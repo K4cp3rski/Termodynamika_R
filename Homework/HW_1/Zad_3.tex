@@ -1,0 +1,66 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 3}
+
+
+
+Sto osób ustawia się w kolejce do samolotu ze stoma miejscami. Pierwsza osoba w kolejce zgubiła kartę pokładową, więc losowo wybiera miejsce. Następnie każda kolejna osoba wchodząca do samolotu albo siada na swoim przydzielonym miejscu, jeśli jest ono dostępne, albo, jeśli nie, wybiera losowo wolne miejsce. Kiedy setny pasażer w końcu wejdzie do samolotu, jakie jest prawdopodobieństwo, że jego przydzielone miejsce będzie wolne?
+
+
+\section{Rozwiązanie}
+
+W tym zadaniu do wyniku dla stu osób dojedziemy przez indukcję.
+Rozważmy najpierw przypadek gdy w samolocie są dwa miejsca. Pierwszy pasażer zajmuje losowe miejsce, więc w szczególności zajmuje miejsce pasażera ostatniego z prawdopodobieństwem $p = \frac12$. 
+Teraz spójrzmy na przypadek 3 osób.\\
+Oznacza to, że pasażer pierwszy ma $\frac13$ prawdopodobieństwa podsiądnięcia pasażera 3. Ale trzeba do tego dodać, że ma również prawdopodonieństwo $\frac13$ usiąść na miejscu jednej z pozostałych dwóch osób. Czyli prawdopodobieństwo, że usiądzie na miejscu pasażera 3 wynosi 
+\[
+ p = \frac13 + \frac13 \cdot \frac12 = \frac26 + \frac16 = \frac12
+\]
+Teraz chcąc to uogólnić możemy powiedzieć, że mając $N$ pasażerów, pasażer 1 siada na miejscu pasażera $n, (n \leq N)$ z prawdopodobieństwem $\frac{1}{n}$. 
+
+Czyli prawdopodobieństwo, że usiądzie na miejscu pasażera numer $N$, jest to suma prawdopodobieństwa zajęcia jego miejsca plus suma prawdopodobieństw zajęcia miejsc wszystkich innych pasażerów:
+\[
+    p = \frac{1}{N} + \frac{1}{N} \sum_i p_i
+\]
+
+W tym miejscu przeformułujmy sobie tu odrobinę warunki z zadania. Wiemy w ogólności, że jak pasażer 1 siądzie na swoim miejscu, to wszyscy siedzą na swoich miejscach, a jak na miejscu pasażera $k, (k \in (2, N))$, to pasażer $k$ musi losować gdzie siada i gdy siądzie na swoim miejscu, to znów mamy sukces - pasażer N ma wolne miejsce. Gdyby nie zajął swojego miejsca, to miejsce losuje pasażer kolejny (spośród pasażerów $(k+1, N)$) co finalnie sprowadza się to pytania czy pasażer 1 zajął miejsce pasażera N, czy też nie.
+
+Oznacza to, że prawdopodobieństwo że miejsce pasażera 100 będzie wolne czy też nie to:
+\[
+    p =\frac12
+\]
+
+\end{document}

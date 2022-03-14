@@ -1,0 +1,734 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{datetime}
+\usepackage{makeidx}
+\usepackage{hyperref}
+
+\title{Termodynamika R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\makeindex
+\setlength\parindent{0pt}
+
+\addto\captionspolish{\renewcommand{\chaptername}{Lecture}}
+
+\newcommand{\ind}[1]{{\color{blue} #1\index{#1}}}
+
+\newcommand{\subind}[2]{{\color{blue} #1\index{#2}}}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\newenvironment{lecture}[1][]{\par\medskip
+   \noindent\chapter \rmfamily}{\medskip}
+   
+\newenvironment{emph_box}[1]
+    {\begin{center}
+    \begin{tabular}{|p{0.9\textwidth}|}
+    \hline
+    \begin{center} \textbf{#1} \end{center}\\[1ex]
+    }
+    { 
+    \\\\\hline
+    \end{tabular} 
+    \end{center}
+    }
+
+\begin{document}
+
+\maketitle
+
+% ---------------------------------------------------------------------------
+% Wykład 01.03.2022
+
+\chapter*{Organizacja wykładu}:
+\begin{enumerate}
+    \item Dwa kolokwia - po 40 \% pkt
+    \item Zadania domowe - 20 \% pkt
+\end{enumerate}
+
+{\color{blue} \link{http://www.fuw.edu.pl/~piotrek/stat2022}{Strona wykładu}}
+
+Suma - 100 \%. Zaliczenie ćwiczeń $> 50 \%$, Egzamin 100 \%. Propozycja oceny w zakresie $3-4.5$ Po 5 przychodzimy na ustny. Ustny też dla plebsu, nie tylko dla tych z 4.5 ({\it Patrz Pawełczyk})
+
+Egzamin i kolokwia mają 2 częsci:
+\begin{itemize}
+\item Test ABCD, 1 lub wielokrotnego wyboru $\sim 45$ min.
+\item Zadania - $\sim 3h$
+\end{itemize}
+
+Zadania domowe: Jak na elektro, ale tylko 3 zadania na tydzień. Na wykładzie czwartkowym losowanie zadania zbieranego. Jest jedno dodatkowe, trudniejsze, "Joker".
+
+\begin{lecture}
+\section{\ind{Problem wielu ciał}}
+
+Dla problemu 3 ciał pierwsze znalezione stabilne rozwiązanie zostało opisane przez Lagrange'a. Jest to ruch po okręgu, a w $\sim 1990$ opisano też stabilną orbitę po ósemce.
+
+Historia superkomputerów:
+\begin{itemize}
+    \item Anton (2008) - Daniel Shaw
+    \begin{itemize}
+        \item Problem zwijania białek
+        \item 10 ms zwijania - 5 min obliczeń
+        \item $10^4-10^5$ atomów - 1 ms w 100 dni. Tj. $10$ ns/dzień
+    \end{itemize}
+    \item Summit (2018)
+    \begin{itemize}
+        \item 27 tys. GPU + 9 tys. CPU.
+        \item $200\cdot10^6$ 32 ns/dzień
+    \end{itemize}
+\end{itemize}
+Dla skali -> kubek z herbatą ma \textbf{$\sim10^{25}$ atomów}
+
+\ind{Demon Laplace'a}:
+Laplace mówił, że symulacja, która by znała położenia i pędy wszyskich cząstek by znała przeszłość i przyszłość $\to$ \textit{przeszłość i przyszłość by stała przed nią otworem}. Jest to wizja świata skrajnie deterministycznego. Obecnie raczej upadłej. {\color{green} Wniosek:} Kupując kefir nie obchodzi nas położenie wszystkich atomów, a właściwości makroskopowe.
+
+\ind{Fizyka statystyczna}: Jest dziedziną zajmującą się przejściem z informacji mikroskopowej do informacji makroskopowej, która jest obiektem naszego zainteresowania.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Wyk_1_Rys_1.jpeg}
+    \caption{Proces nieodwracalny?}
+\end{figure}
+
+\FloatBarrier
+
+\section{Pokazy}
+\subsection{Cylindry z ulepkiem cukru}
+Widzimy tu na demonstracji \ind{odwracalność}. Są dwa rodzaje:
+\begin{itemize}
+    \item {\color{blue} odwracalność dynamiczna} \index{odwracalność!dynamiczna}:
+    \[m \dv{v}{t} = F\]
+    Wynika ona z dynamiki Newtonowskiej, jest symetryczna względem transformacji $t \to -t$, $v \to -v$.
+    \item {\color{blue} odwracalność kinematyczna} \index{odwracalność!kinematyczna}:
+    \[0 = m \dv{v}{t} = F - \gamma v \implies v = \frac{F}{\gamma}\]
+    Gdzie $\gamma$ jest współczynnikiem oporu. Ta odwracalnośc jest symetryczna względem przekształcenia $F \to -F, v \to -v$. Ten rodzaj odwracalności zachodzi w lepkich cieczach. Symetryczny względem zmiany kierunku siły i prędkości, ale z czasem nieodwracalnym.
+\end{itemize}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Wyk_1_Rys_2.jpeg}
+    \caption{Demonstracja odwracalności kinematycznej. Działa to tylko dla \emph{lepkiej cieczy}}
+    \label{fig:lec_1:odwracalność}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Wyk_1_Rys_3.jpeg}
+    \caption{Demonstracja \emph{Bilardu Bunimowicza}. Po prawej bilard prostokątny - Nie Ergodyczny, ponieważ po odpowiednio długim czasie nie uśrednia się rozkład cząstek - Nie osiąga równowagi.}
+    \label{fig:lec1:bilardbunimowicza}
+\end{figure}
+
+Kolejnym pojęciem które się pojawia jest \ind{ergodyczność}. Oznacza to, że średnia $\expval{x}$ z układu  po czasie jest równa średniej po powierzchni. Przykładem takiego układu jest zasadniczo \emph{Bilard bunimowicza} (Patrz Rysunek \ref{fig:lec1:bilardbunimowicza}). Układ ergodyczny to taki, który po odpowiednio dużym czasie osiąga stan równowagi.
+
+
+\section{Model Ehrenfestów}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Wyk_1_Rys_4.jpeg}
+    \caption{Demonstracja \emph{Modelu Ehrenfestów}. Bierzemy dwa psy i liczymy sobie $\expval{n_a(t)}$. W tym celu patrzymy sobie na \ind{ansambl} (zespół) dwójek psów.}
+    \label{fig:lec_1:pchły}
+\end{figure}
+
+\end{lecture}
+
+% --------------------------------------------------------------------------
+% Wykład 03.03.2022
+
+\FloatBarrier
+
+\begin{lecture}
+\section{Ruch cząstek - Ruchy Browna}
+
+Wprowadzamy sobie jak propaguje się cząstka w cieczy w czasie.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Wyk_2_Rys_1.jpeg}
+    \caption{Położenie cząstki}
+    \label{fig:lec_2:czastka}
+\end{figure}
+
+Skoki o $\delta x$ następują co $\delta t$ i mamy:
+\[ \Delta x = \begin{cases}
+    \delta x \qc \frac{1}{2} \\
+    - \delta x \qc \frac{1}{2}
+\end{cases}\]
+
+\begin{align*}
+    x(n) = x(n-1) + \Delta x\\
+    \expval{x(n)} = \expval{x(n-1)} = \expval{x(n-2)} \dots = \expval{x(0)} = 0
+\end{align*}
+
+Wynika, że:
+\begin{align*}
+    x(n)^2 = (x(n-1) + \Delta x)^2 = x^2(n-1) + 2x(n-1)\Delta x + (\Delta x)^2\\
+    \expval{x^2(n)} = \expval{x^2(n-1)} + 2\expval{x(n-1)\Delta x} + \expval{(\Delta x)^2}
+\end{align*}
+
+Gdzie wiemy, że $2\expval{x(n-1)\Delta x} = 0$  bo kolejne skoki są niezależne, a $\expval{(\Delta x)^2} = (\delta x)^2$
+
+Czyli:
+\begin{align*}
+    \expval{x^2(n)} = \expval{x^2(n-1) + (\delta x)^2}\\
+    \expval{x^2(n)} = n (\delta x)^2 + \expval{x^2(0)}
+\end{align*}
+Ale $\expval{x^2(0)} = 0$, więc widzimy, że:
+\[
+    \expval{x(n)} = 0 \qc \expval{x^2(n)} = n (\delta x)^2
+\]
+Teraz oznaczmy sobie $n = \frac{T}{\delta t}$, a $\frac{(\delta x)^2}{2 \delta t} = D$ - stała dyfuzji. Wtedy dostajemy ruch dyfuzyjny (\ind{Ruch Browna}).
+\[
+    \expval{x^2(n)} = 2 T \frac{(\delta x)^2}{2 \delta t}
+\]
+Dokładna definicja ruchu Browna to:
+\[
+    \text{ruch Browna} = 
+    \begin{cases}
+    \expval{x^2(n)} = 2 D T \\
+    \expval{x(n)} = 0
+    \end{cases}\qq{gdzie}
+    x = vt\qc t=\frac{L}{v}\qc T=\frac{L^2}{2D}
+\] gdzie $L$ - odległość.
+
+Przykładowe wartości:\\
+\emph{Bakteria} - $L \sim 10^{-4}$ wtedy $D \sim 10^{-5} \frac{cm^2}{s}$ a czas dyfuzji $t = \frac{L^2}{2 D} = 5 \cdot 10^{-4} \sim (0.5)\,$ms
+ale np z jednogo końca auli na drugi szło by to miesiąc.\\
+\emph{Takeaway} - Zapachy nie transportują się dyfuzyjnie!
+
+\section{Równanie Master}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Wyk_2_Rys_2.jpeg}
+\end{figure}
+
+$x = m \delta x \to$, $t \pm 1 = t \pm \delta t$
+
+\begin{align*}
+    P(m, t+1) &= \frac12 P(m+1, t) + \frac12 P(m-1, t )\\
+    P(m, t+1) - P(m, t) &= \frac12(P(x + \delta x, t) - 2P(x, t) + P(x - \delta x, t))\\ 
+    \qq{co jest drugą pochodną w punkcie}x:&\\
+    P(m, t+1) - P(m, t) &= \frac12\delta x\qty(\frac{P(x + \delta x, t) - P(x, t)}{\delta x} - \frac{P(x, t) - P(x - \delta x, t)}{\delta x})\\
+    P(m, t+1) - P(m, t) &= \frac12(\delta x)^2\qty(P'\qty(x + \frac{\delta x}{2}, t) - P'\qty(x - \frac{\delta x}{2}, t))\\
+    \qq{co na mocy \textit{central limit theorem}}& \text{tłumaczy się na:}\\
+    \pdv{P}{t} &= \frac{P(x, t+\delta t) - P(x, t)}{\delta t} = \frac{(\delta x)^2}{\delta t}\pdv[2]{P}{x}\\
+    \qq{po przejściu do granic:} &\delta t \to 0\qc \delta x \to 0\qc \frac{\delta x^2}{\delta t} = \qq{const.}\\
+\end{align*}
+Dostajemy równanie dyfuzji:
+\begin{equation}
+    \pdv{P}{t} = D \pdv[2]{P}{x}
+    \label{eq:lec_2:dyfuzja}
+\end{equation}
+Co dla
+\[
+    P(x, t=0) = \delta(x)
+\]
+Daje nam rozkład prawdopodobieństwa występowania punktu w jakimś $x$ przy dyfuzji wygląda:
+\begin{equation}
+    P(x) = \frac{1}{\sqrt{4 \pi D t}} e^{-\frac{x^2}{4 D t}}
+    \label{eq:lec_2:rozklad_gauss}
+\end{equation}
+Czyli rozkład Gaussa, widoczny na Rysunku \ref{fig:lec_2:mol_pow}.
+
+\section{Demonstracje}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Wyk_2_Rys_3.JPG}
+    \caption{Jeden mol powietrza}
+    \label{fig:lec_2:mol_pow}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Wyk_2_Rys_4.JPG}
+    \caption{Jeden mol innych rzeczy}s
+    \label{fig:lec_2:mole_demo}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth, angle=270]{Wyk_2_Rys_5.JPG}
+    \caption{Przykładowy \ind{Rozkład Gaussa} uzyskany ze spadających kulek}
+    \label{fig:lec_2:gauss}
+\end{figure}
+
+Teaser na przyszłość, dyfuzja z dodatkowym członem od pola siły.
+\begin{equation}
+    \pdv{P}{t} = D \pdv[2]{P}{x} - \pdv{F}{\gamma}P
+    \label{eq:lec_2:dyfuzja_pelna}
+\end{equation}
+
+\FloatBarrier
+
+\section{Wracamy do Modelu Erhnferstów}
+
+\begin{align}
+    P(n, t+1) = \frac{n+1}{N} P(n+1, t)+ (1 - \frac{n-1}{N}) P(n-1, t) \label{eq:lec_2:Psy_1}\\
+    P(0, t+1) = \frac1N P(1, t)\label{eq:lec_2:Psy_2}\\
+    P(N, t+1) = (1 - \frac{N - 1}{N}) P( N-1, t)\label{eq:lec_2:Psy_3}
+\end{align}
+Szukamy rozwiązania niezależnego od czasu - $p^{eq}(n)$. Z równania \ref{eq:lec_2:Psy_2} wynika:
+\begin{align*}
+    p^{eq}(0) &= a\qc p^{eq}(1) = N\qc p^{eq}(n) = \mqty(N \\ n)a\\
+    &\qq{\color{purple} Udowodnijmy przez indukcję:}\\
+    &\begin{cases}
+        p^{eq}(n-1) = a \mqty(N \\ n-1)\\
+        p^{eq}(n) = a \mqty(N \\n)
+    \end{cases}\\
+    &\qq{\color{purple} Teraz biorąc równanie \ref{eq:lec_2:Psy_1} wyżej:}\\
+    p^{eq}(n+1) \frac{n+1}{N} &= a \qty[\mqty(N \\ n) \mqty(N \\ n-1) \frac{N - n +1}{N}]\\ \\ \hline \hline
+    &\qq{\color{purple}Pamiętając o tożsamości:}\\
+    \mqty(N \\n) &= \mqty(N-1 \\ n) + \mqty(N-1 \\ n-1)\qq{dostajemy:}\\ \hline \hline \\
+    p^{eq}(n+1) &= a \frac{N}{n +1}\qty[\qty{\mqty(N-1\\n) + \mqty(N-1 \\ n-1)} - \qty{\mqty(N-1 \\ n-1) + \mqty(N -1 \\ n-2)} \cdot \frac{N - n + 1}{N}]\\
+    p^{eq}(n+1) &= a \frac{N}{n +1} \qty[\frac{(N-1)! N }{n! (N-1-n)! (n+1)} + \frac{(N-1)!}{(n-2)!(N-n)!(n+1)} - \frac{(N-1!)}{(n-2)!(N-n)! (n+1)}]\\
+    p^{eq}(n+1) &= a\mqty(N \\ n+1)\\
+    \implies& p^{eq}(n) = a \mqty(N \\n)
+\end{align*}
+
+\end{lecture}
+
+% ---------------------------------------------------------------------
+% Wykład 07.03.2022
+
+\begin{lecture}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth, angle=0]{Wyk_3_Rys_1.jpeg}
+    \caption{Doświadczenie pokazujące jaka jest prędkość cząsteczek powietrza w temperaturze pokojowej, tj. 400 m/s.}
+    \label{fig:lec_3:v_pow}
+\end{figure}
+
+Powrót do 2 psów:
+Na ostatnim wykładzie dostaliśmy równanie na równowagę. Wracamy do tego i idziemy dalej:
+
+\[ p^{eq}(n) = a \mqty(N \\n) \]
+
+Gdzie stała $a$ jest równa:
+\begin{align*}
+    &\sum_0^N a \mqty(N \\ n) = 1\\
+    \hline \hline \\
+    &\qq{pamiętając o tym, że:}\\
+    (a+b)^N &= \sum_0^N \mqty(N \\ n) + a^n + b^n \qq{co po wstawieniu}  a = b =1\\
+    \hline \hline \\
+    2^N &= \sum_0^N \mqty(N \\ n) \implies a = \frac{1}{2^N}
+\end{align*}
+
+
+
+Możemy sobie to rozumieć jako fakt, że $p^{eq}$ odpowiada przyjęciu, że wszystkie możliwości są równo prawdopodobne.\\
+
+Inaczej jeszcze patrząc na to; Wyobraźmy sobie, że każda pchła jest rozróżnialna i może być albo na Azorze albo na Burku. Wtedy takich możliwości jest $2^N$ i spośród nich $\mqty(N \\ n)$ z nich jest na Azorze.
+
+\begin{emph_box}{Definicje stanów}
+\ind{Mikrostan} - Informacja o położeniu każdej ze pcheł\\
+\ind{Makrostan} - Informacja ile jest pcheł na Azorze
+\end{emph_box}
+
+Jednemu makrostanowi\footnote{$n$ pcheł na Azorze} będzie odpowiadać wiele mikrostanów\footnote{Dokładniej $\mqty(N\\n)$}. W szczególności:
+\begin{itemize}
+    \item Makrostanowi "wszystkie pchły na Azorze" odpowiada 1 mikrostan
+    \item Makrostanowi $50\% - 50\%$ odpowiada $\mqty(N \\ N/2)$ mikrostanów,\footnote{Z tym, że $\mqty(N \\ N/2) \approx \frac{N!}{(N/2)!(N/2)!}\approx \frac{N^N}{(N/2)^{N/s} (N/2)^{N/2}} = 2^N$} czyli prawie wszystkie z dokładnością do $\sim N$.
+\end{itemize}
+
+Teraz wyobraźmy sobie, że układ osiąga stan równowagi. Wyprowadzimy sobie tutaj \subind{warunek równowagi szczegółowej}{warunek równowagi!szczegółowej}:
+\begin{align*}
+    p^{eq}(n) p(n\to n+1) &= p^{eq}(n+1)p(n+1 \to n)\\
+    (1 - \frac{n}{N}) &= \frac{N-n}{N}\\
+    p^{eq}(n+1) &= \frac{N-n}{n+1} \frac{N - (n-1)}{n}\\
+    p^{eq}(n+1) &= \frac{(N-n) \dots N}{(n+1) n (n-1) \dots 1} p^{eq}(0)\footnotemark\\
+    p^{eq}(n+1) &= \frac{N!}{(N-n-1)!(n+1)!}a \\
+    p^{eq}(n+1) &= \mqty(N \\ n+1) a\\
+    p^{eq}(n) &= \mqty(N \\ n) a
+\end{align*}
+\footnotetext{$=a$}
+
+
+
+Teraz sprawdźmy, czy jesteśmy w stanie policzyć średnią liczbę pcheł na Azorze w funkcji czasu $\to \ev{n(t)}$, tj. ile średnio zmieni się $n$ przy jednym skoku pchły?
+
+\[
+    \begin{cases}
+    p = \frac{N-n}{N} \qc "+1"\\
+    p = \frac{n}{N} \qc "-1"
+    \end{cases}
+\]
+Czyli zbadamy sobie zależność:
+\[
+    \ev{n(t+1)} - \ev{n(t)} = 1 - \frac{2 \ev{n(t)}}{N}
+\]
+
+\begin{align*}
+    \ev{n(t+1)} &= 1 - \frac{2 \ev{n}}{N} + \ev{n} \qc n=\frac{N}{2} + m\\
+    \ev{n(t+1)} &= \ev{n(t)}(1 - \frac{2}{N}) + 1\\
+    \ev{m(t+1)} + \frac{N}{2} &= \ev{(\frac{N}{2} + m)(1 - \frac{2}{N})} + 1\\
+    \ev{m(t+1)} &= (1 - \frac{2}{N}) m(t) = (1 - \frac{2}{N})^2 m(t-1)\\
+    \ev{m(t)} &= (1 - \frac{2}{N})^t \frac{N}{2}
+\end{align*}
+Gdzie bierzemy:
+\begin{itemize}
+    \item $t$ - liczba kroków
+    \item $\tau$ - czas między skokami
+    \item $T = t \tau$ - czas
+    \item $\frac{1}{N \tau} = \gamma = const.$ - ułamek pcheł, który przeskakuje w ciągu jednostki czasu.
+\end{itemize}
+
+I teraz przejdziemy do granicy $N \to \infty \qc \tau \to 0$:
+\[
+    \ev{f(t)} = \ev{\frac{2m(t)}{N}}\footnotemark = \qty(\qty(1 - \frac{2}{N})^{-\frac{2}{N}})^{-\frac{2 T}{N \tau}}
+\]
+\footnotetext{Względna nadwyżka}
+
+Co daje nam zanik wykładniczy:
+\[
+    \ev{f(t)} = e^{- 2 T \gamma}
+\]
+\end{lecture}
+
+\ind{Mierzenie informacji}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth, angle=0]{Wyk_3_Rys_2.jpeg}
+    \caption{Osiem identycznych pudełek.}
+    \label{fig:lec_3:inf_1}
+\end{figure}
+
+Jak widać na Rysunku \ref{fig:lec_3:inf_1}, nasza \ind{Informacja} to będzie:
+\begin{align*}
+    N = 2^n\\
+    \log N = n \log 2 \\
+    n = \frac{\log N}{\log 2} = k \log N
+\end{align*}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth, angle=0]{Wyk_3_Rys_3.jpeg}
+    \caption{Osiem kolorowych pudełek}
+    \label{fig:lec_3:inf_2}
+\end{figure}
+
+Teraz jak widzimy na Rysunku \ref{fig:lec_3:inf_2}, gdy pudełka mają dodatkową cechę rozróżniającą je, to zdobywajac ją możemy zawęzić sobie pole wyboru. Teraz wyobrażamy sobie, że mamy szpiega, który nam ma powiedzie w pudełku jakiego kolowu jest moneta w tym układzie.\\
+Bez kolorów mieliśmy do zadania $n = k \log N$ pytań, zaś wraz z kolorami mamy $n = k \log N_z$ pytań, czyli to jak dużo informacji dostarczył nam szpieg (ilu pytań nam oszczędził) wyrazi się jako:
+\(
+    I_z = k \log N - k \log N_z = -k \log(\frac{N_z}{N})
+\)
+Gdzie $\frac{N_z}{N}$ jest jednocześnie procentem pudełek koloru który nam wskazał szpieg (tu: zielonych), jak i prawdopodobieństwem, że moneta jest w pudełku tego koloru. Ogólnie daje nam to:
+\[
+    I_i = -k \log p_i
+\]
+
+Teraz średnią miarę tego naszego 'zdziwienia ilością informacji od szpiega' oznaczymy wzorem:
+\[
+    I = \sum_i -k p_i \log p_i
+\]
+Jest to \ind{Informacja Shannona} Inna nazwa to \subind{Entropia Informacyjna Shannona}{Entropia!Informacyjna Shannona}.
+
+Wnioski:
+
+\begin{enumerate}
+    \item Dla rozkładu równowagowego (wszystkie zdarzenia równoprawdopodobne) $p_i = \frac{1}{N}$, $N$ - liczba zdarzeń.\\
+    $I = \sum_i -k \frac{1}{N} \log \frac{1}{N} = k \log N$
+    \item Dla rozkładu maksymalnie nierównowagowego $p_1 = 1 , p_2 = \dots = 0$. Wtedy $I = 0$.
+    \item Można pokazać, że rozkład równowagowy maksymalizuje Entropię. Jest to tzw twierdzenie Jensena dla fukncji wklęsłych. \com{Zdjęcie wklej}
+\end{enumerate}
+
+\begin{lecture}
+
+\section{Entropia wg Gibbsa i wg Boltzmanna}
+
+\subsection{Wzór J.W.Gibbsa}
+\[
+    S = - k \sum_i p_i\footnote{Prawdopodobieńśtwo wystąpienia mikrostanu} \log p_i
+\]
+
+\emph{Joseph Willard Gibbs} (1893 - 1903) \textit{Elementary Principles in Satistical Mechanics (1907)}
+
+\subsection{Wzór Boltzmanna}
+\[
+    S = k \log W\footnote{Liczba mikrostanów}
+\]
+
+\section{Psy Ehrenfersta}
+
+\subsection{Entropia Gibbsa}
+
+\begin{itemize}
+    \item $G_m$ - liczba mikrostanów odpowiadającuch makrostanom $m$, $G_m = \mqty(N \\ m)$
+    \item $P_m(t)$ - prawdopodobieństwo makrostanu ($m$ pcheł na Azorze)
+    \item $p_i(t)$ - prawdopodobieństwo mikrostanu, $p_i (t) = \frac{P_m(t)}{G_m(t)}$\footnote{Wszystkie mikrostany odpowiadające makrostanom $m(i)$ są równoprawdopodobne.}
+\end{itemize}
+
+\begin{emph_box}{\ind{Entropia}}
+\[
+    S = - k \sum_{i=1}^{2^N} p_i \log p_i =\footnotemark - k \sum_m G_m \frac{P_m}{G_m} \log \frac{P_m}{G_m}
+\]
+\[
+    S = \underbrace{- k \sum_m P_m \log P_m}_{\footnotemark} + \underbrace{\sum_m P_m \overbrace{(k \log G_m)}^{\footnotemark}}_{\footnotemark}
+\]
+Czyli finalnie wzór na \emph{Entropię Boltzmanna}:
+\[
+    S_B = k \log G_m
+\]
+\end{emph_box}
+\footnotetext{Wymierny stopień obsadzenai różnych makrostanów}
+\footnotetext{Entropia Boltzmanna odpowiadająca makrostanom M}
+\footnotetext{Średnia entropia Boltzmanna}
+\footnotetext{Tu zmiana indeksu sumowania, na sumowanie po makrostanach a nie mikrostanach}
+
+Teraz idziemy dalej, pokażemy, że Entropia wzrasta. Zdefiniujmy:\\
+$\pi_m = \frac{P_m}{G_m}$ - prawdopodobieństwo wystąpienia mikrostanu odpowiadającego makrostanowi $m$. Czyli:\\
+$P_m = \pi_m G_m \implies$
+\[
+    S = - \sum_m \pi_m G_m \log \pi_m
+\]
+Pokażemy, że:
+\[
+    \underbrace{- \sum \pi_m(t+1) G_m (t+1)}_{S(t+1)} \geq \underbrace{- \sum \pi_m (t) G_m \log \pi_m (t)}_{S(t)}
+\]
+
+Teraz skorzystamy z twierdzenia Jensena i Równania Master:\\
+Funkcja $\phi(x) = x \log x$ jest wypukła $\implies$ 
+\[
+    \phi(\sum_i \alpha_i x_i) \leq \sum_i \alpha_i q(x_i)
+\]
+Równanie Master:
+\begin{align*}
+    P_m(t+1) &= \frac{m+1}{N} P_{m+1}(t) + (1 - \frac{m-1}{N} P_{m-1}(t))\\
+    \pi_m (t+1) &= \frac{m+1}{N} \pi_{m+1} (t) \frac{G_{m+1}}{G_m} + \qty(1 - \frac{m-1}{N} \pi_{m-1} (t) \frac{G_{m-1}}{G_m})\\
+    \pi_m (t+1) &= \underbrace{\frac{m}{N}}_{\alpha_1} \pi_{m-1}(t) + \underbrace{(1 - \frac{m}{N})}_{\alpha_2} \pi_{m+1}(t)\\
+    \alpha_1 + \alpha_2 &= 1 \qc \varphi(x) = x \log x\\
+    \varphi(\alpha_1 x_1 + \alpha_2  x_2) &\leq \alpha_1 q(x_1) + \alpha_2  q(x_2)\\
+    \pi_m (t+1) \log \pi_m (t+1) &\leq \frac{m}{N} \pi_{m-1} (t) \log \pi_{m-1} (t) + (1 - \frac{m}{N}) \pi_{m+1} (t) \log \pi_{m+1} (t) 
+\end{align*}
+Teraz przemnóżmy przez $G_m$ i wysumujmy po $m$, daje nam to:
+\[
+    \underbrace{\sum_{m=0}^N \pi_m(t+1) G_m }_{-S_G(t+1)} \leq \underbrace{\sum_{m=0}^N G_m \frac{m}{N} \pi_{m-1} (t) \log \pi_{m-1} (t)}_{N1} + \underbrace{\sum_{m=0}^N G_m (1 - \frac{m}{N}) \pi_{m+1} (t) \log \pi_{m+1} (t)}_{N2}
+\]
+
+\[
+    N1 = \sum_{n=0}^{N-1} \mqty(N-1 \\ n) \pi_n \log \pi_n \qc N2 = \sum_{n=0}^{N-1} \mqty(N-1 \\ n-1) \pi_n \log \pi_n
+\]
+Czyli:
+\begin{align*}
+    N1 + N2 &= \sum_{n=0}^{N-1} \pi_n \log \pi_n \qty(\mqty(N-1 \\ n) + \mqty(N-1 \\ n-1)) + \pi_N \log \pi_N + \pi_0 \log \pi_0\\
+    &= \sum_{n=0}^{N} \mqty(N \\ n) \pi_n (t) \log \pi_n (t) = -S_G(t)\footnotemark
+\end{align*}
+\footnotetext{Entropia Gibbsa}
+Czyli:
+\[
+    S_G (t+1) \geq S_G (t)
+\]
+Czyli Entropia rośnie i osiąga maksimum w stanie równowagi <- \ind{Druga Zasada Termodynamiki}
+
+A teraz co się dzieje w Entropią Boltzmanna? TL;DR -> Dla niej jest to tylko statystycznie, bo są fluktuacje które mogą być duże.
+\\
+\com{Przepisz ze zdjęcia}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth, angle=0]{Wyk_4_Rys_1.JPG}
+    \caption{\com{Przepisz to}}
+    \label{fig:lec_4:cos_1}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth, angle=0]{Wyk_4_Rys_2.JPG}
+    \caption{\com{Przepisz to}}
+    \label{fig:lec_4:cos_2}
+\end{figure}
+
+\FloatBarrier
+
+Główne postulaty fizyki Statystycznej: (By Boltzmann)
+\begin{itemize}
+    \item W układzie makroskopowym procesy spontaniczne (dziejące się po usunięciu więzów)\\
+    Przebiegają tak, ze liczba mikrostanów odpowiadajacych danemu makrostanowi rośnie\footnote{Z dokładnością do fluktuacji}
+    \item Stanowi równowagi odpowiada makrostan, który realizuje największa liczba mikrostanów.
+    \item Jeśli układ izolowany jest w stanie równowagi, to wszystkie stany można traktować jako równo prawdopodobne. <- postulat równych prawdopodobieństw \textit{a priori}
+\end{itemize}
+
+\end{lecture}
+
+\begin{lecture}
+
+\section{Przeniosło Time}
+
+Przy Erhenferstów once again:\\
+Niech liczba pcheł $N = 20000$\\
+Prawdopodobieństwo liczby $n$ pcheł: $p(n) = \frac{1}{2^N} \qty(N \\ n)$
+Side note: $N! = N^N e^{-N} \sqrt{a \pi N}$, Czas dojścia do stanu $\approx \frac{1}{p(n)}$
+Czyli w szczególności wiedząc, że $p(0) = \frac{1}{2^N}$, $p(\frac{N}{2}) = \frac{1}{2^N} \mqty(N \\ \frac{N}{2})$:
+\[
+    T_0 = \frac{1}{p(0)} = 2^N = 2^20000 \approx (2^10)^2000 \approx (10^3)^2000 - \qq{absurdalnie duża liczba}
+\]
+Za to prawdopodobieńśtwo dojścia do stanu pół na pół:
+\[
+    p(N/2) = \frac{1}{2^N} \mqty(N \\ \frac{N}{2}) = \frac{1}{2^N} \frac{N!}{\qty(\frac{N}{2})!\qty(\frac{N}{2})!} \approx \frac{2}{\sqrt{2 \pi N}}
+\]
+Czyli czas dojścia:
+\[
+    T_{\frac{N}{2}} \approx \frac{1}{p(N/2)} = \frac{\sqrt{2 \pi} \sqrt{N}}{2} = 100 \sqrt{\pi} \approx 177\qq{s}
+\]
+Rozkład stanów prawdopoodobnych ma ształt bardzo cienkiego Gaussa \com{Przepisz ze zdjęcia z tel.}
+
+Side note: 1 Angstrem \com{Znajdź symbol} $ = 10^{-10}$
+
+\section{Granica Termodynamiczna}
+Weźmy:
+\begin{itemize}
+    \item Komórki o objętości $V_0 = 1$
+    \item $V$ - komórek = liczba komórek = objętość w tej jednostce
+\end{itemize}
+
+Teraz wprowadźmy nowe pojęcie:
+
+\begin{emph_box}{\ind{Granica Termodynamiczna}}
+    Granica termodynamiczna, tj:
+    \[
+        N \to \infty, V \to \infty\qc \frac{N}{V} = \varrho = const.
+    \]
+\end{emph_box}
+Teraz:
+\[
+\Sigma = \mqty(V \\ N) = \frac{V!}{N! (V - N)!} =\footnote{$\varrho = \frac{N}{V}\qc N = \varrho V\qc(V-N) = V(1-\varrho)$} 
+\]
+\begin{align*}
+    \Sigma &= \frac{V!}{(\varrho V)! (V(1-\varrho))!}\\
+    S &= k \log \Sigma = k(V \log V + \log(\sqrt{2 \pi V}) - \varrho V \log(\varrho V) - \log(\sqrt{2 \pi \varrho V}) \\ &- V(1 - \varrho) \log V - V(1 - \varrho)\log(1 - \varrho) - \log\sqrt{2 \pi V (1 - \varrho)})\\
+    S &= k\qty[V \log V - \varrho V \log(\varrho V) - V (1 - \varrho) \log V - V (1 - \varrho) \log(1 - \varrho)]\\
+    S &= V k \qty[-\varrho \log \varrho - (1 - \varrho)\log(1 - \varrho)]\\
+\end{align*}
+Wniosek - Entropia jest funkcja Ekstensywną (skaluje się z liczbą cząstek), $S(\alpha N) = \alpha S(N)$\\
+Teraz niech $S = f(x)$ i rozpiszmy ją jako: 
+$$f(x) = -x \log x - (1-x) \log(1-x)$$
+Wtedy jej pochodna to 
+$$
+    f'(x) = - \log x + \log(1-x) + \frac{1-x}{1-x} = -\log x + \log(1-x) = 0
+$$
+Czyli musi zachodzić $f'(x) = \log x = log(1-x) \implies x = \frac12$
+
+Wynika z tego, że 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Wyk_5_Rys_1.jpeg}
+    \caption{Wykres entropii na jednostkę objętości w funkcji gęstości pcheł na Azorze}
+    \label{fig:lec_5:entropia_plot}
+\end{figure}
+
+\section{Maksymalizacja Entropii}
+
+Teraz dzieliimy sobie układ na dwie objętości: $V/2$ i $V/2$. Teraz niech $N_L$ - liczba z lewej, $N_P$ - liczba z prawej. Wtedy:
+\begin{align*}
+\varrho_L &= \frac{N_L}{V/2} & \varrho_P &= \frac{N_P}{V/2}\\
+N_L &= \frac{V}{2} \varrho_L & N_P &= \frac{V}{2} \varrho_P\\
+\end{align*}
+Daje to:
+\begin{align*}
+    N_L + N_P = N\\
+    \frac{V}{2} \varrho_L + \frac{V}{2} \varrho_P = V \varrho\\
+    \varrho_L + \varrho_P = 2 \varrho
+\end{align*}
+
+Weźmy:
+\[
+    \log \Sigma = \log \mqty(V/2 \\ N_L) \mqty(V/2 \\ N_P) = \log \frac{\frac{V}{2}}{\qty(\frac{V}{2} \varrho_L)! \qty(\frac{V}{2} (1- \varrho_L))!} \frac{\frac{V}{2}}{\qty(\frac{V}{2} \varrho_L)! \qty(\frac{V}{2} (1- \varrho_P))!} = \dots\footnote{Po dokładny rachunek patrz załącznik A.1 \com{Dopisz referencje}} = 0
+\]
+
+Czyli wiemy, że:
+\begin{align*}
+    No.1 &= \frac{V}{2} (- \varrho_L \log \varrho_L - \frac{V}{2} (1 - \varrho_L \log (1 - \varrho_L))) \qc & No.2 &= \frac{V}{2} (- \varrho_P \log \varrho_P - (1 - \varrho_P \log (1 - \varrho_P)))
+\end{align*}
+Czyli:
+\[
+    S = k \frac{V}{2} \qty[\varrho_L \log(\varrho_L) - (1 - \varrho_L) \log(1 - \varrho_L) - \varrho_P \log(\varrho_P) - (1 - \varrho_P) \log(1 - \varrho_P))]
+\]
+Dalej daje to:
+\[
+    \dv{S}{\varrho_L} = - k \frac{V}{2} \log\qty{\frac{\varrho_L (1 - 2 \varrho + \varrho_L)}{(1 - \varrho_L)(2 \varrho - \varrho_L)}} = 0 \implies
+\]
+\[
+    \varrho_L (1 - 2 \varrho + \varrho_L) = (1 - \varrho_L)(2 \varrho - \varrho_L) \implies
+\]
+\[
+    \varrho_L = \varrho_R = \varrho
+\]
+
+Teraz sprawdźmy ze wzoru na pochodną \com{Wstaw referencję $\dv{S}{\varrho_L}$} co sie stanie jak $\varrho_L = \varrho + \Delta \varrho$ i $\varrho_R = \varrho - \Delta \varrho$:
+
+\[
+    \dv{S}{\varrho_L} = -\frac{k V}{2} \log\qty{\frac{(\varrho - \Delta \varrho)(1 - \varrho) - \Delta \varrho}{(\varrho + \Delta \varrho)(1 - \varrho) + \Delta \varrho}}
+\]
+Czyli wtedy entropia maleje.
+
+{\color{orange} Wniosek:} Entropia (maksymalna liczba konfiguracji) jest maksymalizowana tylko i wyłącznie gdy $\varrho_L = \varrho_R$
+
+\end{lecture}
+
+\tableofcontents
+
+\listoffigures
+
+\printindex
+
+\begin{center}
+    \chapter*{Załączniki}
+\end{center}
+
+\appendix
+\setcounter{table}{0}
+\captionsetup[table]{name=Załącznik}
+\captionsetup[figure]{name=Załącznik}
+\captionsetup[section]{name=Lecture}
+
+\chapter{Długaśne wyprowadzenia wzorów}
+
+\com{Dopisz komendy na to}
+
+\section{Lecture 1}
+
+\section{Lecture 2}
+
+\section{Lecture 3}
+
+\section{Lecture 4}
+
+\section{Lecture 5}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\linewidth]{Wyk_5_Rys_2.JPG}
+    \caption{Wyprowadzenie wzoru na maksymalizację entropii}
+    \label{fig:lec_5:app:maksymalizacja_entropii}
+\end{figure}
+
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\linewidth]{Wyk_5_Rys_3.JPG}
+    \caption{Wyprowadzenie wzoru na maksymalizację entropii cz.2}
+    \label{fig:lec_5:app:maksymalizacja_entropii_2}
+\end{figure}
+
+\end{document}
