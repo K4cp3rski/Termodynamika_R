@@ -1,0 +1,146 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 3}
+
+
+
+\textit{Roztargniony naukowiec} 
+Pewien fizyk teoretyk chodzący z domu do pracy spacerem posiada r parasoli i zabiera ze sobą parasol tylko wtedy gdy pada. Dla każdego wyjścia z budynku prawdopodobieństwo deszczu wynosi p, niezależnie od poprzedniej pogody. Znajdź rozkład stacjonarny liczby parasoli w domu i w pracy i podać na jego podstawie przybliżone prawdopodobieństwo zmoknięcia w pewnym odległym dniu. Ile parasoli jest potrzebnych, żeby szansa zmoknięcia była mniejsza niż 0.1?
+
+
+
+\section{Rozwiązanie}
+
+Spójrzmy na to zadanie biorąc za krok czasowy jeden cały dzień, tj. podróż dom$\to$praca, praca$\to$dom. Możemy to założyć bez straty ogólności, gdyż rozważamy jednakowoż sytuację naukowca, który ma życie poza wydziałem, tj. chce każdego dnia wrócić i wyspać się w swoim łóżku.\\
+Teraz, definiujemy sobie zgodnie z treścią zadania, że przy każdym wyjściu z budynku (z domu czy też pracy) naukowiec ma prawdopodobieństwo:
+\begin{itemize}
+    \item $p$, że będzie padać (w tej sytuacji zabiera ze sobą parasol jeśli takowy jest dostępny)
+    \item $p-1$, że nie będzie padać i w tej sytuacji nie następuje przeskok między populacjami parasoli na FUW-ie i w domu.
+\end{itemize}
+Takie sformułowanie problemu zostawia nas z czterema możliwymi konfiguracjami pogody w ciągu dnia:
+\begin{enumerate}
+    \item Rano pada a wieczorem nie pada - prawdopodobieństwo $p(1-p)$
+    \item Rano nie pada a wieczorem pada - prawdopodobieństwo $p(1-p)$
+    \item Rano i wieczorem pada - prawdopodobieństwo $p^2$
+    \item Rano i wieczorem nie pada - prawdopodobieństwo $(1-p)^2$
+\end{enumerate}
+Mówimy sobie teraz, że skoro naukowiec posiada $r$ parasoli, to $k$ z nich będzie występowało w domu, a $r-k$ na FUW-ie. Daje nam to taki zmiany stanu $k$ wraz z prawdopodobieństwami:
+\begin{itemize}
+    \item $p(k\to k) = p^2 + (1-p)^2$
+    \item $p(k\to k+1) = p(1-p)$
+    \item $p(k \to k-1) = p(1-p)$
+\end{itemize}
+Teraz spójrzmy sobie na ewolucję stanów parasoli w domu. W tym celu możemy zapisać sobie Równanie "Master" (póki co z wyłączeniem przypadków granicznych, dla $k = 0$ i dla $k = r$, nimi zajmiemy się niżej):
+\[
+    P(k, t+1) = p(k \to k) P(k, t) + p(k \to k+1) P(k+1, t) + p(k \to k-1) P(k-1, t)
+\]
+Co po wstawieniu wcześniej wyprowadzonych zależności daje nam:
+\[
+    P(k, t+1) = (p^2 + (1-p)^2) P(k, t) + p(1-p) P(k+1, t) + p(1-p) P(k-1, t)
+\]
+Rozważmy teraz przypadki graniczne. Najpierw zastanówmy się co się dzieje, gdy w domu nie ma parasoli, tj. $k=0$:
+\[
+    P(0, t+1) = (\underbrace{p(1-p)}_{\footnotemark} + \overbrace{(1-p)^2}^{\footnotemark} \underbrace{P(0, t)}_{\footnotemark} + \underbrace{p(1-p)}_{\footnotemark} P(1, t)
+\]
+\addtocounter{footnote}{-3}
+\footnotetext{Padało tylko rano}
+\refstepcounter{footnote}
+\footnotetext{Nie padało tego dnia}
+\refstepcounter{footnote}
+\footnotetext{Do domu nie przybył nowy parasol}
+\refstepcounter{footnote}
+\footnotetext{Padało tylko wieczorem}
+Czyli:
+\[
+    P(0, t+1) = (1-p) P(0, t) + p(1-p) P(1,t)
+\]
+Rozważmy teraz drugi przypadek graniczny, tj. gdy $k=r$:
+\[
+    P(r, t+1) = (\underbrace{p(1-p)}_{\footnotemark} + \overbrace{(1-p)^2}^{\footnotemark} + \underbrace{p(1-p)}_{\footnotemark}) P(r,t) + \overbrace{p(1-p)}^{\footnotemark} P(r-1, t)
+\]
+\addtocounter{footnote}{-3}
+\footnotetext{Padało rano i wieczorem}
+\refstepcounter{footnote}
+\footnotetext{Nie padało tego dnia}
+\refstepcounter{footnote}
+\footnotetext{Padało tylko wieczorem}
+\refstepcounter{footnote}
+\footnotetext{Padało tylko rano}
+
+Aby znaleźć interesujący nas rozkład stacjonarny skorzystamy sobie z warunku na równowagę szczegółową:
+\begin{align*}
+    p(k\to k+1) P(k) &= p(k+1 \to k) P(k+1)\\
+    (1-p)pP(k) &= p(1-p)P(k+1) \implies \forall_{k\neq0, r} P(k) = P(k+1)
+\end{align*}
+Czyli w szczególności:
+\[
+    P(1) = P(2) = \dots = P(r-1)
+\]
+Teraz popatrzmy jak to się skleja z przypadkami granicznymi:\\
+Dla $k=0$
+\begin{align*}
+    P(r) &= (p^2 + 1 - 2p + p^2 + p - p^2) P(r) + p(1-p) P(1)\\
+    P(r)(1 - p^2 - 1 + p) &= p(1-p)P(1)\\
+    P(r)p(1-p) &= p(1-p)P(1)\\
+    \implies P(r) &= P(1)
+\end{align*}
+Dla $k=r$:
+\begin{align*}
+    P(0) &= (1-p)P(0) + p(1-p) P(1)\\
+    pP(0) &= p(1-p) P(1) \implies P(0) = (1-p) = P(1)
+\end{align*}
+Dalej, pamiętając o tym, że $\sum_k P(k) = 1$ dostajemy:
+\[
+    \sum_{k=0}^r P(k) = 1 = (1-p) P(1) + rP(1) \implies P(1) = \dots P(r) = \frac{1}{1 - p + r}
+\]
+Co w szczególności daje nam też:
+\[
+    P(0) = \frac{1-p}{1 - p + r}
+\]
+Zastanówmy się teraz, kiedy naukowca zmoczy deszcz? Szansę na to oznaczmy sobie jako $\pi$. Jest to możliwe w dwóch przypadkach: gdy wszystkie parasole ma w domu a deszcz go zaskoczył wychodząc z pracy, albo gdy wszystkie parasole ma w pracy a idąc doń zaskoczył go deszcz. Wtedy $\pi$:
+\[
+    \pi = p(1-p+p) P(0) + \underbrace{p(1-p)}_{\footnotemark} P(r) = \frac{p(1-p)}{1 - p + r} + \frac{p(1-p)}{1-p+r} = \frac{2p(1-p)}{1 - p +r}
+\]
+\footnotetext{Rano nie pada, wieczorem tak}
+Teraz interesuje nas znalezienie $r$ dla którego szansa zmoknięcia $\pi<0.1$:
+\begin{align*}
+    \frac{2p(1-p)}{1-p+r} &< 0.1\\
+    2p(1-p) \cdot 10 &< 1 - p + r\\
+    r &> -20p^2 + 21p - 1
+\end{align*}
+Ten wielomian przyjmuje maksimum globalne i jest ono równe $p = \frac{-21}{-40} = 0.525 \approx 0.5$ i daje to wartość maksimum globalnego $r = 4.5125$. Niestety my jako ludzie z natury dość kiepsko się posługujemy częściami ułamkowymi parasoli do ochrony przed deszczem, więc interesuje nas tylko naturalna wielokrotność, co prowadzi do wniosku, że niezbędna liczba parasoli aby prawdopodobieństwo zmoknięcia było mniejsze niż $0.1$, to \[ r \geq 5 \]
+
+\end{document}
