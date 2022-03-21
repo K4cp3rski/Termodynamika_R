@@ -5,6 +5,7 @@
 \usepackage[polish]{babel}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{mathtools}
 \usepackage[table,xcdraw,dvipsnames]{xcolor}
 \usepackage{hhline}
 \usepackage{placeins}
@@ -474,7 +475,7 @@ Wnioski:
     \item Dla rozkładu maksymalnie nierównowagowego $p_1 = 1 , p_2 = \dots = 0$. Wtedy $I = 0$.
     \item Można pokazać, że rozkład równowagowy maksymalizuje Entropię. Jest to tzw twierdzenie Jensena dla fukncji wklęsłych. \com{Zdjęcie wklej}
 \end{enumerate}
-% -----------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------
 % 10.03.2022
 
 \begin{lecture}{Entropia Gibbsa i Boltzmanna}
@@ -851,12 +852,156 @@ Wyciągamy teraz wniosek, że entropia będzie maksymalizowana, gdy $\varrho_L =
 
 \end{lecture}
 
-% ----------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------
 % 21.03.2022
 
-% \begin{lecture}{Kij wie jaki temat}
+\begin{lecture}{Kij wie jaki temat}
 
-% \end{lecture}
+\emph{Jachymski ma zastępstwo}
+
+\com{Od Szymona}
+
+\begin{align*}
+	S &= k N \left[ \log \frac{V}{N} \left( \frac{4 \pi m}{3 h^2} \frac{E}{N} \right)^{3 /2}  + \frac{5}{2}  \right]  \\
+\end{align*}
+dla gazu doskonałego. Pudełko z gazem opisują dla nas 4 wartości: energia $E$, objętość $V$, liczba cząsteczek $N$ i entropia $S$. Wypisaliśmy również wzór na temperaturę związany z entropią, ale nie był zaargumentowany. \\
+
+Przedzielmy pudełko ścianką, która pozwala na przepływ energii. Ale liczba cząstek się nie zmienia. Pierwsza część w czasie $t=0$ ma energię $E_1'$ a druga $E_2'$, w stanie równowagi $t \to \infty$ mamy $E_1, \, E_2$ oraz cała energia jest zachowana $E_1+ E_2 = E_1' + E_2' = E$. \\
+Entropia się jednak zwiększy. W stanie równowagi powinna być maksymalna. Co to znaczy, że entropia jest maksymalna?
+\begin{align*}
+	\delta S &=  \pdv[]{S_1}{{E_1}} \delta E_1 + \pdv[]{S_2}{{E_2}} \delta E_2, \\
+	\intertext{Natomiast $\delta S_1 = - \delta S_2$. Co za tym idzie, $\pdv*[]{}{{E_1}} = - \pdv*[]{}{{E_2}} $. Entropia ma się nie zmieniać, mamy więc wniosek}
+	\frac{1}{T} &\coloneq \pdv[]{S_1}{{E}} = \pdv[]{S_2}{{E}} 
+\end{align*}
+Weźmy wycinek z dochodzenia układu do położenia równowagi. W pewnym momencie będziemy mieli energie $E_1 + \Delta E $ i $E_2 - \Delta E$. Wówczas,
+\begin{align*}
+	\Delta S &= \pdv[]{S_1}{{E_1}} \Delta E - \pdv[]{S_2}{{E_2}}  \Delta E = \left( \frac{1}{ T_1} - \frac{1}{T_2} \right) \Delta E  
+\end{align*}
+$\Delta S >0$, mamy więc dwa przypadki.
+\begin{enumerate}
+	\item $\displaystyle{\Delta E >0, \quad \frac{1}{T_1} - \frac{1}{T_2} >0}$, wówczas $T_1 < T_2$
+	\item $\Delta E < 0$, wówczas $T_1 > T_2$. 
+\end{enumerate}
+Zatem widzimy, że przy tej definicji energia przepływa z układu o większej temperaturze do układu o mniejszej temperaturze. To jest to co byśmy chcieli. \\
+
+Możemy więc teraz policzyć temperaturę gazu doskonałego. Niech $s = S / N$ i podobnie pozostałe wartości przeskalujmy przez liczbę cząstek.
+\begin{align*}
+	s &= k \left[ \log v + \frac{3}{2} \log \varepsilon + \frac{5}{2} + \frac{3}{2} \log \frac{4 m \pi }{3 h^2} \right]  \\
+	\frac{1}{T} &= \pdv[]{s}{{\varepsilon}} = \frac{3}{2} \frac{k}{\varepsilon} 
+\end{align*}
+Stąd otrzymujemy znane wzory na związek energii gazu z jego temperaturą. 
+\begin{align*}
+	\varepsilon &= \frac{3}{2} k T \\
+	E &= \frac{3}{2} N kT 
+\end{align*}
+
+% -----
+% Zredaguj powyżej
+
+Na ostatnim wykładzie pojawiła się Entropia gazu doskonałego:
+\begin{equation*}
+        S(E, V, N) = N k \qty[\ln(\frac{V}{2}) + \frac32 \ln(\frac{E}{N}) + S_0]
+\end{equation*}
+Stan gazu jest opisywany czterema wartościami:
+\begin{itemize}
+    \item Energią $E$
+    \item Objętością $V$
+    \item Ilością cząstek $N$
+    \item Entropią $S$
+\end{itemize}
+
+Będziemy sobie teraz przedzielać pudełko ściankami o różnych właściwościach
+
+Wypisaliśmy wzór Sackur-Tetrodre:
+\[
+    S = k N \qty(\log\frac{V}{N}\qty(\frac{4 \pi m E}{3 h^2 N})^{\frac32} + \frac52)
+\]
+
+\com{Przepisz z tych 10 min}
+
+\section{Zależność od energii, entropii i temperatury}
+
+Teraz rozważmy sobie układ, pudełko zamknięte tłokiem o masie $m$, wysokości $h$, powierzchni $A$, w polu $g$. \com{Wstaw rysunek}.Zajdą zależności:
+\begin{align*}
+    E &= E_g + mhg\\
+    S &= k \log \sum(E_g, V) = k \log \sum (E - mgh, Ah)
+\end{align*}
+Stan równowagi osiągniemy, gdy $\pdv{S}{h} = 0$:
+\begin{align*}
+    \pdv{S}{h} &= 0\\
+    \pdv{S}{h} = k \pdv{\log \Sigma}{E_g} \pdv{E_g}{h} + \pdv{\log \Sigma}{V} \pdv{V}{h} &= - k mg \pdv{\log \Sigma}{E_g} + k A \pdv{\log \Sigma}{V}\\
+    0 = - mg\qty(\pdv{S}{E_g})_V + A \qty(\pdv{S}{V})_{E_g} &\implies \qty(\pdv{S}{V})_{E} = \frac{m g}{A T} = \frac{p}{T}
+\end{align*}
+
+Teraz rozważmy sobie układ, gdzie ścianka między pojemnikami z dwoma gazami jest ruchoma. Mamy więc więc pojemniki o objętościach $V_1$ i $V_2$. Teraz szukając stanu równowagi dostajemy:
+\begin{align*}
+    \pdv{S}{V_1} = 0 \qc \pdv{S}{E_1} = 0 \implies T_1 = T_2\\
+    \pdv{S}{V_1} = \pdv{S_1}{V_1} - \pdv{S_2}{V_1}\\
+    \implies \pdv{S_1}{V} = \pdv{S_2}{V}\qc p_1 = p_2 \qc \frac{p_1}{T_1} = \frac{p_2}{T_2}
+\end{align*}
+
+Spójrzmy teraz na małą zmianę Entropii:
+\[
+    \Delta S = \pdv{S_1}{V_1} \Delta V - \pdv{S_2}{V_2} \Delta V = \qty(\frac{p_1}{T_1} - \frac{p_2}{T_2}) \Delta V = \qty(\frac{p_1 - p_2}{T})\Delta V > 0
+\]
+Czyli $\Delta V > 0 \implies p_1 > p_2$. Patrzymy teraz na entropię:
+\(
+    s = k (\log v + \dots) \implies \pdv{s}{v} = \frac{k}{v}
+\) Daje to: \( p = \frac{kT}{p} \implies pV = NkT \)
+\begin{emph_box}{Wzór Clapeyrona}
+    \[
+        pV = NkT
+    \]
+\end{emph_box}
+
+Rozważamy teraz \emph{ściankę adiabatyczną} (termos):
+\com{Rysunek}
+W tym przypadku mamy;
+\[ 0 = 
+  \begin{cases}
+      \Delta V\\
+      \Delta E\\
+      \Delta N
+  \end{cases}
+\]
+Czyli inaczej mówiąc wymiana ciepła z otoczeniem nie zachodzi.
+
+\section{Pokazy}
+\emph{Zależność ciśnienia od głębokości w cieczy}
+
+\com{Wstaw zdjęcie z ururką i balonem}
+Patrząc na doświadczenie widzimy, że rurka z cieczą jest z jednej strony otwarta, a z drugiej zamknięta balonikiem, który jest wsuwany wgłąb cylindra z wodą. Wzrost ciśnienia działającego na balon obserwujemy poprzez to, że poziom cieczy w rurce się zmienia wraz ze wsuwaniem balonika na głębokość\\
+\com{Zdjęcie implozji puszki}\\
+
+\emph{Pokazy z różnicą ciśnień (Efekt wysokogórski etc.)} \com{Zdjęcia i film} \com{Zdjęcie z wodą wrzącą w temperaturze pokojowej w niskim ciśniniu}\\
+
+\emph{Pokaz z zamrażaniem lodu poprzez gwałtowne zmiejszenie ciśnienia w układzie z wodą}
+
+Ciecz która jest pomiędzy wodą a pompą to kwas siarkowy, który jest silnie higroskopijny, więc dzięki temu odfiltrowujemy powietrze od wody i zyskujemy efekt obniżenia temperatury wody i zamarzania. 
+
+\emph{Nurek Kartezjusza} \com{Zdjęcia}\\
+W nurku jest stała ilość gazu zamknięta w szklanej bańce powietrza. Od dołu jest otwarta ta bańka, wiec jest zatknięta wodą. Zwiększajac ciśnienie wody powietrze się spręża co raz bardziej, więc siła wyporu spada, a siła grawitacji pozostaje bez zmian bo jest niezależna od objętości gazu i nurek tonie. Jak zmniejszamy ciśnienie, to nurek się na nowo wynurza.
+
+\section{Powrót do teorii}
+Ostatni rodzaj ścianki, pozwala na przepływ energii i cząstek ale nieruchoma (ścianka wyimaginowana)
+Czyli mamy:
+\[
+    const = 
+    \begin{cases}
+    N_1 + N_2 = N\\
+    E_1 + E_2 = E
+    \end{cases}
+\]
+Oraz wiemy, że:
+\begin{align*}
+    0 = \pdv{S}{N_1} = \pdv{S_1}{N_1} - \pdv{S_2}{N_2} &\implies \qty(\pdv{S}{N})_E = - \frac{\mu}{T}\\
+    \text{Mała zmiana }&\text{entropii}:\\
+    \Delta S = \pdv{S_1}{N_1}\Delta N = \pdv{S_2}{N_2}\Delta N &= \frac{\mu_1 = \mu_2}{T} \Delta N > 0\\
+    \implies \Delta N>0\implies&\mu_1 < \mu_2
+\end{align*}
+Gdzie wielkość $\mu$ to \ind{Energia Chemiczna} - możemy ją rozumieć jako 'chęć' cząstek do przechodzenia między dwoma objętościami.
+
+\end{lecture}
 
 \tableofcontents
 
