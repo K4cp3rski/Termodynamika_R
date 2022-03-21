@@ -5,7 +5,7 @@
 \usepackage[polish]{babel}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage[table,xcdraw]{xcolor}
+\usepackage[table,xcdraw,dvipsnames]{xcolor}
 \usepackage{hhline}
 \usepackage{placeins}
 \usepackage[margin=0.6in]{geometry}
@@ -14,9 +14,11 @@
 \usepackage{physics}
 \usepackage{float}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage{datetime}
 \usepackage{makeidx}
 \usepackage{hyperref}
+\usepackage{fancyhdr}
 
 \title{Termodynamika R 2021/2022}
 \author{Kacper Cybiński}
@@ -26,7 +28,7 @@
 \makeindex
 \setlength\parindent{0pt}
 
-\addto\captionspolish{\renewcommand{\chaptername}{Lecture}}
+\addto\captionspolish{\renewcommand{\chaptername}{Wykład}}
 
 \newcommand{\ind}[1]{{\color{blue} #1\index{#1}}}
 
@@ -38,8 +40,10 @@
 
 \renewcommand{\emph}{\textbf}
 
-\newenvironment{lecture}[1][]{\par\medskip
-   \noindent\chapter \rmfamily}{\medskip}
+\newcommand{\linediv}{{\color{RubineRed} \rule{\linewidth}{0.5mm}}}
+
+\newenvironment{lecture}[1]{\par\medskip
+   \noindent\chapter{#1} \rmfamily}{\medskip}
    
 \newenvironment{emph_box}[1]
     {\begin{center}
@@ -52,6 +56,24 @@
     \end{tabular} 
     \end{center}
     }
+    
+    
+\pagestyle{fancy}
+% zmiana liter w~żywej paginie na małe
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} % usuń bieżące ustawienia pagin
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\rightmark}
+\fancyhead[RE]{\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} % pionowy odstęp na kreskę
+\fancypagestyle{plain}{%
+\fancyhead[LE,RO]{\bfseries\thepage} % usuń p. górne na stronach pozbawionych
+% numeracji (plain)
+\renewcommand{\headrulewidth}{0.5pt} % pozioma kreska
+}
 
 \begin{document}
 
@@ -60,7 +82,7 @@
 % ---------------------------------------------------------------------------
 % Wykład 01.03.2022
 
-\chapter*{Organizacja wykładu}:
+\chapter*{Organizacja wykładu}
 \begin{enumerate}
     \item Dwa kolokwia - po 40 \% pkt
     \item Zadania domowe - 20 \% pkt
@@ -78,7 +100,7 @@ Egzamin i kolokwia mają 2 częsci:
 
 Zadania domowe: Jak na elektro, ale tylko 3 zadania na tydzień. Na wykładzie czwartkowym losowanie zadania zbieranego. Jest jedno dodatkowe, trudniejsze, "Joker".
 
-\begin{lecture}
+\begin{lecture}{Wstęp, Ergodyczność}
 \section{\ind{Problem wielu ciał}}
 
 Dla problemu 3 ciał pierwsze znalezione stabilne rozwiązanie zostało opisane przez Lagrange'a. Jest to ruch po okręgu, a w $\sim 1990$ opisano też stabilną orbitę po ósemce.
@@ -156,7 +178,7 @@ Kolejnym pojęciem które się pojawia jest \ind{ergodyczność}. Oznacza to, �
 
 \FloatBarrier
 
-\begin{lecture}
+\begin{lecture}{Ruchy Browna, Równanie Master}
 \section{Ruch cząstek - Ruchy Browna}
 
 Wprowadzamy sobie jak propaguje się cząstka w cieczy w czasie.
@@ -215,7 +237,7 @@ Przykładowe wartości:\\
 ale np z jednogo końca auli na drugi szło by to miesiąc.\\
 \emph{Takeaway} - Zapachy nie transportują się dyfuzyjnie!
 
-\section{Równanie Master}
+\section{\subind{Równanie Master}{Równanie!Master}}
 
 \begin{figure}[!ht]
     \centering
@@ -268,7 +290,7 @@ Czyli rozkład Gaussa, widoczny na Rysunku \ref{fig:lec_2:mol_pow}.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.8\linewidth, angle=270]{Wyk_2_Rys_5.JPG}
-    \caption{Przykładowy \ind{Rozkład Gaussa} uzyskany ze spadających kulek}
+    \caption{Przykładowy \subind{Rozkład Gaussa}{Rozkład!Gaussa} uzyskany ze spadających kulek}
     \label{fig:lec_2:gauss}
 \end{figure}
 
@@ -310,7 +332,7 @@ Szukamy rozwiązania niezależnego od czasu - $p^{eq}(n)$. Z równania \ref{eq:l
 % ---------------------------------------------------------------------
 % Wykład 07.03.2022
 
-\begin{lecture}
+\begin{lecture}{Definicja stanu, Entropia}
 
 \begin{figure}[!ht]
     \centering
@@ -414,7 +436,7 @@ Co daje nam zanik wykładniczy:
     \label{fig:lec_3:inf_1}
 \end{figure}
 
-Jak widać na Rysunku \ref{fig:lec_3:inf_1}, nasza \ind{Informacja} to będzie:
+Jak widać na Rysunku \ref{fig:lec_3:inf_1}, nasza Informacja to będzie:
 \begin{align*}
     N = 2^n\\
     \log N = n \log 2 \\
@@ -452,26 +474,26 @@ Wnioski:
     \item Dla rozkładu maksymalnie nierównowagowego $p_1 = 1 , p_2 = \dots = 0$. Wtedy $I = 0$.
     \item Można pokazać, że rozkład równowagowy maksymalizuje Entropię. Jest to tzw twierdzenie Jensena dla fukncji wklęsłych. \com{Zdjęcie wklej}
 \end{enumerate}
+% -----------------------------------------------------------------------------------------
+% 10.03.2022
 
-\begin{lecture}
+\begin{lecture}{Entropia Gibbsa i Boltzmanna}
 
-\section{Entropia wg Gibbsa i wg Boltzmanna}
-
-\subsection{Wzór J.W.Gibbsa}
+\emph{Wzór J.W.Gibbsa}
 \[
     S = - k \sum_i p_i\footnote{Prawdopodobieńśtwo wystąpienia mikrostanu} \log p_i
 \]
 
 \emph{Joseph Willard Gibbs} (1893 - 1903) \textit{Elementary Principles in Satistical Mechanics (1907)}
 
-\subsection{Wzór Boltzmanna}
+\emph{Wzór Boltzmanna}
 \[
     S = k \log W\footnote{Liczba mikrostanów}
 \]
 
 \section{Psy Ehrenfersta}
 
-\subsection{Entropia Gibbsa}
+\subsection{Wzrost Entropii}
 
 \begin{itemize}
     \item $G_m$ - liczba mikrostanów odpowiadającuch makrostanom $m$, $G_m = \mqty(N \\ m)$
@@ -486,10 +508,16 @@ Wnioski:
 \[
     S = \underbrace{- k \sum_m P_m \log P_m}_{\footnotemark} + \underbrace{\sum_m P_m \overbrace{(k \log G_m)}^{\footnotemark}}_{\footnotemark}
 \]
-Czyli finalnie wzór na \emph{Entropię Boltzmanna}:
-\[
+Czyli finalnie wzór na \emph{\subind{Entropię Boltzmanna}{Entropia!Boltzmanna}}:
+\begin{equation}
     S_B = k \log G_m
-\]
+    \label{eq:lec_4:entropia_boltz}
+\end{equation}
+Oraz wzór na \emph{\subind{Entropię Gibbsa}{Entropia!Gibbsa}}
+\begin{equation}
+    S_G = - k \sum_i p_i\footnote{Prawdopodobieńśtwo wystąpienia mikrostanu} \log p_i
+    \label{eq:app:entropia_gibbs}
+\end{equation}
 \end{emph_box}
 \footnotetext{Wymierny stopień obsadzenai różnych makrostanów}
 \footnotetext{Entropia Boltzmanna odpowiadająca makrostanom M}
@@ -507,7 +535,7 @@ Pokażemy, że:
     \underbrace{- \sum \pi_m(t+1) G_m (t+1)}_{S(t+1)} \geq \underbrace{- \sum \pi_m (t) G_m \log \pi_m (t)}_{S(t)}
 \]
 
-Teraz skorzystamy z twierdzenia Jensena i Równania Master:\\
+Teraz skorzystamy z twierdzenia Jensena i Równania \subind{Master}{Równanie!Master}:\\
 Funkcja $\phi(x) = x \log x$ jest wypukła $\implies$ 
 \[
     \phi(\sum_i \alpha_i x_i) \leq \sum_i \alpha_i q(x_i)
@@ -536,9 +564,10 @@ Czyli:
 \end{align*}
 \footnotetext{Entropia Gibbsa}
 Czyli:
-\[
+\begin{equation}
     S_G (t+1) \geq S_G (t)
-\]
+    \label{eq:lec_4:wzrost_entropii}
+\end{equation}
 Czyli Entropia rośnie i osiąga maksimum w stanie równowagi <- \ind{Druga Zasada Termodynamiki}
 
 A teraz co się dzieje w Entropią Boltzmanna? TL;DR -> Dla niej jest to tylko statystycznie, bo są fluktuacje które mogą być duże.
@@ -570,11 +599,14 @@ Główne postulaty fizyki Statystycznej: (By Boltzmann)
 
 \end{lecture}
 
-\begin{lecture}
+% ------------------------------------------------------------------------------------
+% 14.03.2022
+
+\begin{lecture}{Granica Termodynamiczna, Maksymalizacja Entropii}
 
 \section{Przeniosło Time}
 
-Przy Erhenferstów once again:\\
+Psy Erhenferstów once again:\\
 Niech liczba pcheł $N = 20000$\\
 Prawdopodobieństwo liczby $n$ pcheł: $p(n) = \frac{1}{2^N} \qty(N \\ n)$
 Side note: $N! = N^N e^{-N} \sqrt{a \pi N}$, Czas dojścia do stanu $\approx \frac{1}{p(n)}$
@@ -590,9 +622,9 @@ Czyli czas dojścia:
 \[
     T_{\frac{N}{2}} \approx \frac{1}{p(N/2)} = \frac{\sqrt{2 \pi} \sqrt{N}}{2} = 100 \sqrt{\pi} \approx 177\qq{s}
 \]
-Rozkład stanów prawdopoodobnych ma ształt bardzo cienkiego Gaussa \com{Przepisz ze zdjęcia z tel.}
+Rozkład stanów prawdopoodobnych ma kształt bardzo cienkiego Gaussa, o szerokości $\sqrt{4 N}$
 
-Side note: 1 Angstrem \com{Znajdź symbol} $ = 10^{-10}$
+Side note: 1 Angstrem \AA$= 10^{-10}$
 
 \section{Granica Termodynamiczna}
 Weźmy:
@@ -653,7 +685,7 @@ Daje to:
 
 Weźmy:
 \[
-    \log \Sigma = \log \mqty(V/2 \\ N_L) \mqty(V/2 \\ N_P) = \log \frac{\frac{V}{2}}{\qty(\frac{V}{2} \varrho_L)! \qty(\frac{V}{2} (1- \varrho_L))!} \frac{\frac{V}{2}}{\qty(\frac{V}{2} \varrho_L)! \qty(\frac{V}{2} (1- \varrho_P))!} = \dots\footnote{Po dokładny rachunek patrz załącznik A.1 \com{Dopisz referencje}} = 0
+    \log \Sigma = \log \mqty(V/2 \\ N_L) \mqty(V/2 \\ N_P) = \log \frac{\frac{V}{2}}{\qty(\frac{V}{2} \varrho_L)! \qty(\frac{V}{2} (1- \varrho_L))!} \frac{\frac{V}{2}}{\qty(\frac{V}{2} \varrho_L)! \qty(\frac{V}{2} (1- \varrho_P))!} = \dots\footnote{Po dokładny rachunek patrz załącznik \ref{fig:lec_5:app:maksymalizacja_entropii}} = 0
 \]
 
 Czyli wiemy, że:
@@ -665,9 +697,10 @@ Czyli:
     S = k \frac{V}{2} \qty[\varrho_L \log(\varrho_L) - (1 - \varrho_L) \log(1 - \varrho_L) - \varrho_P \log(\varrho_P) - (1 - \varrho_P) \log(1 - \varrho_P))]
 \]
 Dalej daje to:
-\[
-    \dv{S}{\varrho_L} = - k \frac{V}{2} \log\qty{\frac{\varrho_L (1 - 2 \varrho + \varrho_L)}{(1 - \varrho_L)(2 \varrho - \varrho_L)}} = 0 \implies
-\]
+\begin{equation}
+    \dv{S}{\varrho_L} = - k \frac{V}{2} \log\qty{\frac{\varrho_L (1 - 2 \varrho + \varrho_L)}{(1 - \varrho_L)(2 \varrho - \varrho_L)}} = 0
+    \label{eq:lec_5:ds_drho}
+\end{equation}
 \[
     \varrho_L (1 - 2 \varrho + \varrho_L) = (1 - \varrho_L)(2 \varrho - \varrho_L) \implies
 \]
@@ -675,7 +708,7 @@ Dalej daje to:
     \varrho_L = \varrho_R = \varrho
 \]
 
-Teraz sprawdźmy ze wzoru na pochodną \com{Wstaw referencję $\dv{S}{\varrho_L}$} co sie stanie jak $\varrho_L = \varrho + \Delta \varrho$ i $\varrho_R = \varrho - \Delta \varrho$:
+Teraz sprawdźmy ze wzoru na pochodną \eqref{eq:lec_5:ds_drho} co sie stanie jak $\varrho_L = \varrho + \Delta \varrho$ i $\varrho_R = \varrho - \Delta \varrho$:
 
 \[
     \dv{S}{\varrho_L} = -\frac{k V}{2} \log\qty{\frac{(\varrho - \Delta \varrho)(1 - \varrho) - \Delta \varrho}{(\varrho + \Delta \varrho)(1 - \varrho) + \Delta \varrho}}
@@ -686,11 +719,153 @@ Czyli wtedy entropia maleje.
 
 \end{lecture}
 
+% ------------------------------------------------------------------------
+% Wykład 17.03.2022
+
+\begin{lecture}{Entropia Gazu doskonałego, Termometr}
+    \section{Przeniosło time}
+    \subsection{Ad poprzedni wykład}
+    Weźmy układ jednorodny, tj. $\varrho = \frac{N}{V}$\\
+    Przypomnijmy, że entropia to:
+    \[
+        S = \log\sum = - Vk\qty[\varrho \ln(\varrho) + (1-\varrho) \ln(\varrho)]
+    \]
+    Podzielmy układ na dwie części tak jak ostatnim razem, tj.
+    \begin{align*}
+    \varrho_L &= \frac{N_L}{V/2} & \varrho_P &= \frac{N_P}{V/2}\\
+    N_L &= \frac{V}{2} \varrho_L & N_P &= \frac{V}{2} \varrho_P\\
+    \end{align*}
+    Daje to:
+    \begin{align*}
+        N_L + N_P = N\\
+        \frac{V}{2} \varrho_L + \frac{V}{2} \varrho_P = V \varrho\\
+        \varrho_L + \varrho_P = 2 \varrho
+    \end{align*}
+    \begin{align*}
+    N_L + N_P = N\\
+    \frac{V}{2} \varrho_L + \frac{V}{2} \varrho_P = V \varrho\\
+    \varrho_L + \varrho_P = 2 \varrho
+\end{align*}
+Wracamy też do wzoru wyprowadzonego na poprzednim układzie:
+\[
+    S = k \frac{V}{2} \qty[\varrho_L \log(\varrho_L) - (1 - \varrho_L) \log(1 - \varrho_L) - \varrho_P \log(\varrho_P) - (1 - \varrho_P) \log(1 - \varrho_P))]
+\]
+Wyciągamy teraz wniosek, że entropia będzie maksymalizowana, gdy $\varrho_L = \varrho_R = \varrho$ i ma wartość $\log\varrho$
+
+\com{Wstaw zdjęcia slajdów Przeniosły}
+
+    \section{Wyprowadzenie wzoru na entropię gazu doskonałego}
+    Weźmy sobie:
+    \begin{align*}
+        P(\text{mikrostan}) &= \frac{1}{E(E, N, V)}\\
+        H(\underbrace{x_1, x_2, \dots, x_n, p_1, p_2 \dots, p_n}_{\Gamma_n}) &= E = const.\\
+        \varrho(\Gamma_n) &= \frac{1}{\omega(E, N, V)\footnotemark} \delta(E - H(\Gamma_n, V))\\
+        \omega(E, N, V) &= \int \delta(E - H(\Gamma_n, V)) \dd{\Gamma_n}\qq{gdzie:}\\ \hline \\
+        \dd{\Gamma_n} = \frac{\dd[3N]{p} \dd[3N]{q}}{h^{3N}\footnotemark N!\footnotemark} &\qc \omega(E, N, V) = \pdv{\Omega}{E}\\
+        \Omega(E) &= \int_{\epsilon < E} \omega(\epsilon, N, V) \dd{\epsilon} = \int_{H(\Gamma_N) < E} \dd{\Gamma_N}\\ 
+        H = \frac{1}{2m}\qty(p_1^2 + p_2^2 + \dots +p_n^2) = E &\implies \qty(p_1^2 + p_2^2 + \dots +p_n^2) = (\sqrt{2 m E})^2\\
+        \hline
+    \end{align*}
+    \addtocounter{footnote}{-1}
+    \footnotetext{Liczba konfiguracji}
+    \refstepcounter{footnote}
+    \footnotetext{Stała Plancka}
+    \refstepcounter{footnote}
+    \footnotetext{Jest to istotne o tyle, że w tym $N!$ siedzi nasze przekonanie fundamentalne, że te cząstki są \emph{nierozróżnialne} i dopiero jak przez to podzielimy, to wzór na Entropię się zgodzi.}
+    I teraz patrzymy sobie na wymiar jednostkowy stałej Plankcka (bo chcemy udowodnić, że tylko jak ona tam jest to działa). Stała Plancka to $h = \frac{E}{\nu} \qty[\frac{J}{1/s} = J \cdot s]$ i analogicznie iloczyn $p \cdot q = \qty[kg \cdot \frac{m}{s} \cdot m = J \cdot s]$ \\
+    Idąc dalej w tym wyprowadzeniu mamy:
+    \begin{align*}
+        \Omega(E, N, V) &= \frac{\pi^{\frac{3N}{2}}}{\qty(\frac{3N}{2})!} \qty(2 m E)^{3N/2} \frac{V^N}{h^{3N}N!}\\
+        \omega = \pdv{\Omega}{E} &=  \frac{\pi^{\frac{3N}{2}}}{\qty(\frac{3N}{2})!} \frac{V^N}{h^{3N}N!} \frac{3N}{2} E^{\frac{3N}{2} - 1} \\
+        k\footnotemark \ln(\omega) &= N k \qty{\ln(\frac{V}{N}) + \frac{3}{2}\ln(\frac{E}{N}) + \frac52 + \frac32 \ln(\frac{4 \pi m}{4 h^2})}\\
+        \text{Korzystamy }&\text{teraz ze wzoru Stirlinga i dostajemy Entropię:}
+    \end{align*}
+    \addtocounter{footnote}{-1}
+    \footnotetext{Stała Boltzmanna}
+    \begin{equation}
+        S(E, V, N) = N k \qty[\ln(\frac{V}{2}) + \frac32 \ln(\frac{E}{N}) + S_0\footnotemark]
+    \end{equation}
+    \refstepcounter{footnote}
+    \footnotetext{Ten czynnik przez lata umykał a jest esencją zrozumienia dziedziny}
+    
+    Teraz spójrzmy sobie na pochodną Entropii:
+    \[
+        \dd{S(E, V, N)} = \qty(\pdv{S}{E})_{V, N} \dd{E} + \qty(\pdv{S}{V})_{E,N} \dd{V} + \qty(\pdv{S}{N})_{E, V} \dd{N}
+    \]
+    
+    Gdzie znaleziona tu wielkość $T$ znalezniona z równania $\pdv{S}{E} = \frac{1}{T}$ to \ind{Temperatura absolutna} - w skali Kelvina
+    
+    \com{Przeniosło poleca rozdiał o historii Termodynamiki z ksiązki prof. Wróblewskiego + wklej tu coś ze slajdów od Przeniosły}
+    
+    \begin{emph_box}{Zerowa zasada termodynamiki}
+        Jeśli układy A i B mogące ze sobą wymieniać ciepło są ze sobą w równowadze termicznej, i to samo jest prawdą dla układów B i C, to układy A i C również są ze sobą w równowadze termicznej. \link{https://pl.wikipedia.org/wiki/Zerowa_zasada_termodynamiki}{Wikipedia}
+    \end{emph_box}
+    \section{Pokazy}
+    \subsection{\ind{Termometr}}
+    Z zerowej zasady termodynamiki wynika zasada działania termometru. Pierwszy termometr, który bierzemy pod uwagę, to \subind{Termometr gazowy}{Termometr!gazowy}, patrz Rys. \ref{fig:lec_6:term_1}.
+    
+    \begin{figure}[ht!]
+         \centering
+         \begin{subfigure}[b]{0.4\textwidth}
+             \centering
+             \includegraphics[width=\textwidth]{Wyk_6_Rys_1.JPG}
+             \caption{Przed ogrzaniem}
+             \label{fig:lec_6:term_1.1}
+         \end{subfigure}
+         \hfill
+         \begin{subfigure}[b]{0.4\textwidth}
+             \centering
+             \includegraphics[width=\textwidth]{Wyk_6_Rys_2.JPG}
+             \caption{Po ogrzaniu}
+             \label{fig:lec_6:term_1.2}
+         \end{subfigure}
+        \caption{Termometr gazowy (tradycyjny) - rozszerzanie się parów gazu pod wpływem temperatury powoduje zmianę poziomu cieczy w pojemniku, co przekładamy na odczyt temperatury}
+        \label{fig:lec_6:term_1}
+     \end{figure}
+    
+    \com{Wstaw slajdy z prezentacji Przeniosły}\\
+    Działają te termometry poprzez mierzenie w jakiś sposób zmiany objętości gazu który jest w układzie zamkniętym\\
+    Dobrym ciałem/zjawiskiem wzorcowym do cechowania termometru {\color{orange} Nie jest} temperatura przejścia fazowego woda-lód, ani woda-gaz. Za to dobrym punktem {\color{orange} Jest} tzw. \ind{Punkt potrójny}, gdzie łączą się wszystkie przejścia fazowe. Dla wody jest to $273.17$K. \\
+    Pokaz punktu potrójnego na bazie Bromu. \nameref{fig:lec_6:term_2}\\
+        \begin{figure}[ht!]
+         \centering
+         \begin{subfigure}[b]{0.4\textwidth}
+             \centering
+             \includegraphics[width=\textwidth]{Wyk_6_Rys_3.JPG}
+             \caption{Przed ogrzaniem}
+             \label{fig:lec_6:term_2.1}
+         \end{subfigure}
+         \hfill
+         \begin{subfigure}[b]{0.4\textwidth}
+             \centering
+             \includegraphics[width=\textwidth]{Wyk_6_Rys_4.JPG}
+             \caption{Po ogrzaniu}
+             \label{fig:lec_6:term_2.2}
+         \end{subfigure}
+        \caption{Na Rys. \ref{fig:lec_6:term_2.1} widać stan bańki z Bromem tuż po wyjęciu z zamrażarki, obecne są tylko pary Bromu (żółta para) i ciało stałe, a po ogrzewaniu pojawia się też i ciecz z topiącego się ciała stałego (Rys. \ref{fig:lec_6:term_2.2}). Wtedy Brom jest w okolicy swojego punktu potrójnego}
+        \label{fig:lec_6:term_2}
+     \end{figure}
+    Żeby skala była dobra, to współczynnik termometryczny musi być liniową funkcją temperatury. Czyli np taka woda w zakresie $0-8$ stopni Celsiusza by się nie nadawała, bo ma w $4$ stopniach maksimum gęstości.\\
+    Co ciekawe dla żelaza również nie jest to monotoniczna zależność gęstości od temperatury, bo jak się grzeje, to zachodzi przejście fazowe ok $500$ stopni, i ma dziwny przebieg przez to.\\
+    Doświadczenie z kulką: Jak grzaliśmy otwór, to kulka wciąż przechodzi, ponieważ jak tempetarura rośnie, to rosną srednie odległości między atomami w obręczy, czyli otwór się \emph{powiększa}.
+
+\end{lecture}
+
+% ----------------------------------------------------------------------------------------------
+% 21.03.2022
+
+% \begin{lecture}{Kij wie jaki temat}
+
+% \end{lecture}
+
 \tableofcontents
 
 \listoffigures
 
 \printindex
+
+% ----------------------------------------------------------------------------------------------
+% Appendix
 
 \begin{center}
     \chapter*{Załączniki}
@@ -703,16 +878,6 @@ Czyli wtedy entropia maleje.
 \captionsetup[section]{name=Lecture}
 
 \chapter{Długaśne wyprowadzenia wzorów}
-
-\com{Dopisz komendy na to}
-
-\section{Lecture 1}
-
-\section{Lecture 2}
-
-\section{Lecture 3}
-
-\section{Lecture 4}
 
 \section{Lecture 5}
 
@@ -730,5 +895,71 @@ Czyli wtedy entropia maleje.
     \caption{Wyprowadzenie wzoru na maksymalizację entropii cz.2}
     \label{fig:lec_5:app:maksymalizacja_entropii_2}
 \end{figure}
+
+\chapter{Przydatne wzorki}
+
+\emph{Wzór Stirlinga}
+\begin{equation}
+    \log m! \approx \frac12 \log 2 \Pi + (m+1) \log m - m \dots
+    \label{eq:app_wzory:stirling}
+\end{equation}
+
+\linediv
+
+\emph{Entropia}
+
+\begin{itemize}
+    \item $G_m$ - liczba mikrostanów odpowiadającuch makrostanom $m$, $G_m = \mqty(N \\ m)$
+    \item $P_m(t)$ - prawdopodobieństwo makrostanu ($m$ pcheł na Azorze)
+    \item $p_i(t)$ - prawdopodobieństwo mikrostanu, $p_i (t) = \frac{P_m(t)}{G_m(t)}$\footnote{Wszystkie mikrostany odpowiadające makrostanom $m(i)$ są równoprawdopodobne.}
+\end{itemize}
+
+
+\emph{Entropia Boltzmanna}
+\begin{equation}
+    S_B = k \log G_m
+    \label{eq:app:entropia_boltz}
+\end{equation}
+
+\emph{Entropia Gibbsa}
+\begin{equation}
+    S_G = - k \sum_i p_i\footnote{Prawdopodobieńśtwo wystąpienia mikrostanu} \log p_i
+    \label{eq:app:entropia_gibbs}
+\end{equation}
+
+\linediv
+
+\emph{Rozkłady}
+
+\emph{\subind{Rozkład Cauchy'ego}{Rozkład!Cauchy'ego}}
+\begin{equation}
+    P_x = \frac{1}{\pi \gamma} \qty[\frac{\gamma^2}{(x-x_0)^2 + \gamma^2}]
+    \label{eq:app:rozklad_cauchy}
+\end{equation}
+
+\begin{itemize}
+    \item $P_x$ - Rozkład gęstości prawdopodobieństwa
+    \item $\gamma$ - Parametr skali (np. na ćwiczeniach odległość działa od ekranu)
+    \item $x_0$ - przesunięcie peaku względem środka U.W.
+\end{itemize}
+
+\emph{\subind{Rozkład Maxwella}{Rozkład!Maxwella}}
+\begin{equation}
+    P(v) = 4 \pi v^2 \qty(\frac{m}{2 \pi k T})^{\frac32} e^{-\frac{\frac12 m v^2}{k T}}
+    \label{eq:app:rozklad_maxwell_v}
+\end{equation}
+
+\begin{equation}
+    P(E) = 2 \sqrt{\frac{E}{\pi}} \qty(\frac{1}{k T})^{\frac32} e^{-\frac{E}{kT}}
+    \label{eq:app:rozklad_maxwell_E}
+\end{equation}
+
+\begin{itemize}
+    \item $P(v)$ - Rozkład Maxwella w funkcji prędkości cząsteczek
+    \item $P(v)$ - Rozkład Maxwella w funkcji Energii cząsteczek
+    \item $\gamma$ - Parametr skali (np. na ćwiczeniach odległość działa od ekranu)
+    \item $x_0$ - przesunięcie peaku względem środka U.W.
+\end{itemize}
+
 
 \end{document}
