@@ -1,0 +1,50 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 1}
+
+Stefan i Janusz polują na kaczki, przy czym każdy z nich tak często trafia jak pudłuje. Stefan podczas polowania oddał po jednym strzale do 50 kaczek, a Janusz - do 51. Jakie jest prawdopodobieństwo, że Janusz ustrzelił więcej kaczek niż Stefan?
+
+\section{Rozwiązanie}
+
+Najwygodniej podejść do tego zadania zadając sobie pytanie o prowadzenie w przypadku gdy obydwaj oddali tyle samo strzałów. Weźmy sobie zdarzenie $A$, oznaczające że obaj ustrzelili tyle samo kaczek. Wtedy jego prawdopodobieństwo wynosi $p(A) = r$. Teraz racji tego, że prawdopodobieństwo każdego pojedyńczego trafienia to $p = \frac12$, równe dla obu panów, to prawdopodobieństwo zdarzenia $B$ - objęcia prowadzenia przez jednego z nich wyrazimy wzorem: 
+\[
+    p(B) = p \cdot p(A') = \frac12 \cdot (1-r) = \frac{1-r}{2}
+\]
+Przejdźmy teraz do sytuacji, gdy Janusz strzela 51 razy. Oznacza to, że ostatni strzał zrobi jakąkolwiek różnicę tylko i wyłącznie, gdy po 50 strzałach był remis, na co prawdopodobieństwo już sobie oznaczyliśmy wyżej jako $r$. Czyli sumując te dwa wydarzenia razem, szukane prawdopodobieństwo będzie wynosić:
+\[
+    p_s = \frac{1-r}{2} + \frac12 r = \frac12
+\]
+\end{document}
