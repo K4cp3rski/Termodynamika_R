@@ -19,6 +19,7 @@
 \usepackage{datetime}
 \usepackage{makeidx}
 \usepackage{hyperref}
+\usepackage{amsfonts}
 \usepackage{fancyhdr}
 
 \title{Termodynamika R 2021/2022}
@@ -64,6 +65,7 @@
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \fancyhf{} % usuń bieżące ustawienia pagin
+\setlength{\headheight}{15pt}
 \fancyhead[LE,RO]{\bfseries\thepage}
 \fancyhead[LO]{\bfseries\rightmark}
 \fancyhead[RE]{\bfseries\leftmark}
@@ -999,7 +1001,138 @@ Oraz wiemy, że:
     \Delta S = \pdv{S_1}{N_1}\Delta N = \pdv{S_2}{N_2}\Delta N &= \frac{\mu_1 = \mu_2}{T} \Delta N > 0\\
     \implies \Delta N>0\implies&\mu_1 < \mu_2
 \end{align*}
-Gdzie wielkość $\mu$ to \ind{Energia Chemiczna} - możemy ją rozumieć jako 'chęć' cząstek do przechodzenia między dwoma objętościami.
+Gdzie wielkość $\mu$ to \ind{Potencjał Chemiczny} - możemy go rozumieć jako 'chęć' cząstek do przechodzenia między dwoma objętościami.
+
+\end{lecture}
+
+% ------------------------------------------------------------------------
+% 24.03.2022
+
+\begin{lecture}{Potencjał chemiczny}
+
+\section{Potencjał Chemiczny Gazu Doskonałego}
+Piszemy równanie na Entropię:
+\[
+    S = k N (\ln V + \frac32 \ln \frac{4 \pi m}{3 h^2} + \frac52 + \frac32 \ln E - \frac52 \ln N)
+\]
+Wtedy \subind{potencjał chemiczny}{Potencjał Chemiczny} będzie wyglądać:
+\[
+    \mu = \frac{S}{N} - \frac52 k = - k T \qty(\ln\qty(\frac{V}{N}\qty(\frac{2 \pi n k T}{h^2})))
+\]
+
+
+\section{Warunki nieidealne}
+Do tej pory braliśmy tylko układy odizolowane o parametrach $E, N, V, S, T, \mu, p$, ale IRL nasz układ o stanie $\mathbb{S}$ jest w jakimś rezerwuarze $R$. Wtedy Energia całkowita to będzie:\\
+$E = E_S + E_R$ - suma energii układu o stanie $\mathcal{S}$ i rezerwuaru $R$.\\
+Oznaczamy to jako $\Gamma_N = \qty{\Gamma_S, \Gamma_R}$ - Stan układu $R+S$. Rozpiszemy to jako:
+\[
+    \rho(\Gamma_N) = \frac{1}{\omega(E, V, N)} \delta(E - H(\Gamma_N)) 
+\]
+Weźmy teraz $\varrho = \rho(\Gamma_S, \Gamma_R)$. Wtedy:
+\[
+    \rho_S(\Gamma_S) = \int\dd{\Gamma_R} \varrho(\Gamma_S, \Gamma_R) = \int \dd{\Gamma_R} \frac{1}{\omega} \delta(E - H_S(\Gamma_S) - H_R(\Gamma_R))
+\]
+\[
+    \rho_S(\Gamma_S) = \frac{1}{\omega(E, V, N)} \omega_R(E - H_S(\Gamma_S), V_R, N_R)
+\]
+Pamiętając, że:
+\[
+    \mqty{
+        \omega = \int \delta(E - H(\Gamma)) & \omega = e^{\frac{S}{k}}\\
+        k \log \omega = S
+    }
+\]
+Stosując te założenia do poprzednich wzorów:
+\[
+    \rho_S(\Gamma_S) \sim e^{\frac{1}{k} S_R(E - E_S, V_R, N_R)}
+\]
+Dalej zakładamy $\abs{S} \ll \abs{R}$, $\abs{E_S} \ll \abs{E}$. Rozwijamy wokół $E_S = 0$
+\[
+    S_R(E-E_S, V_R, N_R) \approx S_R(E) - \pdv{S_R}{E} E_S
+\]
+Z normalizacji $\rho_S$, biorąc $\beta = \frac{1}{k T}$:
+\[
+    \mqty{
+    \rho_S = \frac{1}{Z} e^{- \beta E_S(\Gamma_S)}\\
+    Z = \int\dd{\Gamma_S} e^{-\beta E(\Gamma_S)}
+    }
+\]
+Gdzie wielkosć 
+\begin{equation}
+    Z = \int\dd{\Gamma_S} e^{-\beta E(\Gamma_S)}
+    \label{eq:lec_8:suma_stat}
+\end{equation}
+nazwiemy \subind{sumą statystyczną}{Suma Statystyczna}, zaś wielkość $Z(T, V, N)$ nazwiemy \subind{zespołem kanonicznym}{Zespół Kanoniczny}
+
+Idąc dalej mamy:
+\begin{align}
+    \ev{E} &= U = \int_\Gamma E(\Gamma) \rho(\Gamma) \dd{\Gamma} = \\
+    &= \frac{1}{Z(T, V, N)} \int E e^{- \beta E(\Gamma)} \dd{\Gamma} = - \frac{1}{Z}\pdv{\beta}\int e^{- \beta E(\Gamma)} \dd{\Gamma} = \\
+    &= -\frac{1}{Z} \pdv{Z}{\beta} = - \pdv{\log Z}{\beta}
+\end{align}
+Licząc sobie teraz dyspersję tego rozkładu:
+\begin{align}
+    \ev{(\Delta E)^2} &= \ev{E^2} - \ev{E}^2\\
+    \ev{E} &= \footnotemark
+\end{align}
+\footnotetext{\com{Wklej Zdjęcie obliczeń aż do równoważności zespołów.}}
+
+\section{Powrót to $\mu$}
+\com{Wstaw rysunek z Goodnotes}
+
+$$P(N_g, N_d) = \frac{1}{Z} \sum_{j: \mqty{N_g\text{ w }V_g\\N_d\text{ w }V_d}} e^{- \beta E_j} = \frac{Z(N_g, N_d,)}{Z}$$
+Daje nam to: $Z(N_g, N_d) = Z_g(N_g)Z_d(N_d)$. Czy istnieje maksimum $P$?, tj.
+\[
+        \pdv{P}{N_g} \qc \pdv{\log P}{N_g}
+\]
+Tu jedna uwaga:
+\[
+    P_\text{mikro} = \frac{1}{\sum(E)} \qc P_\text{kanoniczne} = \frac{1}{Z} e^{-\beta \ev{E}}
+\]
+Daje nam to:
+\begin{align*}
+        S(E) &= k \log \sum(E)\qc P_M = e^{- S(E)/k} \implies P_K = P_M\\
+        \frac{e^{- \beta \ev{E}}}{Z} &= e^{- \beta S(E)/k}
+\end{align*}
+Daje nam to:
+\begin{equation}
+    e^{- \beta (U - TS)} = Z
+    \label{eq:lec_8:Z}
+\end{equation}
+
+Zdefiniujemy sobie tu taką wielkość:
+\begin{equation}
+    F = U - TS
+    \label{eq:lec_8:energia_swobodna}
+\end{equation}
+
+Nazwiemy ją \subind{energią swobodną}{Energia Swobodna}.
+\begin{align*}
+    - \beta F &= \log Z\\
+    F &= - k T \log Z\\
+    \dd{F} &= \dd{U} - T \dd{S} - S\dd{T}\\
+    \dd{S} &= \qty(\pdv{S}{U})_{VN} \dd{U} + \qty(\pdv{S}{V})_{UN}\dd{V} + \qty(\pdv{S}{N})_{VU}\\
+    \dd{F} &= \dd{U} - T \qty(\frac{1}{T} \dd{U} + \frac{p}{T} \dd{V} - \frac{\mu}{T} \dd{N}) - S \dd{T} =\\
+    &= - p \dd{V} - S \dd{T} + \mu \dd{N}\\
+    \mu &= \qty(\pdv{F}{N})_{T, V}
+\end{align*}
+Wstawmy sobie to teraz dla naszej sytuacji dwóch zbiorników:
+\begin{align*}
+    \pdv{\log Z_g(N_g)}{N_G} - \pdv{\log Z_d(N_d)}{N_d} &= 0\\
+    \color{BrickRed} \pdv{\log Z}{N} = -k T\mu\\
+    \implies \mu_g = \mu_d
+\end{align*}
+Idąc dalej z tym rozumowaniem liczymy sobie:
+\begin{align*}
+    Z_g(N_g) &= \int e^{- \beta E_g\footnotemark} \dd{\Gamma_g} = {\color{BrickRed} E_g \approx mgh + U_w} = \qty(\frac{V_g}{\lambda^3} e^{-\frac{mgh}{kT}})^{N_g}/N_g! \implies\\
+    \mu_g &\approx mgh + kT\log\frac{N_g \lambda^3}{V_g}\\
+    \mu_d &\approx 0 + kT \log \frac{N_d \lambda^3}{V_d}\\
+    % F = - kT \log Z &\qc \mu = (\pdv{F}{N) = -k T \pdv{\log Z}{N})
+\end{align*}
+\footnotetext{Energia grawitacyjna}
+Duży $\mu$ - skłonność do dyfuzji.
+
+Potencjał chemiczny to zmiana energii układu po dołożeniu nowej cząstki do niej.
 
 \end{lecture}
 
