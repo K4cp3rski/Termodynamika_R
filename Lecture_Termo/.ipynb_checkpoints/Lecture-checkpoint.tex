@@ -1277,6 +1277,146 @@ Potencjał chemiczny to zmiana energii układu po dołożeniu nowej cząstki do 
     Teraz wyobraźmy sobie, że poziomy się nie zmieniają, ale prawdopodobieństwa obsadzeń już tak (np. na skutek kontaktu z innym ciałem, przekazem ciepła) $\implies \dd{E_i} = 0 \to \dbar Q = \dd{U} \sum_i E_i \dd{p_i}$ co skutkuje przekazem entropii $\dd{S_e} = \frac{1}{T} \dbar Q = \frac{1}{T} \sum_i E_i \dd{P_i} $
 \end{lecture}
 
+% ----------------------------------------------------------------------
+% Wykład 28.03.2022
+
+\begin{lecture}{Twierdzenie Adiabatyczne}
+Weźmy sobie:
+\[
+    E_{n_x n_y n_z} = \frac{\hbar^2\pi^2(n_x^2 + n_y^2 + n_z^2)}{2 m l^2}
+\]
+Spójrzmy sobie na poziomy energetyczne studni \com{Przerysuj ze zdjęcia}, to mamy: $L \to L'\qc\dd{P_i} = 0\qc\dd{E_i}\neq0$.
+\begin{emph_box}{\subind{Twierdzenie Adiabatyczne}{Twierdzenie!Adiabatyczne}}
+\emph{Twierdzenie Adiabatyczne}\textit{(mechanika kwantowa)}: Jeśli układ fizyczny był w stanie własnym Hamiltonianu $H(0)$ określonym liczbami kwantowymi $n$, to jeśli tylko $H$ zmienia się dostatecznie wolno, to układ pozostaje w stanie własnym Hamiltonianu $H(t)$ scharakteryzowanego tym zespołem liczb kwantowych.
+\end{emph_box}
+
+Widzimy, że w związku z tym:
+\begin{align*}
+    U &= \sum_i E_i P_i\qc S = ik\sum_i P_i \log P_i\\
+    \dd{U} &= \sum_i\qty(\underbrace{\dd{E_i}P_i}_{\footnotemark} + \underbrace{E_i\dd{P_i}}_{\footnotemark})\qc\dd{S} = \frac{1}{T} \sum_i \dd{P_i}E_i
+\end{align*}
+\addtocounter{footnote}{-1}
+\footnotetext{Praca}
+\refstepcounter{footnote}
+\footnotetext{$T\dd{S}$ - Ciepło}
+Czy to nie oszustwo?
+Bo widzimy, że na początku mamy:
+\[
+    p_n^i = e^{-\beta \frac{\hbar^2 \pi^2 n^2}{2 m L^2}}
+\]
+\[
+    p_n^f = e^{-\beta' \frac{\hbar^2 \pi^2 n^2}{2 m (L')^2}}
+\]
+
+\textit{Jeśli to Pana niepokoi, to może Pan wyłączyć mózg $\sim$ P. Szymczak 31.03.2022}
+Gdzie $\beta = \frac{1}{kT}, \frac{\beta}{L^2} = \frac{\beta'}{(L')^2} \implies T L^2 = T' (L')^2 \implies L = V^{\frac13} \implies T V^{\frac23} = const.$\\
+Czyli po wstawieniu tego wyniku do Równania Clapeyrona dostajemy $pV = NkT \implies T = \frac{pV}{Nk}$ Co też daje nam:
+\[
+    pV^{\frac53} = const.
+\]
+Jest to \emph{równanie adiabaty dla gazu doskonałego}.\\
+Z tego też widać, że w rozumieniu fizyki statystycznej, \emph{adiabatycznie}, to znaczy bez wymiany ciepła z otoczeniem, a niekoniecznie nieskończenie wolno, co jest rozumieniem kwantowym.
+Z tego wynika nam dalej:
+\begin{enumerate}
+    \item $\dbar W = \dd{U} = \sum_i P_i\dd{E_i} \gets$ kwazistatyczne, adiabatyczne (statystycznie) sprężanie układu
+    \item $\dd{E_i} = 0 \qc \dd{U} = \dbar{Q} = \sum_i E_i \dd{P_i} \qc S_e = \frac{1}{T} \sum_i E_i \dd{P_i}$, gdzie $S_e$ to zewnętrzna zmiana entropii.
+    \item Jeśli zmiana poziomów energetycznych nie następuje bardzo wolno, to cząstni mogą zmieniać stan ("spadanie kur z grzęd w tej studni nieskończonej"), przy czym prawdopodobieństwo przejśćia $i \to j$ wynosi:
+    \[
+        H' = H_o + V'\qc \tilde{P_{ij}} = \mel{\Psi_i}{V'}{\Psi_j} = \tilde{P_{ji}}
+    \]
+    Gdzie $v'$ jest zaburzeniem.
+\end{enumerate}
+Teraz patrzymy na prawdopodobieństwo obsadzenia stanu po zaburzeniu, $P_i'$.
+\begin{align*}
+    P_i' &= \sum_j \tilde{P_{ij}} P_j\\
+    \dd{P_i} = P_i' - P_i = \sum_j \tilde{P_{ij}}P_j - P_i = \sum_j \tilde{P_{ij}}P_j - \sum_j \tilde{P_{ij}}P_i = \sum_j \tilde{P_{ij}}(P_j - P_i)
+\end{align*}
+W związku z tym zmiana energii:
+\[
+    \sum_i E_i\dd{P_i} = \sum_{i,j} \tilde{P_{ij}} E_i (P_i - P_j) = \sum_{i,j} \tilde{P_{ji}} E_j (P_i - P_j) = \frac12\qty(\sum_{ij} \tilde{P}_{ij} E_i (P_j-P_i) - \tilde{P}_{ji} E_j (P_j - P_i))
+\]
+\[
+    \sum_i E_i \dd{P_i} = \frac12\sum_{ij}\tilde{P}_{ij}(E_i-E_j) (P_i-P_j) >0 
+\]
+I dlaczego to jest dodatnie? Ponieważ $p \sim e^{-\beta E_i}$. Czyli:
+\[
+    \dd{S_int} = \frac{1}{2T} \sum_{ij} \tilde{P}_{ij} (E_i-E_j) (P_i-P_j) 
+\]
+Zatem zmienia się energia, bez wymiany ciepła z otoczeniem. \\
+Daje nam to też \subind{Drugą Zasadę Termodynamiki}{Zasada Termodynamiki!Druga}.\\
+Zbierając te wyniki w całość dostajemy, że $\sum_i E_i \dd{p_i}$ można dostać w wyniku przekazu ciepła z otoczeniem, lub w wyniku przeprowadzenia nagłego nieodwracalnego procesu. Stąd wynika:
+\begin{equation}
+    \dd{S} = \dd{S_{int}} + \dd{S_{ext}} = \frac{\dbar Q}{T} + \underbrace{\dd{S_{int}}}_{\footnotemark}
+\end{equation}
+\footnotetext{Związane z nieodwracalnością, nieadiabatycznością (Mech.Kwant.) procesu lae nie przekazem ciepła}
+Daje nam to \emph{Drugą Zasadę Termodynamiki}
+\begin{emph_box}{\subind{Druga Zasada Termodynamiki}{Zasada Termodynamiki!Druga}}
+    Biorąc za $S$ Entropię Gibbsa:
+    \begin{equation}
+        \dd{S} \geq \frac{\dbar Q}{T}
+    \end{equation}
+    Co dla układu izolowanego ($\dbar Q = 0$) daje nam:
+    \begin{equation}
+        \dd{S} \geq 0
+    \end{equation}
+    Czyli inaczej mówiąc, Entropia układu izolowanego nigny nie maleje, nie zmienia się w procesach odwracalnych, a w nieodwracalnych rośnie.
+\end{emph_box}
+
+\section{Zespół wielki kanoniczny}
+Zespół wielki kanoniczny, to taki, gdzie układ może z otoczeniem wymieniać nie tylko ciepło ale i cząstki. \com{Wstaw rysunek}
+Czyli jego własności są takie. Biorąc $E_1, N_1, V_1$ jako stan układu, a $E_2, N_2, V_2$ stan otoczenia mamy $N_1 + N_2 = const.$ a $E_1 + E_2 = const.$
+Własności:
+\begin{enumerate}
+\item Dla całego układu $(1+2)$ obowiązuje rozkład mikrostanów
+\[
+    \rho(\Gamma^{(1)}, \Gamma^{(2)}) = \frac{1}{\omega(E, N, V)} \delta(E - E_1(\Gamma^{(1)}_1 N_1) - E_2(\Gamma^{(2)}_1 N_2))
+\]
+\item Nas ciekawią tylko prawdopodobieństwa poszczególnych mikrostanów układu $(1)$ bez względu na to co dzieje się w $(2)$.
+\[
+    \rho_1(\Gamma^{(1)}) = \int \dd{\Gamma_2} \rho(\Gamma^{(1)}, \Gamma^{(2)}) = \int \dd{\Gamma_2} \frac{1}{\omega(E, V, N)} \delta(E- E_1-E_2)
+\]
+\begin{equation}
+    \rho(\Gamma^{(1)}) = \frac{1}{\omega(E, V, N)} \omega_2(E - E_1(\Gamma^{(1)}_1 N_1), V_2, N-N_1)
+    \label{eq:lec_10:cos_1}
+\end{equation}
+Rozwińmy log $\omega_2$:
+\[
+    \log \omega_2(E- E_1, V_2, N-N_1) = \log \underbrace{\omega_2(E, V_2, N)}_{\frac{1}{k}S_2(E, V_2, N)} - \underbrace{\frac{1}{k}\pdv{k \log \omega_2}{E}E_1}_{\pdv{S}{E} = \frac{1}{T}} - \pdv{\log \omega_2}{N}N_1
+\]
+Pamiętając o tym, że $S = k \log \omega$:
+\[
+    \log \omega_2 (E-E_1, V_1, N-N_1) = \frac{1}{k} S_2 (E, V, N) - \beta E_1 + N \beta N_1
+\]
+Gdzie $\beta = \frac{1}{kT}$
+\[
+    \omega_2 (E-E_1, V_2, N-N_1) = A e^{-\beta (E_1 - \mu N_1)}
+\]
+Gdzie wielkość $z = e^{\beta \mu}$ nazwiemy \emph{aktywnością}. Wstawiamy teraz do równania \eqref{eq:lec_10:cos_1}, biorąc $\Xi(T, V, \mu) = \sum_N \int e^{-E - \mu N} \dd{\Gamma_N}$:
+\[
+    \rho_1(\Gamma^{(1)}) = \frac{1}{\Xi} e^{-\beta E_1 - \mu N} = \frac{1}{\Xi}z^N_1 e^{-\beta E_1}
+\]
+Stała normalizacyjna w zespole daje nam zwykle najwiecej informacji o układzie, więc spójrzmy sobie na stałą $\Xi$. Dostajemy ją jako:
+\[
+    \Xi(T, V, \mu) = \sum_{N=0}^{\infty} Z^N \int e^{-\beta E(\Gamma_N, V)} \dd{\Gamma_N}
+\]
+Teraz porównując sobie zespół kanoniczny z wielkim kanonicznym:
+\[
+    \frac{e^{-\beta \ev{E}}}{z} = \frac{-\beta \ev{E} - \mu \ev{N}}{\Xi}
+\]
+Daje nam to dalej:
+\[
+    z e^{\beta \mu \ev{N}} = \Xi \implies \log z + \beta \mu \ev{N} = \log \Xi
+\]
+Czyli jest to:
+\[
+    F - \mu \ev{N} = - k T \log \Xi \equiv \Omega(T, V, \mu)
+\]
+Wielkość $\Omega$ to \ind{Wielki podencjał termodynamiczny}
+\end{enumerate}
+
+
+\end{lecture}
+
 \tableofcontents
 
 \listoffigures
