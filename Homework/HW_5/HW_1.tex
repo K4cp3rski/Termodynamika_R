@@ -1,0 +1,162 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 1}
+
+Studnia kwantowa. Rozwaź pojedynczą cząstkę w nieskończonej studni kwantowej o szerokości $L$. Znajdź sumę statystyczną $(Z)$ takiego układu. Pokaż, że w granicy niskich temperatur, $k T \ll \frac{\hbar^{2}}{2 m L^{2}}$ dostajemy
+$$
+\log Z=\log x+x^{3}+\ldots
+$$
+gdzie $x=e^{-\frac{\hbar^{2} \pi^{2}}{2 m L^{2} k T}}$. Znajdź średnią energię $(U)$ układu w tym przybliżeniu oraz jego ciepło właściwe przy stałej długości, $C_{L}=\left(\frac{\partial U}{\partial T}\right)_{L}$ Jak zachowuje się $C_{L}$ w granicy $T \rightarrow 0$ ? Znajdź następnie równanie stanu układu wiązaące $p, L$ i $T$, pamiętając o tym, że $p=-\left(\frac{\partial F}{\partial L}\right)_{T}$. Wreszcie wyraź $p$ poprzez $U$ i $L$.
+
+Następnie rozważ granicę wysokich temperatur, $k T \gg \frac{\hbar^{2}}{2 m L^{2}}$. Uzasadnij, że wtedy sumę statystyczną można zastąpić całką
+$$
+Z=\int_{0}^{\infty} e^{-\frac{\hbar^{2} \pi^{2} n^{2}}{2 m L^{2} k T}} d n
+$$
+oraz znajdź $U, C_{L}$ oraz równanie stanu w tej granicy.
+
+
+\section{Rozwiązanie}
+
+Rozważmy pojedynczą cząstkę w studni kwantowej o szerokości L. Stany stacjonarne cząstki w takim układzie w reprezentacji położeniowej dane są wzorem:
+$$
+\Psi_{n}(x)=\sqrt{\frac{2}{L}} \sin \left(k_{\mathrm{n}} x\right)
+$$
+Jako że funkcja falowa musi znikać na brzegach studni to $k_{n}$ jest postaci $k_{n}=\frac{n \pi}{L} . Z$ drugiej strony z równania Schroedingera bez czasu dostajemy, że $k_{n}=\sqrt{\frac{2 m E_{n}}{\hbar^{2}}}$. Stąd energie stanów stacjonarnych są postaci:
+$$
+E_{n}=\frac{\hbar^{2} \pi^{2}}{2 m L^{2}} n^{2}
+$$
+gdzie $n$ wszędzie jest indeksem n-tego stanu stacjonarnego. Stąd suma statystyczna $Z$ jest postaci:
+$$
+Z=\sum_{n=1}^{\infty} \exp \left(-\beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}} n^{2}\right)
+$$
+gdzie $\beta=\frac{1}{k T}$. Wartość tego szeregu wyrazić można przy pomocy funkcji theta Jacobiego, jednak do dalszej części zadania lepiej jest zostawić ją w takiej formie.
+
+Jeśli przyjmiemy, że $k T \ll \frac{\hbar^{2}}{2 m L^{2}}$ to łatwo zauważyć, że kolejne eksponensy bardzo szybko zblizają się do 0 (poniewaz samo $\beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}$ jest bardzo duze, a dodatkowo przemnażamy je przez $n^{2}$, które tym bardziej go powiększa nawet dla małych n). Zapiszmy wiecc $Z$ w trochę innej formie wyciągając poza sumę dwa pierwsze wyrazy:
+$$
+Z=\exp \left(-\beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}\right)+\exp \left(-4 \beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}\right)+\sum_{n=3}^{\infty} \exp \left(-\beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}} n^{2}\right)
+$$
+Wprowadźmy oznaczenie:
+$$
+x=\exp \left(-\beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}\right)
+$$
+Wówczas:
+$$
+Z=x+x^{4}+O\left(x^{9}\right)
+$$
+Działając na to wyrażenie obustronnie logarytmem dostaniemy:
+$$
+\log Z=\log \left(x+x^{4}+O\left(x^{9}\right)\right)=\log \left(x\left(1+x^{3}+O\left(x^{8}\right)\right)\right)=\log x+\log \left(1+x^{3}+O\left(x^{8}\right)\right)
+$$
+Jako że $x$ jest małe, to możemy drugi logarytm rozwinąć wokół 0 :
+$$
+\log \left(1+x^{3}+O\left(x^{8}\right)\right)=x^{3}+O\left(x^{8}\right)+\frac{1}{2}\left(x^{3}+O\left(x^{8}\right)\right)^{2}=x^{3}+\ldots
+$$
+Podstawiając to do równania na $\log Z$ dostajemy wzór, którego oczekiwano w treści zadania:
+$$
+\log Z=\log x+x^{3}+\ldots
+$$
+
+Podstawiajacc za $\mathrm{x}$ eksponensa dostaniemy:
+$$
+\log Z=-\beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}+\exp \left(-3 \beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}\right)
+$$
+Obliczmy teraz energię wewnętrzną układu. Wyraża się ona wzorem:
+$$
+\begin{gathered}
+U=-\frac{\partial \log Z}{\partial \beta} \\
+U=\frac{\hbar^{2} \pi^{2}}{2 m L^{2}}+3 \frac{\hbar^{2} \pi^{2}}{2 m L^{2}} \exp \left(-3 \beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}\right)
+\end{gathered}
+$$
+Policzmy teraz ciepło właściwe dla tego układ przy stałej długości studni:
+$$
+\begin{gathered}
+C_{L}=\left(\frac{\partial U}{\partial T}\right)_{L}=\left(\frac{\partial U}{\partial \beta} \frac{\partial \beta}{\partial T}\right)_{L} \\
+C_{L}=-\frac{1}{k T^{2}}\left(\frac{\partial U}{\partial \beta}\right)_{L}=\frac{1}{k T^{2}}\left(3 \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}\right)^{2} \exp \left(-3 \frac{\hbar^{2} \pi^{2}}{2 m L^{2} k T}\right)
+\end{gathered}
+$$
+W granicy $T \rightarrow 0$ dostajemy, że $C_{L} \rightarrow 0$. Na koniec znajdźmy równanie stanu. Wiadomo, że ciśnienie wyraża się wzorem:
+$$
+p=-\left(\frac{\partial F}{\partial L}\right)_{T}
+$$
+gdzie $F$ to energia swobodna dana wzorem $F=-k T \log Z$. Czyli ciśnienie wyraża się wzorem:
+$$
+\begin{gathered}
+p=k T\left(\frac{\partial\left(-\frac{1}{k T} \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}+\exp \left(-3 \frac{\hbar^{2} \pi^{2}}{2 m L^{2} k T}\right)\right)}{\partial L}\right)_{T} \\
+p=\frac{\hbar^{2} \pi^{2}}{m L^{3}}+\frac{3 \hbar^{2} \pi^{2}}{m L^{3}} \exp \left(-3 \frac{\hbar^{2} \pi^{2}}{2 m L^{2} k T}\right)
+\end{gathered}
+$$
+Korzystając ze wzoru na energię wewnętrzną układu wzór na ciśnienie można wyrazić tylko poprzez U i L:
+$$
+p=\frac{2}{L}\left(\frac{\hbar^{2} \pi^{2}}{2 m L^{2}}+\frac{3 \hbar^{2} \pi^{2}}{2 m L^{2}} \exp \left(-3 \frac{\hbar^{2} \pi^{2}}{2 m L^{2} k T}\right)\right)=\frac{2 U}{L}
+$$
+Rozważmy teraz granicę wysokich temperatur $k T \gg \frac{\hbar^{2}}{2 m L^{2}}$. Wprowadźmy ponownie oznaczenie $x=\exp \left(-\beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}}\right)$. Rozważmy teraz ile wynosi w tej granicy różnica między kolejnymi wyrazami szeregu opisującego $Z$. Wybierzmy w tym celu dowolne $k$. Wówczas różnica między $\mathrm{k}$-tym, a $(\mathrm{k}+1)$-ym wyrazem szeregu wyraża się wzorem:
+$$
+\Delta x=x^{k^{2}}-x^{(k+1)^{2}}=x^{k}\left(1-x^{2 k+1}\right)
+$$
+
+Skoro $k T \gg \frac{\hbar^{2}}{2 m L^{2}}$, to wykładnik eksponensa dąży do 0 , więc $x \rightarrow 1$. Skoro tak, to $\Delta x \rightarrow 0$. Zatem dla dowolnego naturalnego $k$ różnica między kolejnymi wyrazami jest bliska zeru, więc rozkład uciągla się i sumę można zastąpić całką. W granicy wysokich temperatur suma statystyczna jest więc dana wzorem:
+$$
+\begin{gathered}
+Z=\int_{0}^{\infty} \exp \left(-\beta \frac{\hbar^{2} \pi^{2}}{2 m L^{2}} n^{2}\right) d n \\
+Z=\frac{1}{2} \sqrt{\frac{2 m L^{2}}{\hbar^{2} \pi^{2} \beta}}
+\end{gathered}
+$$
+W tej granicy energia wewnętrzna U dana jest wzorem:
+$$
+U=-\frac{\partial \log Z}{\partial \beta}=\frac{1}{\beta}=\frac{k T}{2}
+$$
+Natomiast $C_{L}$ dane jest wzorem:
+$$
+C_{L}=\left(\frac{\partial U}{\partial T}\right)_{L}=\frac{k}{2}
+$$
+$\mathrm{Na}$ koniec wyznaczmy równanie stanu poprzez wyznaczenie zależności na $p$. Ponownie jest ona dana wzorem:
+$$
+p=-\left(\frac{\partial F}{\partial L}\right)_{T}
+$$
+Natomiast $F$ jest równe:
+$$
+F=-k T \log \left(\frac{1}{2} \sqrt{\frac{2 m L^{2} k T}{\hbar^{2} \pi^{2}}}\right)
+$$
+A stąd $p$ jest równe:
+$$
+p=\frac{k T}{L}
+$$
+Wyrażając ciśnienie poprzez $U$ i $L$ dostaniemy:
+$$
+p=\frac{2 U}{L}
+$$
+
+\end{document}

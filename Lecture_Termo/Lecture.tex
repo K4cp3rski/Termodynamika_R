@@ -1417,6 +1417,154 @@ Wielkość $\Omega$ to \ind{Wielki podencjał termodynamiczny}
 
 \end{lecture}
 
+% ----------------------------------------------------------------------
+% Wykład 28.03.2022
+
+\begin{lecture}{Wielki zespół kanoniczny once again...}
+\section{W poprzednim odcinku...}
+
+Ostatnio wyprowadziliśmy sobie rozkład w którym układ może wymieniać z otoczeniem nie tylko energię ale i materię, jest to \emph{Wielki zespół kanoniczny}.
+\[
+    \rho = \frac{e^{-\beta(E - \mu N)}}{\Xi(T, V, \mu)}
+\]
+Gdzie $\Xi$:
+\[
+    \Xi = \sum_N\int e^{-\beta(E-\mu N)\dd{\Gamma_N})}
+\]
+W ten sposób zdefiniowaliśmy \subind{Energię swobodną Helmholza}{Energia Swobodna!Helmholza} jako:
+\[
+    F \mu N = - k T \log\Xi \equiv \Omega(T,V,N)
+\]
+Gdzie $\Omega$ to \emph{wielki potencjał termodynamiczny}.
+Różniczkę $\Omega$ definiujemy jako:
+\[
+    \dd{\Omega} = \dd{F} - \dd{\mu} N - \mu \dd{N} = -p\dd{V} - S\dd{T} - N\dd{\mu}
+\]
+W ten sposób definiujemy sobie $p, S$ jako:
+\[
+    p = \qty(\pdv{\Omega}{V})_{T, \mu}\qc S = - \qty(\pdv{\Omega}{T})_{V,\mu}
+\]
+W ten sposób dostaniemy $\ev{N}$:
+\[
+    \ev{N} = - \qty(\pdv{\Omega}{\mu})_{T, N} = \frac{1}{\beta} \qty(\pdv{\log \Xi}{\mu})_{T, V}
+\]
+Oraz, że:
+\[
+    \qty(\pdv{\beta} \log\Xi)_{V,p} = \frac{1}{\Xi} \sum_N \int \dd{\Omega_N} (E - \mu N) e ^{- \beta (E - \mu N)} = \ev{-E+\mu N} = -\ev{E} + \mu \ev{N}
+\]
+\linediv\\
+Czyli:
+\[
+    \ev{E} = - \pdv{\beta} \log\Xi + \mu k T \pdv{\log\Xi}{\mu}
+\]
+Inaczej pisząc, biorąc $z = e^{\beta \mu}$:
+\[
+    -\qty(\pdv{\beta} \log\Xi)_{V, z} = - \frac{1}{\Xi} \sum_N \int \dd{\Gamma_N} (-E)e^{-\beta E}z^N
+\]
+\linediv\\
+Chcemy pokazać, że $F = - p V$. W tym celu przyda nam się \emph{Twierdzenie Eulera o funkcjach jednorodnych}:\\
+\section{Twierdzenie Eulera o funkcjach jednorodnych}
+Niech $f$ będzie funkcją taką, że:
+\begin{equation}
+    f(\lambda x_1 + \lambda x_2 + \dots + \lambda x_N) = \lambda^n f(x_1, x_2, x_3, \dots, x_N)
+    \label{eq:lec_11:euler_teza}
+\end{equation}
+Wtedy $f$ nazwiemy funkcją jednorodną stopnia n-tego. Np. $3x^2$ - jednorodna stopnia 2, $xy^2+z^3$ - jednorodna stopnia 3, $e^{xy}$ - niejedorodna.\\
+Twierdzenie:\\
+Dla funkcji jednorodnej pierwszego stopnia n-tegp zachodzi:
+\[
+    nf(x_1, x_2, x_3 \dots x_N) = \sum_i x_i \pdv{f}{x_i}
+\]
+Dowód:\\
+Zróżniczkujmy równanie \eqref{eq:lec_11:euler_teza} po $\lambda$:
+\[
+    n \lambda^{n-1}f(x_1, x_2, x_3 \dots x_N) = \sum_i \pdv{\lambda x_i}{\lambda} \pdv{f}{\lambda x_i} = \sum_i x_i \pdv{f}{\lambda x_i}
+\]
+Co po podstawieniu $\lambda = 1$ daje:
+\[
+    nf(x_1, x_2, x_3 \dots x_N) = \sum_i x_i \pdv{f}{x_i}
+\]
+$\mathbb{QED}$
+Zastosujmy to teraz do Entropii. Entropia jest Ekstensywna, więc:
+\[
+    S(\lambda U, \lambda V, \lambda N) = \lambda S(U, V, N)
+\]
+Z Tw. Eulera:
+\[
+    S = \qty(\pdv{S}{U})_{V, N} U + \qty(\pdv{S}{V})_{U, N} V + \qty(\pdv{S}{N})_{V, U} N
+\]
+Czyli:
+\[
+    S = \frac{1}{T} (U + pV - \mu N)
+\]
+Co daje nam:
+\[
+    F = U - TS = - p V + \mu N \qc \Omega = F - \mu N = - pV
+\]
+\emph{Co chcieliśmy pokazać}
+
+
+\section{Transformata Legendre'a}
+Energię wewnętrzną definiujemy jako $U(S, V, N)$ co jest wielkością Ekstensywną.
+
+\com{Wstaw rysunek}
+Pochodna tej funkcji zdefiniujemy jako:
+\begin{align*}
+    \pdv{f}{x} &= p = \frac{f(x) - \Psi}{x}\\
+    f(x) - \Psi(p) &= px\\
+    \Psi(p) &= f(x) - \qty(\pdv{f}{x}) x\\
+    \Psi(p) &= f(x) - p x
+\end{align*}
+Teraz zdefiniujmy sobie \subind{entalpię}{Entalpia} ($H = U + pV$):
+\begin{align*}
+    \dd{U} &= T \dd{S} - p \dd{V}\\
+    T &= \qty(\pdv{U}{S})_{V,N} - p = \qty(\pdv{U}{V})_{S, N}\\
+    H(S, p, N) &= U(S, V, N) - V\qty(\pdv{U}{V})_{S,N}\\
+    H(S, p, N) &= U(S, V, N) + pV\\
+    F(S, p, N) &= U(S, V, N) - S\qty(\pdv{U}{S})_{V,\mu}\\
+    F(S, p, N) &= U(S, V, N) - ST
+\end{align*}
+Teraz definiując sobie \subind{energię swobodną Gibbsa}{Energia Swobodna!Gibbsa} zwana też \subind{entalpię swobodną Gibbsa}{Entalpia!Swobodna Gibbsa} $G(T, p, N)$:
+\begin{align*}
+    G(T, V, N) &= U(S, V, N) - V\qty(\pdv{U}{V}) - \qty(\pdv{U}{S})
+    &= U(S, V, N) - pV - ST
+\end{align*}
+Teraz możemy sobie do zdefiniować różniczkowo:
+\begin{align*}
+    \color{Blue} \dd{H} &= \color{Blue} T\dd{S} + V\dd{p} + \mu\dd{N}\\
+    \color{Cyan} \dd{T} &= \color{Cyan} T\dd{S} - p \dd{V} + \mu \dd{N} - T \dd{S} - S\dd{T} = - S \dd{T} - p \dd{V} + \mu \dd{N}\\
+    &\text{Za to dla Entalpii Gibbsa:}\\
+    \dd{G} &= T \dd{S} - p \dd{V} + \mu \dd{N} + p \dd{V} + U\dd{p}\\
+    \dd{G} &= - S \dd{T} + Y \dd{p} + \mu\dd{N}
+\end{align*}
+Doprowadzi nas to do \emph{Relacji Maxwella}:
+\section{Relacje Maxwella}
+\begin{align*}
+\dd{H} = \qty(\pdv{H}{S})_{V,N} \dd{S} &+ \qty(\pdv{H}{p})_{S, N} \dd{p} + \qty(\pdv{H}{N})_{S,p} \dd{N} \implies\\
+\pdv{H}{S}{p} = \pdv{H}{p}{S} &\qc \pdv{H}{S}{N} = \pdv{H}{N}{S}\\
+\end{align*}
+\com{wstaw te wyprowadzenia}
+\com{Wstaw tu to pokopane kółko i kwadracik}\\
+\emph{TL;DR;} Z równości drugich pochodnych mamy dużo relacji Maxwella na pochodne po różnych wielościach. Jakich? Patrz kółeczko.\\
+Mnemotechniki:
+\begin{itemize}
+    \item \emph{V}alid \emph{F}acts and \emph{T}heoretical \emph{U}nderstanding \emph{G}enerates \emph{S}oliutions to \emph{P}roblems
+    \item \emph{V}icehrabia \emph{U}rugwaju, \emph{S}tary \emph{H}rabia \emph{P}(cośtam) \emph{G}ryzł \emph{T}warde \emph{F}istaszki
+\end{itemize}
+
+Teraz w układzie o stałej Temperaturze możemy sobie wyprowadzić:
+\begin{align*}
+    \Delta U_{ot} + \Delta _{uk} &= 0\\
+    \Delta U_{ot} &= - \Delta _{uk}\\
+    T \Delta S_{ot} &= \Delta U_{ot}\\
+    \Delta (S_{ot} + S_{uk}) \geq 0 \qc \Delta S_{ot} + \Delta S_{uk} &= \frac{U_{ot}}{T} + \Delta S_{uk} = \frac{-\Delta U_{uk}}{T} + \Delta S_{uk} \geq 0 \\
+    \Delta U_{uk} - T \Delta S_{uk} \leq 0\\
+    \Delta F_{uk} = \Delta(U_{uk} - T S_{uk}) \leq 0
+\end{align*}
+Czyli wniosek, przy wymianie ciepła w stałej temperaturze jak nie jesteśmy w stanie nic powiedzieć o entropii, to minimalizujemy sobie enegię/entalpię swobodną.
+\end{lecture}
+
+
 \tableofcontents
 
 \listoffigures

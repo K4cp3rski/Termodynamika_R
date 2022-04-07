@@ -1,0 +1,75 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 2}
+
+Model suwakowy DNA. Suwak składa się $N$ par ząbków, z których każda może być połączona lub rozłączona. Energia połączonej pary wynosi 0 , a rozłączonej $E$. Ponadto wymagamy, aby suwak otwierał się tylko z jednej strony (na przykład z lewej) - a zatem para $k$ może być otwarta tylko wtedy, gdy otwarte są pary $1,2, \ldots, k-1$ (patrz rys.). Znajdź sumę statystyczną dla takiego układu oraz wyznacz średnią liczbę otwartych par ząbków $<N_{o t w}>w$ temperaturze $T$. Pokaż, że dla malych temperatur (tj. $k T \ll E$ ) średnia liczba otwartych par ząbków $<N_{o t w}>$ jest niezależna od $N$. Jaką wartość przybiera $<N_{o t w}>$ w wysokich temperaturach (tj. dla $k T \gg E)$ ?
+
+
+\section{Rozwiązanie}
+
+Rozważmy sytuację, gdy rozłączone jest pierwsze n par ząbków. Skoro energia rozłączonej pary jest równa $\mathrm{E}$, a polączonej 0 , to energia układu w takim stanie równa jest $E_{n}=n E$. Suma statystyczna będzie sumą dla wszystkich takich stanów energii i dana będzie wzorem:
+$$
+Z=\sum_{n=0}^{N} \exp (-\beta E n)=\frac{\exp (-\beta E(N+1))-1}{\exp (-\beta E)-1}
+$$
+Prawdopodobieństwo znalezienia się układu w stanie o energii $E_{n}$ równe jest:
+$$
+p_{n}=\frac{\exp (-\beta E n)}{Z}
+$$
+A stąd średnia liczba otwartych par jest postaci:
+$$
+\left\langle N_{o t w}\right\rangle=\sum_{n=0}^{N} n p_{n}=\frac{1}{Z} s u m_{n=0}^{N} n \exp (-\beta E n)=-\frac{1}{Z}\left(\frac{\partial \exp (-\beta E n)}{\partial E}\right)_{T}=-\left(\frac{\partial \log Z}{\partial E}\right)_{T}
+$$
+Rozpiszmy wyrażenie $\log Z$ :
+$$
+\log Z=\log \left(\frac{\exp (-\beta E(N+1))-1}{\exp (-\beta E)-1}\right)=\log (\exp (-\beta E(N+1))-1)-\log (\exp (-\beta E)-1)
+$$
+Wracając z podstawieniem do wyrażenia na średnią liczbę otwartych par ząbków:
+$$
+\begin{gathered}
+\left\langle N_{o t w}\right\rangle=\frac{\beta(N+1) \exp (-\beta E(N+1))}{\exp (-\beta E(N+1))-1}-\frac{\beta \exp (-\beta E)}{\exp (-\beta E)-1} \\
+\left\langle N_{\text {otw }}\right\rangle=\frac{\beta(N+1) \exp (-\beta E(N+1))(\exp (-\beta E)-1)-\beta \exp (-\beta E)(\exp (-\beta E(N+1))-1)}{(\exp (-\beta E(N+1))-1)(\exp (-\beta E)-1)}
+\end{gathered}
+$$
+Rozważmy teraz granicę niskich temperatur $k T \ll E$. W tej granicy wyrażenie $\beta E \rightarrow \infty$, więc $\exp (-\beta E) \rightarrow 0$. Wynika stąd, że średnia liczba otwartych par ząbków będzie równa po prostu:
+$$
+\left\langle N_{o t w}\right\rangle=0
+$$
+Co jak należało udowodnić jest niezależne od całkowitej liczby par ząbków.
+Rozważmy jeszcze granice dla $k T \gg E$. Wówczas wyrażenie $\beta E$ dąży do 0 , a więc $\exp (-\beta E) \rightarrow 1$. Wprowadźmy oznaczenie $x=\exp (-\beta E)$. Policzmy teraz przejście graniczne dla $x \rightarrow 1$ :
+$$
+\left\langle N_{o t w}\right\rangle=\frac{N}{2}
+$$
+\end{document}
