@@ -1586,6 +1586,109 @@ Czyli wniosek, przy wymianie ciepła w stałej temperaturze jak nie jesteśmy w 
 \com{Przepisz wzorki z tablicy które wypisuje Przeniosło}
 \end{lecture}
 
+% ----------------------------------------------------------------------
+% Wykład 25.04.2022
+
+\begin{lecture}{Związek z Mech.Klas.}
+\section{Twierdzenie Liouville'a}
+Twierdzenie Liouville'a mówi nam o tym, że w trakcie ewolucji dynamicznej objętość w przetrzeni fazowej pozostaje stała.\\
+Tj. weźmy sobie:
+\begin{align*}
+    \Gamma = (q_1, q_2, \dots , q_{3N}, p_1, p_2,\dots p_{3N})\qc \begin{cases}
+        \dot{q}_i = \pdv{H}{p_i}\\
+        \dot{p}_i = - \pdv{H}{q_i}
+    \end{cases}
+\end{align*}
+    Czyli definiujemy tak równania Hamiltona, którymi postulujemy, że będzie się dało przestrzeń fazową opisać. Definiujemy sobie też, że prędkość 'potoku fazowego' czyli ewolucji w przestrzeni fazowej zdefiniujemy sobie jako:
+    \[
+        \vb{v}(t) = \qty{\Gamma(t) | \Gamma(0) \in V_0}
+    \]
+    Teraz co się stanie za czas $\dd{t}$?
+    \[
+        \Delta V = V_{dt} - V_0 = \int{\sum_0} \overbrace{\dd{\va{S}}}^{\dd{S}\cdot\hat{n}} \cdot \vb{v} \dd{t} \underbrace{=}_{\footnotemark} \int_V \div \vb{v} \dd{\Gamma_N}
+    \]
+    \footnotetext{$6N$ wymiarowe tw Stokesa}
+    Gdzie definiujemy sobie:
+    \[
+    \vb{v} = \qty(\dot{q}_1, \dots, \dot{q}_{3N}, \dot{p}_1, \dots, \dot{p}_{3N})\qc \div \vb{v} = \sum \pdv{\dot{q}_i}{q_i} + \sum \pdv{\dot{p}_i}{p_i} = \sum_i \pdv{H}{q_i}{p_i} - \pdv{H}{p_i}{q_i}
+    \]
+    \section{Funkcja Rozkładu}
+    Musimy sobie jeszcze zdefiniować coś takiego jak \emph{Funkcja Rozkładu} $f(\underbrace{q^{3N}, p^{3N}}_{\Gamma^N}, t)$.\\
+    Teraz zdefiniujemy sobie $\dd{w} = f(\Gamma^N, t) \dd{\Gamma^N}$ gdzie $w$ będzie prawdopodobieństwem znalezienia układu w chwili $t$ w elemencie objętości fazowej $\dd{\Gamma^N}$.\\
+    Rozważymy sobie ruch ze stanu przestrzeni $\Gamma_0$ do $\Gamma_t$, opisywaną poprzez:
+    \[
+            f(\Gamma^N_0, t=0) \dd{\Gamma_0} = f(\Gamma^N_t, t=t) \dd{\Gamma_t}
+    \]
+    ale transformację $\Gamma_0 \to \Gamma_t$ można uważać za zmianę współrzędnych rozkładzie.
+    W związku z tym, korzystając z Tw. Liouville'a wiemy, że Jakobian zamiany zmiennych jest jednostkowy i jest zachowany podczas przejścia (objętość zachowana), czyli:
+    \begin{equation}
+        \dd{\Gamma_0} = \dd{\Gamma_t}
+        \label{eq:lec_15:liouville}
+    \end{equation}
+    Co prowadzi nas do wniosku, że:
+    \[
+        f(\Gamma_0^N, 0) = f(\Gamma_t^N, t)
+    \]
+    \wniosek  Funkcja rozkładu jest stała wzdłuż trajektorii ruchu
+    \section{Krótka dygresja o sposobach opisu świata}
+    W mechanice mamy dwa sposoby opisu:
+    \begin{itemize}
+        \item Opis Eulera
+        \item Opis Lagrange'a
+    \end{itemize}
+    Zwizualizujmy sobie to na przykładzie 3D.
+    \subsection{Opis Lagrange'a}
+    Odpowiada ponumerowaniu punktów poprzez ich położenia i pędy w czasie $t=0$ i śledenie ich ruchu. Zmiennymi niezależnymi są wtedy $\vb{r}_0, t$.
+    \subsection{Metoda Eulera}
+    Za zmienne niezależne przyjmuje położenie $\vb{r}, t$, czyli jakby zmienia się gęstość w konkretnym punkcie a nie położenia konkretnych punktów.
+    \com{Rysunek}
+    Zmierzone Eulerowsko i Lagrange'owsko temperatury będą sobie równe $\iff$
+    \[
+        T^E(\vb{r}(\vb{r}_0, t), t) = T^L(\vb{r}_0, t)
+    \]
+    Czyli inaczej mówiąc będą sobie równe tylko i wyłącznie gdy są obie mierzone w tym samym punkcie przestrzeni i czasie.
+    Gdzie po małej zmianie $\dd{t}$ temperatura $T^E$ jest mierzona w tym samym punkcie i mierzy temperaturę innych cząstek przepływających nad nią (mierzenie temperatury na wieży ze stale zamontowanym termomentrem), a temperatura $T^L$ mierzy temperaturę tej samej cząstki wzdłuż jej trajektorii, czyli w zmiennym położeniu. (Mierzenie temperatury na balonie w nurcie wiatru). Z zastrzeżeniem:
+    \[
+        \eval{\pdv{T^L}{t}}_{\vb{r}_0} \neq \eval{\pdv{T^E}{t}}_{\vb{r}}
+    \]
+    A prędkość i przyspieszenie fizycznie zazwyczaj opisujemy jako:
+    \begin{itemize}
+        \item Prędkość $\eval{\pdv{\vb{r}^L}{l}}_{\vb{r}_0}$
+        \item Przyspieszenie $\eval{\pdv{\vb{v}^L}{l}}_{\vb{r}_0}$
+    \end{itemize}
+    Czyli uściślając wnioski z poprzedniej sekcji:\\
+    \wniosek Funkcja rozkładu jest stała wzdłuż trajektorii ruchu, czyli:
+    \begin{equation}
+        f^E(\Gamma(\Gamma_0^N, t), t) = f^L(\Gamma_0^N, t) = f^L(\Gamma_0^N, 0)
+        \label{eq:lec_15:rozklady}
+    \end{equation}
+    \section{Zastosowanie do Fizyki Statystycznej}
+    Z funkcją rozkładu $f(\Gamma,t)$ można związać entropię:
+    \[
+        S_t = - k \int f^E(\Gamma_N, t) \log f^E(\Gamma^N, t) \dd{\Gamma^N}
+    \]
+    Teraz będziemy to porównywać z $S_{t=0}$:
+    \[
+        = -k \int f^E(\Gamma^N(\Gamma^N_0, t), t)\log f^E(\Gamma^N(\Gamma^N_0, t) \dd{\Gamma^N}
+    \]
+    Co po porównaniu z równaniem \eqref{eq:lec_15:liouville} i \eqref{eq:lec_15:rozklady}:
+    \[
+        = -k \int f^L(\Gamma_0^N, 0)\log f^L(\Gamma_0^N, 0) \dd{\Gamma_0^N} = S_{t=0}
+    \]
+    
+    {\color{Cerulean} Fakt: Entropia Gibbsa podczas ruchu w przestrzeni fazowej podlegającemu równaniom Hamiltona jest stała}
+    Zdefiniujemy sobie teraz \subind{Entropię gruboziarnistą}{Entropia!Gruboziarnista}:\\
+    Dzielimy sobie przestrzeń fazową na komórki. Jako, że człowiek nie jest demonem, który by mógł widzieć entorpię mikroskopowo w każdym punkcie P.F., więc wprowadzamy sobie zamiast dokładnej funkcji $f(\Gamma^N, t)$ funkcję uśrednioną (przecałkowaną) po komórce, tj. 
+    \[
+        \tilde{f}^E(\Gamma^N, t) = \frac{1}{\abs{w_i}} \int_{w_i} f^E(\Gamma^N, t)\dd{\Gamma^N}
+    \]
+    Gdzie $w_i$ jest objętością jednej komórki. Wtedy \emph{Entropia Gruboziarnista} to będzie:
+    \begin{equation}
+        \tilde{S}_t = - k \int \tilde{f}^E(\Gamma^N, t) \log \tilde{f}^E(\Gamma^N, t) \dd{\Gamma^N}
+    \end{equation}
+    I dopiero tak zdefiniowana Entropia rośnie, czyli nam się nie psuje Fizyka Statystyczna.
+\end{lecture}
+
 \tableofcontents
 
 \listoffigures
