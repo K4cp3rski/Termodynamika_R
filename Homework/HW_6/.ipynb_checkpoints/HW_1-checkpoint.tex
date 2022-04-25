@@ -1,0 +1,107 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 1}
+
+Rozważmy układ o ustalonej objętości V i temperaturze T. Pokaż, że fluktuacje energii w zespole wielkim kanonicznym i kanonicznym $(\Delta E)^2)$ różnią się o wyraz proporcjonalny do 
+$(\Delta N)^2$. Jaka jest interpretacja tego wyniku?
+
+\section{Rozwiązanie}
+
+Rozważmy uklad o objętości $\mathrm{V}$ i temperaturze $\mathrm{T}$. Cheemy obliczyć różnicę:
+$$
+\left(\Delta E_{\omega k}\right)^{2}-\left(\Delta E_{k}\right)^{2}
+$$
+gdzie $\left(\Delta E_{w k}\right)^{2}$ to fluktuacje energii w zespole wielkokanonicznym, a $\left(\Delta E_{k}\right)^{2}$ to fluktuacje energii w zespole kanonicznym. Zacznijmy od fluktuacji w zespole kanonicznym. Srednia wartośc energii jest równa:
+$$
+\langle E\rangle=\frac{1}{Z} \sum_{i} E_{i} \exp \left(-\beta E_{i}\right)=-\left(\frac{\partial \log Z}{\partial \beta}\right)_{V, N}
+$$
+Natomiast wartość $\left\langle E^{2}\right\rangle$ jest równa:
+$$
+\begin{gathered}
+\left\langle E^{2}\right\rangle=\frac{1}{Z} \sum_{i} E_{i}^{2} \exp \left(-\beta E_{i}\right)=-\frac{1}{Z} \frac{\partial}{\partial \beta}\left(\sum_{i} E_{i} \exp \left(-\beta E_{i}\right)\right) \\
+\left\langle E^{2}\right\rangle=\frac{1}{Z} \frac{\partial^{2}}{\partial \beta^{2}}\left(\sum_{i} \exp \left(-\beta E_{i}\right)\right) \\
+\left\langle E^{2}\right\rangle=\frac{\partial^{2} \log Z}{\partial \beta^{2}}+\frac{1}{Z^{2}}\left(\sum_{i} E_{i} \exp \left(-\beta E_{i}\right)\right)^{2}=\frac{\partial^{2} \log Z}{\partial \beta^{2}}+\langle E\rangle^{2}
+\end{gathered}
+$$
+Czyli wartose fluktuacji jest równa:
+$$
+\left(\Delta E_{k}\right)^{2}=\left\langle E^{2}\right\rangle-\langle E\rangle^{2}=\frac{\partial^{2} \log Z}{\partial \beta^{2}}==k T^{2}\left(\frac{\partial\langle E\rangle}{\partial T}\right)_{V, N}
+$$
+gdzie $U$ to energia wewnętrzna ukladu. Przejdźmy teraz do zespołu wielkokanonicznego.
+Srednia wartość energii jest równa:
+$$
+\langle E\rangle=\frac{1}{\Xi} \sum_{i} E_{i} \exp \left(-\beta E_{i}\right) z^{N}=-\left(\frac{\partial \log \Xi}{\partial \beta}\right)_{z, V}
+$$
+gdzie $z=\exp (\beta \mu)$. Tutaj zacząłem oznaczać, co jest stałe, ponieważ jest to ważne przy wyprowadzeniu. Policzmy teraz $\left\langle E^{2}\right\rangle$ :
+$$
+\begin{gathered}
+\left\langle E^{2}\right\rangle=\frac{1}{\Xi} \sum_{i} E_{i}^{2} \exp \left(-\beta E_{i}\right) z^{N}=-\frac{1}{\Xi}\left(\frac{\partial}{\partial \beta} \sum E_{i} \exp \left(-\beta E_{i}\right) z^{N}\right)_{z, V} \\
+\left\langle E^{2}\right\rangle=-\left(\frac{\partial\langle E\rangle}{\partial \beta}\right)_{z, V}+\frac{1}{\Xi^{2}}\left(\frac{\partial E}{\partial \beta}\right)_{z, V}^{2}
+\end{gathered}
+$$
+
+Czyli $\left(\Delta E_{w k}\right)^{2}$ jest równe:
+$$
+\left(\Delta E_{w k}\right)^{2}=-\left(\frac{\partial(E)}{\partial \beta}\right)_{z, V}=k T^{2}\left(\frac{\partial\langle E\rangle}{\partial T}\right)_{z, V}
+$$
+Zauważmy teraz, ze w ukladzie wielkokanonicznym liczba caastek nie jest stala i także zalezy od temperatury. Skoro $\langle E\rangle$ jest funkcją liczby cząstek, to fluktuacje możemy zapisać jako:
+$$
+\left(\Delta E_{w, k}\right)^{2}=k T^{2}\left(\left(\frac{\partial\langle E\rangle}{\partial T}\right)_{N, V}+\left(\frac{\partial\langle E\rangle}{\partial\langle N\rangle}\right)_{T, V}\left(\frac{\partial\langle N\rangle}{\partial T}\right)_{z, V}\right)
+$$
+Rozpisując wzory na wartosć oczekiwanal liczby cząstek i energii zauważyć można, żee zachodzi:
+$$
+\left(\frac{\partial\langle N\rangle}{\partial T}\right)_{z, V}=\frac{1}{T}\left(\frac{\partial\langle E\rangle}{\partial \mu}\right)_{T, V}
+$$
+$Z$ drugiej strony mamy:
+$$
+\left(\frac{\partial\langle E\rangle}{\partial \mu}\right)_{T, V}=\left(\frac{\partial(E\rangle}{\partial\langle N\rangle}\right)_{T, V}\left(\frac{\partial\langle N\rangle}{\partial \mu}\right)_{T, V}
+$$
+Dodatkowo zauważmy, zee
+$$
+(\Delta N)^{2}=k T\left(\frac{\partial\langle N\rangle}{\partial \mu}\right)_{T, V}
+$$
+Stąd fluktuacje energii dla ukladu wielkokanonicanego będą postaci:
+$$
+\left(\Delta E_{w k}\right)^{2}=\left(\Delta E_{k}\right)^{2}+\left(\frac{\partial\langle E\rangle}{\partial\langle N\rangle}\right)_{T, V}^{2}(\Delta N)^{2}
+$$
+A zatem rôżnica fluktuacji będzie rôwna:
+$$
+\left(\Delta E_{w k}\right)^{2}-\left(\Delta E_{k}\right)^{2}=\left(\frac{\partial\langle E\rangle}{\partial\langle N\rangle}\right)_{T, V}^{2}(\Delta N)^{2}
+$$
+Czyli jest proporcjonalna do fluktuacji energii co należalo pokazać.
+
+
+\end{document}

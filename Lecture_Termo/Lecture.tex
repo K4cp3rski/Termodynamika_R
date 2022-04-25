@@ -1251,7 +1251,7 @@ Potencjał chemiczny to zmiana energii układu po dołożeniu nowej cząstki do 
         F = - k T \log Z = - k T \qty(N \log V - N \log N + N - 3 N \log h + \frac{3N}{2} \log (2 \pi m k) + \frac{3 N}{2} \log T)
     \]
     Co w granicy Termodynamicznej by nam wybuchło (bo jest to 
-    \subind{wielkość intensywna}{Wielkość!Intensywna}), więc liczymy sobie energię swobodną na cząstkę (bo to już jest \subind{wielkością ekstensywną}{Wielkość!Ekstensywna}):
+    \subind{wielkość ekstensywna}{Wielkość!Ekstensywna}), więc liczymy sobie energię swobodną na cząstkę (bo to już jest \subind{wielkością intensywną}{Wielkość!Intensywna}):
     \[
         f = \lim_{n\to\infty}\frac{F}{N} = - k T \qty(\log \underbrace{\frac{V}{N}}_{=v} + 1 - 3 \log h + \frac{3}{2} \log 2 \pi m k + \frac32 \log T)
     \]
@@ -1524,10 +1524,10 @@ Teraz zdefiniujmy sobie \subind{entalpię}{Entalpia} ($H = U + pV$):
     F(S, p, N) &= U(S, V, N) - S\qty(\pdv{U}{S})_{V,\mu}\\
     F(S, p, N) &= U(S, V, N) - ST
 \end{align*}
-Teraz definiując sobie \subind{energię swobodną Gibbsa}{Energia Swobodna!Gibbsa} zwana też \subind{entalpię swobodną Gibbsa}{Entalpia!Swobodna Gibbsa} $G(T, p, N)$:
+Teraz definiując sobie \subind{energię swobodną Gibbsa}{Energia Swobodna!Gibbsa} zwana też \subind{entalpią swobodną Gibbsa}{Entalpia!Swobodna Gibbsa} $G(T, p, N)$:
 \begin{align*}
-    G(T, V, N) &= U(S, V, N) - V\qty(\pdv{U}{V}) - \qty(\pdv{U}{S})
-    &= U(S, V, N) - pV - ST
+    G(T, V, N) &= U(S, V, N) - V\qty(\pdv{U}{V}) - \qty(\pdv{U}{S})\\
+    &= U(S, V, N) + pV - ST
 \end{align*}
 Teraz możemy sobie do zdefiniować różniczkowo:
 \begin{align*}
@@ -1535,7 +1535,7 @@ Teraz możemy sobie do zdefiniować różniczkowo:
     \color{Cyan} \dd{T} &= \color{Cyan} T\dd{S} - p \dd{V} + \mu \dd{N} - T \dd{S} - S\dd{T} = - S \dd{T} - p \dd{V} + \mu \dd{N}\\
     &\text{Za to dla Entalpii Gibbsa:}\\
     \dd{G} &= T \dd{S} - p \dd{V} + \mu \dd{N} + p \dd{V} + U\dd{p}\\
-    \dd{G} &= - S \dd{T} + Y \dd{p} + \mu\dd{N}
+    \dd{G} &= - S \dd{T} + U \dd{p} + \mu\dd{N}
 \end{align*}
 Doprowadzi nas to do \emph{Relacji Maxwella}:
 \section{Relacje Maxwella}
@@ -1544,12 +1544,13 @@ Doprowadzi nas to do \emph{Relacji Maxwella}:
 \pdv{H}{S}{p} = \pdv{H}{p}{S} &\qc \pdv{H}{S}{N} = \pdv{H}{N}{S}\\
 \end{align*}
 \com{wstaw te wyprowadzenia}
-\com{Wstaw tu to pokopane kółko i kwadracik}\\
+\com{Wstaw tu kwadracik termodynamiczny}\\
 \emph{TL;DR;} Z równości drugich pochodnych mamy dużo relacji Maxwella na pochodne po różnych wielościach. Jakich? Patrz kółeczko.\\
 Mnemotechniki:
 \begin{itemize}
     \item \emph{V}alid \emph{F}acts and \emph{T}heoretical \emph{U}nderstanding \emph{G}enerates \emph{S}oliutions to \emph{P}roblems
-    \item \emph{V}icehrabia \emph{U}rugwaju, \emph{S}tary \emph{H}rabia \emph{P}(cośtam) \emph{G}ryzł \emph{T}warde \emph{F}istaszki
+    \item \emph{V}icekonsul \emph{U}rugwaju, \emph{S}tary \emph{H}rabia \emph{P}anfnucy \emph{G}ryzł \emph{T}warde \emph{F}istaszki
+    \item \emph{P}odobno \emph{V}kurwiony \emph{F}izyk \emph{T}eoretyczny \emph{U}jebał \emph{G}órę \emph{S}tudentów
 \end{itemize}
 
 Teraz w układzie o stałej Temperaturze możemy sobie wyprowadzić:
@@ -1564,6 +1565,26 @@ Teraz w układzie o stałej Temperaturze możemy sobie wyprowadzić:
 Czyli wniosek, przy wymianie ciepła w stałej temperaturze jak nie jesteśmy w stanie nic powiedzieć o entropii, to minimalizujemy sobie enegię/entalpię swobodną.
 \end{lecture}
 
+% ----------------------------------------------------------------------
+% Wykład 07.04.2022
+
+\begin{lecture}{Cośtam}
+\com{Przepisz wzorki z tablicy które wypisuje Przeniosło}
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 11.04.2022
+
+\begin{lecture}{Cośtam}
+\com{Poleciał skip po Kolokwium}
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 21.04.2022
+
+\begin{lecture}{Cykl Carnota}
+\com{Przepisz wzorki z tablicy które wypisuje Przeniosło}
+\end{lecture}
 
 \tableofcontents
 
