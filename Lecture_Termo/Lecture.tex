@@ -42,6 +42,8 @@
 
 \renewcommand{\emph}{\textbf}
 
+\newcommand{\pd}[1]{\partial_{#1}}
+
 \newcommand{\linediv}{{\color{RubineRed} \rule{\linewidth}{0.5mm}}}
 
 \newcommand{\wniosek}{{\color{orange} Wniosek:}}
@@ -1687,6 +1689,88 @@ Tj. weźmy sobie:
         \tilde{S}_t = - k \int \tilde{f}^E(\Gamma^N, t) \log \tilde{f}^E(\Gamma^N, t) \dd{\Gamma^N}
     \end{equation}
     I dopiero tak zdefiniowana Entropia rośnie, czyli nam się nie psuje Fizyka Statystyczna.
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 21.04.2022
+
+\begin{lecture}{Twierdzenie Poincarrego}
+\section{Szymczak Time}
+Mówimy sobie tu o twierdzeniu Pointcarrego o rekurencji \link{https://en.wikipedia.org/wiki/Poincaré_recurrence_theorem}{patrz wikipedia}. Z niego wynika, że jak mamy w przestrzeni fazowej jakąś objętość, to po odpowiednio długim czasie możemy oczekiwać, że $1\%$ fluktuacji powróci do początkowego miejsca w przestrzeni fazowej. Czas po którym to się dzieje nazywamy \emph{czasem powrotu}. Dla więcej niż kilku cząstek czas ten jest w dobrym przybliżeniu nieskończony. \\
+W oparciu o to twierdzenie Pointcarrego możemy wyciągnąć wnioski o dwóch właściwościach układów:
+\begin{itemize}
+    \item Własność mieszania w przestrzeni fazowej
+    \item Własność ergodyczności
+\end{itemize}
+\linediv\\
+Z własności mieszania i twiedzenia Pointcarrego wynika nam, że po odpowiednio długim czasie w układzie nastapi rozmycie w przestrzeni fazowej całego układu. Tj, że można sobie całkować po przestrzeni fazowej a nie po czasie, bo wszystkie stany będą równo prawopodobne. \\
+$\implies$ Uzasadnienie rozkładu mikrokanonicznego.\\
+Matematycznie:
+\[
+    \lim_{t\to\infty} \int F(\Gamma)f(\Gamma, t) \dd{\Gamma} \implies \frac{1}{\mu(C)} \int F(\Gamma) \dd{\Gamma}
+\]
+\linediv\\
+\emph{Ergodyczność}
+Weźmy sobie $\Gamma_0$ jako punkt początkowy. Niech:
+\[
+    \ev{f(\Gamma_0)}_t = \lim_{t\to\infty} \frac{1}{T} \int_0^T \dd{t} f(\Gamma_t) \implies \ev{f}_c = \frac{1}{\mu(c)}\int f(\Gamma) \dd{\Gamma}
+\]
+Wynika z tego, że ergodyczność $\iff \ev{f(\Gamma)}_t = \ev{f}_c$ dla wszystkich gładkich funkcji dla których $\ev{f}_c$ istnieje i jest stworzona.\\
+Niestety widać, że taka matematyczna ergodyczność w zasadzie w przyrodzie nie istnieje. Wynika z tego, że:\\
+\wniosek Nie liczy się ergodyczność dla dowolnych funkcji, a tylko dla funkcji 'fizycznie relewantnych', czyli np funkcji stanu gazu.\\
+\linediv\\
+Jeszcze inaczej patrzy na to Landau, że układy są samomieszające, tj. że ta ergodyczność nie jest w ogóle taka istotna, bo to się i tak uśredni
+
+\section{Przeniosław Radosło Time}
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+Lód & Ciepło topnienia & Woda & Ciepło wrzenia & Para wodna  \\
+\hline
+$\rho = 916 \frac{kg}{m^3}$    &  $6 \frac{kJ}{mol}$ &    $\rho = 916 \frac{kg}{m^3}$   &  $40.6 \frac{kJ}{mol}$ &  $\rho = 916 \frac{kg}{m^3}$ 
+\end{tabular}
+\caption{Tabelka z wartościami gęstości i ciepeł dla wody i jej faz}
+\end{table}
+Mamy sobie potencjał $U(S,V,N)$, które ma właściwość $U(\lambda S, \lambda V, \lambda N) = \lambda U(S, V, N)$. Pamiętamy też, że ten potencjał to:
+\[
+    U = TS - pV + \mu N \implies G = U - TS + pV = \mu N
+\]
+Wtedy:
+\[
+    LHS = T\dd{(\lambda S)} - p \dd{(\lambda V)} + \mu \dd{(\lambda N)} = \dd{\lambda} \qty[TS - pV + \mu N] + \lambda \qty[T\dd{S} - p\dd{V} + \mu \dd{N}] = \dd{\lambda} U + \lambda \dd{U}
+\]
+\[
+    RHS = N\dd{\mu} + S \dd{T} - V\dd{p} = 0 \implies N \dd{\mu} + N s \dd{T} - N v \dd{p} = 0 \implies N\qty[\dd{U} + s\dd{T} - v\dd{p}] = 0 
+\]
+Wtedy dla lodu w wodzie mamy takie zależności:
+\[
+    \begin{cases}
+        N_l\qty[\dd{\mu} + s_l \dd{T} - v_l \dd{p}] = 0\\
+        N_w\qty[\dd{\mu} + s_w \dd{T} - v_w \dd{p}] = 0
+    \end{cases}
+    \implies
+    \begin{cases}
+        \dd{\mu}_l = - s_l\dd{T} + v_l \dd{p}\\
+        \dd{\mu}_w = - s_w\dd{T} + v_w \dd{p}
+    \end{cases}
+\]
+Daje nam to dalej:
+\[
+    \dd{\mu}_l = \dd{\mu}_w \implies - s_l \dd{T} + v_l \dd{p} = - s_w \dd{T} + v_w \dd{p}
+\]
+Czyli
+\[
+    (s_w - s_l) \dd{T} = (v_w - v_l) \dd{p}
+\]
+Co daje:
+\[
+    \dv{T}{p} = \frac{v_w - v_l}{s_w - s_l} = \frac{\Delta v T_{topnienia}}{Q_{topnienia}} \implies \dv{p}{T} = \frac{Q_{top}}{\Delta V T_{top}} = -138\,\frac{bar}{K}
+\]
+Idac dalej z tym równaniem możemy dość do przekształcenia:
+\[
+    \dv{p}{T} = \frac{Q_{top}}{\Delta V T_{top}} = \frac{Q p}{n R T^2} \implies \frac{\dd{p}}{p} = \frac{Q}{n R} \frac{\dd{T}}{T^2}
+\]
+Idąc z tym ciut dalej dochodzimy do \subind{równania Clausiusa-Clapeyrona}{Równanie!Clausiusa-Clapeyrona}. \link{https://en.wikipedia.org/wiki/Clausius–Clapeyron_relation}{Patrz tu}
 \end{lecture}
 
 \tableofcontents
