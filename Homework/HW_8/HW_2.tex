@@ -1,0 +1,66 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 2}
+
+Jeden mol gazu doskonałego o znanej wartości $C_{V}$ przeszedł ze stanu opisanego parametrami $p_{0}, V_{0}$ do stanu o objętości $V_{1}=2 V_{0}$. Przemiana była prowadzona z zachowaniem równości $p^{2} V=$ const. Wyznacz wykonaną pracę, ciepło wymienione z otoczeniem oraz zmianę energii wewnętrznej gazu.
+
+\section{Rozwiązanie}
+
+Praca wykonana w trakcie przemiany jest dana wzorem:
+$$
+W=-\int_{V_{0}}^{V_{1}} p d V
+$$
+W trakcie przemiany zachowana jest wartość $p^{2} V$, a więc także wartość $p \sqrt{V}$. Stąd można napisać:
+$$
+\begin{gathered}
+W=-\int_{V_{0}}^{V_{1}} p \sqrt{V} \frac{d V}{\sqrt{V}}=-\int_{V_{0}}^{V_{1}} p_{0} \sqrt{V_{0}} \frac{d V}{\sqrt{V}} \\
+W=-2 p_{0} \sqrt{V_{0}}\left(\sqrt{V_{1}}-\sqrt{V_{0}}\right)=-2 p_{0} V_{0}(\sqrt{2}-1)
+\end{gathered}
+$$
+Policzmy teraz zmianę energii wewnętrznej:
+$$
+\Delta U=\int_{T_{0}}^{T_{1}} c_{V} d T=c_{V}\left(T_{1}-T_{0}\right)=\frac{C_{V}}{R}\left(2 p_{1} V_{0}-p_{0} V_{0}\right)
+$$
+Wiadomo że $p_{1}^{2} V_{1}=p_{0}^{2} V_{0}$, a stąd dostać można $p_{1}=\frac{1}{\sqrt{2}} p_{0}$. Podstawiając tę zależność do wzoru na zmianę energii wewnętrznej dostajemy:
+$$
+\Delta U=\frac{C_{V}}{R} p_{0} V_{0}(\sqrt{2}-1)
+$$
+Dostarczone ciepło wyznaczyć można z pierwszej zasady termodynamiki:
+$$
+Q=\Delta U-W=\frac{C_{V}}{R} p_{0} V_{0}(\sqrt{2}-1)+2 p_{0} V_{0}(\sqrt{2}-1)=p_{0} V_{0}(\sqrt{2}-1)\left(\frac{C_{V}+2 R}{R}\right)
+$$
+
+\end{document}

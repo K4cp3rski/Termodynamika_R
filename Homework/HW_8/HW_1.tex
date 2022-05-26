@@ -1,0 +1,70 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 1}
+
+Cykl Joule'a składa się z dwóch przemian izobarycznych przy ciśnieniu $p_1$ oraz  $p_2$, gdzie $(p_2 > p_1)$ oraz dwóch przemian adiabatycznych. Substancją roboczą jest gaz doskonały o znanych wartościach $C_v, C_p$ oraz $\gamma = C_p/C_v$. Oblicz sprawność silnika działającego w takim cyklu.
+\section{Rozwiązanie}
+
+Zauważmy najpierw, że zgodnie z definicją przemiany adiabatycznej nie jest w niej wymieniane cieplo z otoczeniem, stąd też jakakolwiek wymiana ciepla nastąpi tylko w przemianach izobarycznych. Dodatkowo bez straty ogólnosci zalożyć można, że ciepło pobrane przy rozprężaniu izobarycznym dla temperatury $p_{2}$ jest równe:
+$$
+Q_{1}=\int_{T_{1}}^{T_{2}} c_{V} d T+\int_{V_{1}}^{V_{2}} p_{2} d V=c_{V}\left(T_{2}-T_{1}\right)+p_{2}\left(V_{2}-V_{1}\right)=c_{p}\left(T_{2}-T_{1}\right)
+$$
+gdzie $c_{v}=C_{V} n$ i $c_{p}=C_{p} n$, a $T_{1}$ i $T_{2}$ to temperatury w odpowiednich punktach cyklu. Analogicznie dla sprężania mamy:
+$$
+Q_{2}=c_{p}\left(T_{4}-T_{3}\right)
+$$
+Praca wykonana w tym cyklu jest równa różnicy ciepła pobranego i oddanego, czyli:
+$$
+W=Q_{1}-Q_{2}=c_{p}\left(T_{2}-T_{1}-T_{4}+T_{3}\right)
+$$
+Stąd sprawność cyklu jest rowna:
+$$
+\eta=\frac{W}{Q_{1}}=1-\frac{T_{4}-T_{3}}{T_{2}-T_{1}}
+$$
+Zauważmy że przejścia z temperatury $T_{2}$ do $T_{3}$ i $T_{4}$ do $T_{1}$ nastepowały w trakcie przemiany adiabatycznej. Na podstawie zależności dla przemiany adiabatycznej postaci $p^{\frac{7-1}{y}} V=$ const wyznaczyć można temperatury w zależnosci od znanych wartości ciśnienia. Mamy stąd:
+$$
+\begin{aligned}
+&T_{4}=\left(\frac{p_{2}}{p_{1}}\right)^{\frac{7-1}{\gamma}} T_{1} \\
+&T_{3}=\left(\frac{p_{2}}{p_{1}}\right)^{\frac{p-1}{\gamma}} T_{2}
+\end{aligned}
+$$
+Podstawiając do wzoru na sprawność dostajemy:
+$$
+\eta=1-\left(\frac{p_{2}}{p_{1}}\right)^{\frac{\gamma-1}{\gamma}}
+$$
+
+
+\end{document}

@@ -21,6 +21,18 @@
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{fancyhdr}
+\usepackage[normalem]{ulem}
+\usepackage{xparse}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem}
+\usetikzlibrary{calc}
+
+\DeclareDocumentCommand{\hcancel}{mO{0pt}O{0pt}O{0pt}O{0pt}}{%
+    \tikz[baseline=(tocancel.base)]{
+        \node[inner sep=0pt,outer sep=0pt] (tocancel) {#1};
+        \draw[red] ($(tocancel.south west)+(#2,#3)$) -- ($(tocancel.north east)+(#4,#5)$);
+    }%
+}%
 
 \title{Termodynamika R 2021/2022}
 \author{Kacper Cybiński}
@@ -525,7 +537,7 @@ Czyli finalnie wzór na \emph{\subind{Entropię Boltzmanna}{Entropia!Boltzmanna}
 Oraz wzór na \emph{\subind{Entropię Gibbsa}{Entropia!Gibbsa}}
 \begin{equation}
     S_G = - k \sum_i p_i\footnote{Prawdopodobieńśtwo wystąpienia mikrostanu} \log p_i
-    \label{eq:app:entropia_gibbs}
+    \label{eq:app:entropia_gibbs_costam}
 \end{equation}
 \end{emph_box}
 \footnotetext{Wymierny stopień obsadzenai różnych makrostanów}
@@ -1773,6 +1785,230 @@ Idac dalej z tym równaniem możemy dość do przekształcenia:
 Idąc z tym ciut dalej dochodzimy do \subind{równania Clausiusa-Clapeyrona}{Równanie!Clausiusa-Clapeyrona}. \link{https://en.wikipedia.org/wiki/Clausius–Clapeyron_relation}{Patrz tu}
 \end{lecture}
 
+% ----------------------------------------------------------------------
+% Wykład 09.05.2022
+
+\begin{lecture}{Przejścia Fazowe}
+    \section{Przejścia I Rodzaju}
+    \emph{Klasyfikacja Erhenfersta}
+    \[
+        \dd{G} = - S \dd{T} + V \dd{p}
+    \]
+    Wynika też stąd, że:
+    \[
+       \qty(\pdv{G}{T})_{p} = -S \qc \qty(\pdv{G}{p})_{T} = v
+    \]
+    Ale obydwie te wartości są nieciągłe. Wtedy będziemy mówić o tym, że przejście jest \emph{I rodzaju}.
+    Tutaj też będziemy widzeć zależność:
+    \[
+      \qty(\pdv[2]{G}{T})_{p} = \qty(\pdv[2]{G}{p})_{T}  
+    \]
+    Teraz pokażmy sobie czym jest Gaz Van Der Waalsa.
+    Jest to gaz, w którym będziemy brać też pod uwagę ciśnienie działające na każde cząsteczki od nacisku pozostałych cząsteczek gazu. Jego równanie stanu to:
+    \begin{equation}
+        n R T = \qty(V -n b)\qty[p + \frac{a n^2}{V^2}]
+        \label{eq:lec_17:van_der_waals}
+    \end{equation}
+    Gdzie:
+    \[
+      a = \qc b =   
+    \]
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 12.05.2022
+
+\begin{lecture}{Uzupełnij}
+    
+\end{lecture}
+
+
+% ----------------------------------------------------------------------
+% Wykład 16.05.2022
+
+\begin{lecture}{Uzupełnij}
+    
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 19.05.2022
+
+\begin{lecture}{Uzupełnij}
+    
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 23.05.2022
+
+\begin{lecture}{Uzupełnij}
+    
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 26.05.2022
+
+\begin{lecture}{Coś z zespołem wielkim kanonicznym}
+    \section*{W poprzednim odcinku...}
+    Definijemy sobie:
+    \[
+    N = n_1 + n_2 + n_3 + \dots    
+    \]
+    \[
+        \sum_{N=0}^{\infty} \sum_{n_1} \sum_{n_2} \dots    
+    \]
+    Zaś wielka suma statystyczna:
+    \[
+        \Xi_i^{f, b} = \qty(1 \pm z e^{- \beta \epsilon_i})^{\pm 1} \qc \Xi = \Pi_i \Xi_i\qc \log \Xi = \sum_i \log \Xi_i
+    \]
+    Zdefiniowaliśmy sobie:
+    \[
+        -pV = \Omega^{f,b} = - k T \log \Xi = \pm kT\sum_i \log \qty(1 \pm e^{-\beta (\epsilon_i - \mu)})    
+    \]
+    W związku z tym:
+    \[
+        \ev{N} = z \pdv{z} \log \Xi\qty(T, V, z) = \pm z \pdv{z} \sum_i \log \qty(1 \pm z e^{-\beta \epsilon_i})  = \sum_i \frac{z e^{-\beta \epsilon_i}}{1 \pm z e^{-\beta \epsilon_i}}   
+    \]
+    Gdzie dalej:
+    \[
+        \ev{N} = \sum_i \frac{1}{z^{-1} e^{\beta \epsilon_i} \pm 1} = \sum_i \frac{1}{e^{\beta\qty(\epsilon_i - \mu)} \pm 1}    
+    \]
+    Ale pamiętamy też, że:
+    \[
+        \ev{N} = \sum_i \ev{n_i}    
+    \]
+    \[
+        \ev{n_i}^{f, b} = \frac{1}{e^{\beta\qty(\epsilon_i - \mu)} \pm 1}    
+    \]
+    Średnia liczba cząstek w stanie kwantowym $i$:
+    \begin{itemize}
+        \item \subind{Statystyka Fermi-Diraca}{Statystyka!Fermi-Diraca} 
+        \[
+            n_i = \frac{1}{e^{\beta\qty(\epsilon_i - \mu)} + 1}
+        \]
+        \item \subind{Statystyka Bose-Einsteina}{Statystyka!Bose-Einsteina} 
+        \[
+            n_i = \frac{1}{e^{\beta\qty(\epsilon_i - \mu)} - 1}
+        \]
+    \end{itemize}
+    \section*{Granica klasyczna statystyk kwantowych}
+    \begin{enumerate}
+        \item Zbadajmy gaz, który w danej $T$ - robi się bardzo rzadki, tj. $\frac{\ev{N}}{V} \to 0$:
+        \[
+            0 \leftarrow \frac{\ev{N}}{V} = \frac{1}{V} \sum_i \underbrace{\frac{1}{e^{\frac{1}{kT} \qty(\epsilon_i - \mu)} \hcancel{$\pm 1$}}}_{\to 0} = \frac{1}{V} \sum_i \underbrace{\ev{n_i}}_{\to 0}
+        \]
+        Pomijamy sobie tutaj tę jedynkę, ponieważ wiemy, że drugi wyraz w mianowniku będzie zawsze dużo dużo większy, także jedynka będzie pomijalna.
+        \item Weźmy teraz $T \to \infty$, jak się zachowa $\mu(T)$? Otóż musi uciekać nam wtedy do $-\infty$.\\
+        Wtedy też widzimy, że $\ev{n_i} \to \frac{1}{e^{\beta \qty(\epsilon_i - \mu)}}$
+    \end{enumerate}
+    Teraz w tej granicy (1 lub 2 powyżej) mamy:
+    \[
+        \ev{N} = \underbrace{z}_{e^{\beta \mu}} \sum_i e^{-\beta \epsilon_i} \pm 1     
+    \]
+    Po przekształceniu dostaniemy:
+    \[
+        z = \frac{\ev{N}}{\sum_i e^{-\beta \epsilon_i}}    
+    \]
+    I po wstawieniu do wzoru na $n$ dostajemy:
+    \[
+        \ev{n_i} = z e^{-\beta \epsilon_i} = \ev{N} \frac{e^{-\beta \epsilon_i}}{\sum_i e^{-\beta \epsilon_i}}    
+    \]
+    Daje nam to:
+    \[
+        \frac{\ev{n_i}}{N} = \frac{e^{-\beta\epsilon_i}}{\sum_i e^{-\beta\epsilon_i}}
+    \]
+    Co jest klasyczną \emph{statystyką Boltzmanna}! (klasyczny wzór na prawdopodobieństwo)\\
+
+    Przypomnijmy sobie teraz $Z$ w granicy klasycznej.\\
+    \emph{Wielki Potencjał Termodynamiczny} to będzie:
+    \[
+        \Omega \qty(T, V, \mu) = U\qty(T, \mu) = U - TS - \mu N = -kT \log \Xi    
+    \]
+    Zaś $F$:
+    \[
+        F = - kT \log Z = U\qty(T) = U- TS
+    \]
+    Dalej rozpisując:
+    \[
+        - kT \log Z  = F =  \Omega + \mu N = - k T \log \Xi + \mu N 
+    \]
+    \begin{equation} \label{eq:lec_22:gwiazdka_1}
+        \log Z = \log \Xi - \beta \mu N    
+    \end{equation}
+    
+    W naszej granicy:
+    \[
+        \log \Xi^{f, b} = \sum_i \log \Xi_i^{f, b} = \pm \sum_i \log\qty(1 \pm e^{-\beta \qty(\epsilon_i - \mu)}) \stackrel{N \to 0}{\longrightarrow }  {\color{cyan}| \log(1\pm x) \approx \pm x|} \, \sum_i e^{-\beta(\epsilon_i - \mu)} = z \sum_i e^{-\beta \epsilon_i} = \ev{N}
+    \]
+    Wracamy teraz do równania \eqref{eq:lec_22:gwiazdka_1}. Daje nam to:
+    \begin{equation}\label{eq:lec_22:gwiazdka_2}
+        \log Z = N - \beta \mu N
+    \end{equation}
+    Po wstawieniu do równania \eqref{eq:lec_22:gwiazdka_2} mamy:
+    \[
+        \log Z = N - N \log N + \log \qty(\sum_i e^{-\beta \epsilon_i})^N = \log\qty(\frac{(\sum \dots)^N}{N!})  
+    \]
+    Co daje:
+    \[
+        Z = \frac{1}{N!} \qty(\sum_i e^{-\beta \epsilon_i})^N
+    \]
+    Co jest klasyczną sumą statystyczną z wielkokanonicznym $N!$\\
+    Gaz doskonały w (periodycznym) pudle:
+    \[
+        H_0(i) = \frac{p_i^2}{2m} = -\frac{\hbar^2}{2m} \qty(\pd{x}^2 + \pd{y}^2 + \pd{z}^2)    
+    \]
+    Weźmy periodyczne warunki brzegowe:
+    \[
+        \Psi(0, y, z) = \Psi(L_x, y, z)    
+    \]
+    i analogicznie dla $y$ i $z$. Rozwiązania to:
+    \[
+        \Psi_{n_x, n_y, n_z} = e^{\frac{2 n_x \pi i}{L_x} x} e^{\frac{2 n_y \pi i}{L_y} y}e^{\frac{2 n_z \pi i}{L_z} z}   
+    \]
+    Gdzie $n_{x,y,z} = 0, \pm 1, \pm 2, \pm 3, \dots$. Da nam to energie:
+    \[
+        E_{n_x, n_y, n_z} = \frac{1}{2m} \qty(p_x^2 + p_y^2 + p_z^2)    
+    \]
+    Gdzie $p_x = \frac{2 \hbar n_x \pi i}{L_x}$, a $\Delta p_x = \frac{2 \hbar \pi}{L_x} \stackrel{L_x \to \infty}{\longrightarrow} 0$.\\
+    Różnica między dwoma kolejnymi poziomami energetycznymi dąży do $0$, kiedy rozmiar pudła $\to \infty$.\\
+    Plan: Zamienić sumę na całkę. Jak?\\
+    Zamienić $I = \sum$ po stanach kwantowych $= \sum_{s, n_x. n_y, n_z} f\qty(n_x, n_y, n_z)$ na całkę.\\
+    W takim razie 
+    \[
+        \sum f(x) \dd{x} = \lim_{\Delta x \to 0} \sum_i f(x_i) \Delta x
+    \]
+    Powiedzmy sobie, że $\Delta x = x_i - x_{i-1}$ i jest bardzo małe, więc można napisać:
+    Teraz:
+    \[
+        \frac{1}{\Delta x} \sum f(x) \dd{x} = \sum_i f(x_i)
+    \]
+    I nasza całka to:
+    \[
+        I = \sum_{s, n_x, n_y, n_z} f(n_x, n_y, n_z) = (2s+1) \sum_{p_x, p_y, p_z} f(p_x, p_y, p_z) = \frac{2s_x + 1}{\Delta p_x \Delta p_y \Delta p_z} \int f(p_x, p_y, p_z) \dd{p_x} \dd{p_y} \dd{p_z}
+    \]
+    Zaś $\Delta p_x \Delta p_y \Delta p_z$ to:
+    \[
+        \Delta p_x \Delta p_y \Delta p_z = \frac{8 \pi^3 \hbar^3}{L_x L_y L_z} = \frac{8 \hbar^3 \pi^3}{V}
+    \]
+    Następnie zakładamy, że $f(p_x, p_y, p_z) = f(p)$. Daje nam to:
+    \[
+        I = \frac{(2s+1) V}{h^3} \int f(p) 4 \pi p^2 \dd{p}    
+    \]
+    Zamieńmy sobie teraz na całkę po energiach. W tym celu piszemy:
+    \[
+        E = \frac{p^2}{2m} \qc \dd{E} = \frac{2 p \dd{p}}{2m} = \frac{p}{m} \dd{p} \implies m \dd{E} = p \dd{p} = \sqrt{2 m E} \dd{p} \implies \dd{p} = \sqrt{\frac{m}{2 E}} \dd{E}    
+    \]
+    Teraz po wstawieniu do naszego $I$ mamy:
+    \[
+        I = \frac{(2s+1) V 4\pi}{h^3} \int f(E) 2 m E \sqrt{\frac{m}{2E}} \dd{E} = \frac{2s+1}{4\pi} \qty(\frac{2m}{\hbar})^{\frac32} \int f(E) \sqrt{E} \dd{E}   
+    \]
+
+    \emph{Podsumowanie}\\
+    \[
+        \lim_{\infty} \frac{1}{V} \sum_{s, n_x, n_y, n_z} \dots = \frac{2s+1}{4 \pi^2} \qty(\frac{2m}{\hbar^2}) \int \dd{E} \sqrt{E} \dots   
+    \]
+    Dzielenie na $V$ jest istotne, ponieważ dzięki temu mamy coś intensywnego, co ma sens w granicy termodynamicznej, bo jest intensywne.\\
+    Będziemy dalej operować tymi całkami i zastosujemy je do wielkiego potencjału termodynamicznego itp i dużo fajnych rzeczów dostaniemy. Jak dożyjemy do wykładu w poniedziałek po kolokwium. Howgh. Wejdziemy na wykład z tarczą, lub zostaniemy na tarczy przed salą.
+\end{lecture}
 \tableofcontents
 
 \listoffigures

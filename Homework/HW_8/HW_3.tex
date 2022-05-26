@@ -1,0 +1,118 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 3}
+
+N moli gazu doskonałego poddano przemianie ze stanu początkowego opisanego parametrami $T_{1}, V_{1}$ do stanu końcowego o objętości $V_{2}$, przy czym $V_{2}>V_{1}$. Rozważyć dwie przemiany:
+a) $p(V)=\gamma-\alpha\left(V-V_{1}\right)$
+b) $p(V)=\gamma-\beta\left(V-V_{1}\right)^{2}$
+Współczynniki $\alpha, \beta, \gamma$ dobrano tak, aby ciśnienie końcowe w obydwu przemianach było jednakowe. Wyznacz zależność $T(V)$, temperaturę końcową $T_{2}$ oraz pracę wykonaną przez siły zewnętrzne w obydwu przypadkach. Wyznaczyć warunek aby było spełnione: $T_{2}>T_{1}$.
+
+\section{Rozwiązanie}
+
+Rozważmy pierwszą przemianę, dla której $p(V)$ jest dane wzorem:
+$$
+p(V)=\gamma-\alpha\left(V-V_{1}\right)
+$$
+Jako że pracujemy z gazem doskonałym, to spełnione jest także równanie Clapeyrona:
+$$
+p V=N R T
+$$
+Przekształcając je i podstawiając zależność $p(V)$ dostaniemy zależność $T(V)$ :
+$$
+T(V)=\frac{V\left(\gamma-\alpha\left(V-V_{1}\right)\right)}{N R}
+$$
+A stąd temperatura końcowa jest równa:
+$$
+T_{2}=T\left(V_{2}\right)=\frac{V_{2}\left(\gamma-\alpha\left(V_{2}-V_{1}\right)\right)}{N R}
+$$
+Natomiast praca wykonana przez siły zewnętrzne jest równa:
+$$
+W=-\int_{V_{1}}^{V_{2}} p d V=-\int_{V_{1}}^{V_{2}}\left(\gamma-\alpha\left(V-V_{1}\right)\right) d V=-\gamma\left(V_{2}-V_{1}\right)+\frac{\alpha}{2}\left(V_{2}-V_{1}\right)^{2}
+$$
+Wyznaczmy dla tej przemiany warunek na $T_{2}>T_{1}$ :
+$$
+\begin{gathered}
+T\left(V_{2}\right)>T\left(V_{1}\right) \\
+\frac{V_{2}\left(\gamma-\alpha\left(V_{2}-V_{1}\right)\right)}{N R}>\frac{V_{1} \gamma}{N R} \\
+\gamma\left(V_{2}-V_{1}\right)-\alpha V_{2}\left(V_{2}-V_{1}\right)>0
+\end{gathered}
+$$
+Wiadomo, że $V_{2}>V_{1}$, czyli wynika z tego, że warunek $T_{2}>T_{1}$ będzie spelniony tylko wtedy, gdy ${ }_{\alpha}^{\gamma}>V_{2}$. Rozważmy drugą przemianę, gdzie $p(V)$ jest dane:
+$$
+p(V)=\gamma-\beta\left(V-V_{1}\right)^{2}
+$$
+Postępując analogicznie dostajemy, że $T(V)$ jest dane wzorem:
+$$
+T(V)=\frac{V\left(\gamma-\beta\left(V-V_{1}\right)^{2}\right)}{N R}
+$$
+A stąd $T_{2}$ :
+$$
+T_{2}=T\left(V_{2}\right)=\frac{V_{2}\left(\gamma-\beta\left(V_{2}-V_{1}\right)^{2}\right)}{N R}
+$$
+Natomiast praca wykonana przez siły zewnętrzne jest równa:
+$$
+W=-\int_{V_{1}}^{V_{2}} p d V=-\gamma\left(V_{2}-V_{1}\right)+\frac{\beta}{3}\left(V_{2}-V_{1}\right)^{3}
+$$
+
+Sprawdźmy na koniec kiedy będzie spełniony warunek $T_{2}>T_{1}$ :
+$$
+\begin{gathered}
+T\left(V_{2}\right)>T\left(V_{1}\right) \\
+\frac{V_{2} \gamma-\beta V_{2}\left(V_{2}-V_{1}\right)^{2}}{N R}>\frac{V_{1} \gamma}{N R} \\
+\left(V_{2}-V_{1}\right)\left(\gamma-\beta V_{2}\left(V_{2}-V_{1}\right)\right)>0
+\end{gathered}
+$$
+Czyli musi być spełnione:
+$$
+\gamma-\beta V_{2}\left(V_{2}-V_{1}\right)>0
+$$
+Zauważmy, że stałe $\alpha, \beta, \gamma$ dobrano tak, by ciśnienie końcowe w obu przemianach bylo takie samo, to znaczy, żeby zachodziła równość:
+$$
+\gamma-\alpha\left(V_{2}-V_{1}\right)=\gamma-\beta\left(V_{2}-V_{1}\right)^{2}
+$$
+A stąd mamy związek $\alpha$ z $\beta$ :
+$$
+\alpha=\beta\left(V_{2}-V_{1}\right)
+$$
+Czyli warunek dla drugiej przemiany ponownie redukuje się do nierówności $\frac{\gamma}{\alpha}>V_{2}$. Dodatkowo, zauważmy, że $p_{1}=\gamma$ dla obu przemian. Czyli ostatecznie żeby $T_{2}>T_{1}$ dla obu przemian, to stałe muszą spełniać warunki:
+$$
+\begin{gathered}
+\alpha<\frac{p_{1}}{V_{2}} \\
+\beta<\frac{p_{1}}{V_{2}\left(V_{2}-V_{1}\right)}
+\end{gathered}
+$$
+
+\end{document}
