@@ -1,0 +1,89 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 2}
+
+\emph{Entropia Debye'a}. Na ćwiczeniach obliczyliśmy podatność cieplną trójwymiarowego ciała stałego w którym mogą rozchodzić się fale akustyczne o prędkości $v_{0}$ (model Debye'a) i pokazaliśmy że dla niskich temperatur:
+$$
+C_{V}=N k \frac{12 \pi^{4}}{5}\left(\frac{T}{T_{D}}\right)^{3}, \text { gdzie } T_{D}=\frac{\hbar v_{0}}{k} \sqrt[3]{6 \pi^{2} \frac{N}{V}}
+$$
+Dla tego samego modelu oblicz zależność entropii od temperatury i jej zachowanie asymptotyczne dla niskich temperatur.
+
+\section{Rozwiązanie}
+
+Gęstość stanów w modelu Debye'a jest dana jako:
+$$
+g(w)=\left\{\begin{array}{l}
+\frac{3 V}{2 \pi^{2} v_{0}^{3}} \omega^{2} \quad \omega<\omega_{D} \\
+0 \quad \omega>\omega_{D}
+\end{array}\right.
+$$
+Entropię wyznaczyć można różniczkując po temperaturze energię swobodną układu. Wiemy, że ma ona wzór:
+$
+F=\int_{0}^{\infty} g(\omega)\left(\frac{\hbar \omega}{2}+k T \log (1-\exp (-\beta \hbar \omega))\right) d \omega
+$
+Natomiast entropię policzymy ze wzoru 
+$
+S=-\frac{\partial S}{\partial T}
+$.
+Czyli po podstawieniu mamy:
+$$
+\begin{gathered}
+S=-\int_{0}^{\infty} g(\omega)\left(k \log (1-\exp (-\beta \hbar \omega))-\frac{\hbar}{T} \frac{\omega \exp (-\beta \hbar \omega)}{1-\exp (-\beta \hbar \omega)} d \omega\right) \\
+S=-\int_{0}^{\omega_{D}} \frac{3 V}{2 \pi^{2} v_{0}^{3}} \omega^{2} k \log (1-\exp (-\beta \hbar \omega)) d \omega+\int_{0}^{\omega_{D}} \frac{3 V \hbar}{2 T \pi^{2} v_{0}^{3}} \frac{\omega^{3} \exp (-\beta \hbar \omega)}{1-\exp (-\beta \hbar \omega)} d \omega
+\end{gathered}
+$$
+Jako, że $\omega_{D}=v_{0}\left(\frac{6 \pi^{2} N}{V}\right)^{\frac{1}{3}} \implies v_{0}^{3}=\omega_{D}^{3} \frac{V}{6 \pi^{2} N}$. Jak użyjemy to w naszym równaniu to dostajemy:
+$$
+S=-9 N k \int_{0}^{\omega_{D}} \frac{\omega^{2}}{\omega_{D}^{3}} \log (1-\exp (-\beta \hbar \omega)) d \omega+9 N k \frac{1}{T \omega_{D}^{3}} \int_{0}^{\omega_{D}} \frac{\omega^{3}}{\exp (\beta \hbar \omega)-1} d \omega
+$$
+Dla ułatwienia podstawmy sobie teraz $x=\beta \hbar \omega$, co zmieni nam równanie na Entropię do postaci:
+$$
+S=-9 N k\left(\frac{T}{T_{D}}\right)^{3} \int_{0}^{\frac{T_{D}}{T}} x^{2} \log \left(1-e^{-x}\right) d x+9 N k\left(\frac{T}{T_{D}}\right)^{3} \int_{0}^{\frac{T_{D}}{T}} \frac{x^{3}}{e^{x}-1} d x
+$$
+$$
+\begin{gathered}
+S=9 N k\left(\frac{T}{T_{D}}\right)^{3}\left(-\left.\frac{1}{3} x^{3} \log \left(1-e^{-x}\right)\right|_{0} ^{\frac{T_{D}}{T}}+\frac{4}{3} \int_{0}^{\frac{T_{D}}{T}} \frac{x^{3}}{e^{x}-1} d x\right) \\
+S=-3 N k \log \left(1-e^{-\frac{T_{D}}{T}}\right)+12 N k\left(\frac{T}{T_{D}}\right)^{3} \int_{0}^{\frac{T_{D}}{T}} \frac{x^{3}}{e^{x}-1} d x
+\end{gathered}
+$$
+W końcu, przejdźmy teraz do granicy niskich temperatur (to znaczy $T \ll T_{D}$ ). Wówczas wyrażenie $\frac{T_{D}}{T} \rightarrow \infty$, więc wyraz pod logarytmem dąży do 1 , a sam logarytm do 0 . Za to $\int \to \frac{\pi^{4}}{15}$. Stąd też entropia w granicy niskotemperaturowej jest opisana wzorem:
+
+\[
+    S = 12 N k \qty(\frac{T}{T_D})^3 \frac{\pi^4}{15} = \frac{4 \pi^4}{5} N k \qty(\frac{T}{T_D})^3
+\]
+
+
+\end{document}

@@ -2006,9 +2006,55 @@ Idąc z tym ciut dalej dochodzimy do \subind{równania Clausiusa-Clapeyrona}{Ró
     \[
         \lim_{\infty} \frac{1}{V} \sum_{s, n_x, n_y, n_z} \dots = \frac{2s+1}{4 \pi^2} \qty(\frac{2m}{\hbar^2}) \int \dd{E} \sqrt{E} \dots   
     \]
-    Dzielenie na $V$ jest istotne, ponieważ dzięki temu mamy coś intensywnego, co ma sens w granicy termodynamicznej, bo jest intensywne.\\
+    Dzielenie na $V$ jest istotne, ponieważ dzięki temu mamy coś intensywnego, co ma sens w granicy termodynamicznej, bo jest intensywne.\\
     Będziemy dalej operować tymi całkami i zastosujemy je do wielkiego potencjału termodynamicznego itp i dużo fajnych rzeczów dostaniemy. Jak dożyjemy do wykładu w poniedziałek po kolokwium. Howgh. Wejdziemy na wykład z tarczą, lub zostaniemy na tarczy przed salą.
 \end{lecture}
+
+
+% ----------------------------------------------------------------------
+% Wykład 13.06.2022
+
+\begin{lecture}{Coś o wszechświecie}
+    Na początku mieliśmy jednorodną zupę cząstek, a w czasie wiemy, że Entorpia wszechświata powinna rosnąć. Jednakowoż obecnie, po ok $15\cdot 10^6$ lat mamy planety, gwiazdy itp, co by wskazywało na pierwszy rzut oka, że entropia nam spadła. Więc jak jest naprawdę?\\
+    Odpowiedzi są dwie, pierwszą można by nazwać to, że patrzymy tylko na 5\% całego wszechświata (bo $68\%$ to Ciemna Energia a $24\%$ to Ciemna Materia co do których nic nie wiemy). Ale odpowiedź w pełni ścisła to \emph{grawitacja}.\\
+    Okazuje się, że w miarę tworzenia ciał mocno oddziaływujących grawitacyjnie, to Entropia bardzo rośnie. Patrząc w przestrzeni pędowej (powierzchni $3N$-dim kuli o promieniu $\sqrt{2 m E_{kin}} = \sqrt{2 m (E - E_{pot})}$), ten ogromny wzrost Entropii którego potrzebujemy wyniknie z faktu istnienia \emph{Czarnych Dziur}. Przejdźmy sobie więc przez ich historię.\\
+    \section*{Rozumowanie Laplace'a}
+    Laplace szukał prędkości ucieczki dla różnych ciał grawitacyjnych, czyli jaką prędkość trzeba nadać ciału, żeby odleciało do nieskończoności:
+    \[
+        \frac{v_{gr}^2}{2} - \frac{GM}{R} = \frac{V_{\infty}^2}{2} = 0
+    \]
+    Daje nam to:
+    \[
+        v_{gr}^2 = \frac{2 G M}{R}    
+    \]
+    Teraz jak położymmy $v_{gr} = c$:
+    \[
+        R = \frac{2 G M}{c^2}    
+    \]
+    No i wychodzi nam, że jesteśmy w stanie położyć taką masę, że nic nie będzie w stanie uciec. I tak oto uzyskaliśmy klasycznie Czarną Dziurę.\\
+    Ale tu mamy paradoks, bo wynika, że możemy wrzucić dowolną ilość materii/energii i ona zniknie, więc zasady zachowania by padły. Dlatego zostało swofmułowane, że musi w ich otoczeniu mieć miejsce \emph{Promieniowanie Hawkinga}.\\
+    Tłumaczy się je fluktuacjami kwantowymi, tworzeniem i anihillacją par $e^-$, $e^+$ elektron pozyton, o energii $\Delta E \Delta t < \hbar/2$ o skali czasowej $\Delta t < \frac{\hbar}{1 J}$, ale jest to kosztem utraty masy Czarnej Dziury.
+    \section*{Przeskok do Hawkinga}
+    Hawking pokazał, że Czarna Dziura zachowuje się jak ciało doskonale czarne, tj. $\Gamma = \frac{\hbar c^3}{8 \pi G M k}$.\\
+    W odpowiedzi na to ktoś (nazwisko) policzył sobie entropię Czarnej Dziury. Problem jest tylko taki, że na ten moment tak jak to sobie sformułowaliśmy, to wygląda na to, że wpadając do czarnej dziury tracimy informację o przeszłości, czy też patrząc kwantowo, ze stanu czystego po wejściu robi nam się stan mieszany.\\
+    Daje nam to \emph{Paradoks Informacyjny Czarnych Dziur}.\\
+    W 1997 trójka Fizyków się założyła o ten problem: Hawking, Thorne i Preshill. Hawking i Thorne uznali, że problem jest z Kwantami, a Preshill, że z OTW.\\
+    W 2004 Hawking opublikował pracę, że do OTW trzeba wprowadzić poprawkę na fluktuacje horyzontu zdarzeń i tym samym przyznał Preshillowi, że czuje się przegranym. Wysłał mu encykolopedię Bejsbola.\\
+    Teraz spójrzmy co się dzieje jak wrzucamy coś do czarnej dziury. Wrzucamy jakieś $\dd{m}$, wtedy energia wewnętrzna wzrasta o $\dd{U} = \dd{(Mc^2)}$ co wiemy z I zasady Termodynamiki. Jako, że $\dd{U} = T \dd{S}$, więc $(\dd{M})c^2 = \frac{\hbar c^3}{8 \pi G M k} \dd{S}$, czyli różniczka Entropii to $\dd{S} = \frac{8 \pi G k M \dd{M}}{\hbar c}$, co prowadzi nas do wzoru na entropię od ciała grawitacyjnego:
+    \begin{equation}
+        S = \frac{4 \pi k G M^2}{\hbar c} \approx 10^{77} k \qty(\frac{M}{M_S})^2
+    \end{equation}
+    Co jest \emph{Wzorem Hawkinga-Bekensteina}. Policzmy teraz entropię słońca. Jest tam ok $10^{57}$ protonów. Czyli jego entropia to $S_{sol} \approx 10^{57}$ Policzmy sobie ograniczenie, czyli czarną Dziurę. W tym celu potrzebujemy powiązania między $M$ a $R$, $M = \frac{R c^2}{2 G}$, więc licząc entropię dostajemy:
+    \[
+        S = \frac{4 \pi k G R^2 c^3}{\hbar c 4 G^2} = \frac{k A c^3}{4 \pi G} = \frac{1}{4} K \frac{A}{l_p^2}    
+    \]
+    Gdzie $A = 4 \pi R^2$, a $l_p$ to \emph{długość Plancka}:
+    \[
+        l_p = \sqrt{\frac{\hbar G }{c^3}}    
+    \]
+    Potencjalnym rozwiązaniem paradoksu informacyjnego jest \emph{Zasada Holograficzna t'Hootta} (Nobel '99). Mówi ona w skrócie, że trójwymiarowość świata jest iluzją i świat można by opisać za pomocną teorii dwuwymiarowej. Wchodzi tutaj tzw. \emph{ograniczenie Behensteina}, które mówi, że ilość informacji jest skończona. i mniejsza niż $< \frac{1}{4}K \frac{A}{l_p^2}$
+\end{lecture}
+
 \tableofcontents
 
 \listoffigures
