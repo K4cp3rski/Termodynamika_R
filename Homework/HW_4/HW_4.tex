@@ -1,0 +1,111 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 4}
+
+Pewnien układ fizyczny może znajdować się w jednym z $N$ stanów, prawdopodobieństwa których są dane przez $p_{i}(i=1,2, \ldots, N)$, przy czym $\sum_{i} p_{i}=1$. Dodatkowo, o układzie tym wiadomo, że średnia pewnej wielkości ekstensywnej $a$ dana przez $<a>=\sum_{i} p_{i} a_{i}$ jest ustalona i wynosi $a_{0}$. Pokaż, że entropia Gibbsa w takim układzie $\left(S_{G}=-k \sum_{i} p_{i} \log p_{i}\right)$ jest maksymalizowana przez rozkład
+$$
+p_{j}=\frac{1}{Z(\beta)} e^{-\beta a_{j}}
+$$
+gdzie $Z(\beta)=\sum_{j} e^{-\beta a_{j}}, a_{j}$ jest wartością wielkości $a \mathrm{w}$ j-tym stanie a $\beta$ jest pewną stałą. Pokaż nastepnie, że
+$$
+a_{0}=\left(\frac{\partial \log Z}{\partial \beta}\right)_{a_{1}, \ldots, a_{N}}
+$$
+oraz że $S_{G}=k \beta a_{0}+k \log Z$. Wskazówka: użyj metody mnożników Langrange'a.
+
+
+\section{Rozwiązanie}
+
+Wiemy, że $\sum p_{i}=1$ oraz, że $\sum p_{i} a_{i}=a_{0}$. Z równań tych wynika, że mamy dwa więzy i funkcja więzów ma postać:
+$$
+G=\left[\begin{array}{c}
+\sum p_{i}-1 \\
+\sum p_{i} a_{i}-a_{0}
+\end{array}\right]
+$$
+Natomiast entropia Gibbsa dana jest wzorem $S_{G}=-k \sum p_{i} \log p_{i}$. W celu wyznaczanie rozkładu maksymalizującego entropię skorzystać można z metody mnożników Lagrange'a. Rozkład ten wyznaczyć można z układu równań spełnionych dla każdego $i=1,2,3, \ldots, N$ postaci:
+$$
+\frac{\partial S_{G}}{\partial p_{i}}-\lambda_{1} \frac{\partial G_{1}}{\partial p_{i}}-\lambda_{2} \frac{\partial G_{2}}{\partial p_{i}}=0
+$$
+Podstawiając jawnie wzory dostajemy układ równań postaci:
+$$
+k\left(\log p_{i}+1\right)+\lambda_{1}+\lambda_{2} a_{i}=0
+$$
+A stąd:
+$$
+p_{i}=\exp \left(-\frac{\lambda_{1}+\lambda_{2} a_{i}}{k}-1\right)
+$$
+Podstawmy teraz prawdopodobieństwa do warunku na unormowanie prawdopodobieństw:
+$$
+\begin{gathered}
+\sum p_{i}=1 \Rightarrow \sum \exp \left(-\frac{\lambda_{1}+\lambda_{2} a_{i}}{k}-1\right)=1 \\
+\sum \exp \left(-\beta a_{i}\right)=Z(\beta)=\exp \left(\frac{\lambda_{1}}{k}+1\right)
+\end{gathered}
+$$
+gdzie $\beta=\frac{\lambda_{2}}{k}$. A zatem prawdopodobieństwo dane jest wzorem:
+$$
+p_{i}=\frac{\exp \left(-\beta a_{i}\right)}{\exp \left(\frac{\lambda_{1}}{k}\right)}=\frac{\exp \left(-\beta a_{i}\right)}{Z(\beta)}
+$$
+Sprawdźmy jeszcze, czy faktycznie jest to maksimum. Korzystając ponownie z metody mnożników Lagrange'a tak będzie gdy spełniony będzie warunek:
+$$
+S_{G}^{\prime \prime}-\Lambda G^{\prime \prime}<0
+$$
+Zauważmy, że $G^{\prime \prime}=0$, natomiast $S_{G}^{\prime \prime}$ jest macierzą $\mathrm{N}$ na $\mathrm{N}$ mającej wyrazy tylko na diagonalii postaci $-\frac{k}{p_{i}}$. Jako że $\mathrm{k}$ i $p_{i}$ są większe od 0 , to wszystkie wyrazy diagonalne są mniejsze od 0 . Tak więc wyrażenie:
+$$
+S_{G}^{\prime \prime}-\Lambda G^{\prime \prime}<0
+$$
+Czyli $S_{G}$ nie ma żadnego minimum, a zatem znalezione ekstremum funkcji jest także jego maksimum, co należało udowodnić. Przejdźmy teraz do pokazania, że $a_{0}=-\frac{\partial \log (Z)}{\partial \beta}$.
+$$
+-\frac{\partial \log (Z)}{\partial \beta}=-\frac{1}{Z} \frac{\partial Z}{\partial \beta}
+$$
+
+$$
+-\frac{1}{Z} \frac{\partial Z}{\partial \beta}=-\frac{1}{Z} \sum\left(-a_{i} \exp \left(-\beta a_{i}\right)\right)=\sum a_{i} \frac{\exp \left(-\beta a_{i}\right)}{Z}=\sum a_{i} p_{i}=a_{0}
+$$
+Czyli faktycznie prawdziwa jest tożsamość:
+$$
+a_{0}=-\frac{\partial \log (Z)}{\partial \beta}
+$$
+Na koniec pokażmy, że $S_{G}=k \beta a_{0}+k \log (Z)$ :
+$$
+\begin{gathered}
+S_{G}=-k \sum p_{i} \log p_{i}=-k \sum \frac{\exp \left(-\beta a_{i}\right)}{Z(\beta)} \log \left(\frac{\exp \left(-\beta a_{i}\right)}{Z(\beta)}\right) \\
+S_{G}=-k \sum \frac{\exp \left(-\beta a_{i}\right)}{Z(\beta)}\left(\log \left(\exp \left(-\beta a_{i}\right)\right)-\log (Z(\beta))\right) \\
+S_{G}=k \sum \frac{\exp \left(-\beta a_{i}\right)}{Z(\beta)}\left(\beta a_{i}+\log (Z(\beta))\right)=k\left(\sum p_{i} \beta a_{i}+\sum p_{i} \log (Z(\beta))\right) \\
+S_{G}=k \beta a_{0}+k \log (Z(\beta))
+\end{gathered}
+$$
+Co należało udowodnić.
+\end{document}

@@ -5,6 +5,7 @@
 \usepackage[polish]{babel}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{mathtools}
 \usepackage[table,xcdraw,dvipsnames]{xcolor}
 \usepackage{hhline}
 \usepackage{placeins}
@@ -18,6 +19,7 @@
 \usepackage{datetime}
 \usepackage{makeidx}
 \usepackage{hyperref}
+\usepackage{amsfonts}
 \usepackage{fancyhdr}
 
 \title{Termodynamika R 2021/2022}
@@ -40,7 +42,13 @@
 
 \renewcommand{\emph}{\textbf}
 
+\newcommand{\pd}[1]{\partial_{#1}}
+
 \newcommand{\linediv}{{\color{RubineRed} \rule{\linewidth}{0.5mm}}}
+
+\newcommand{\wniosek}{{\color{orange} Wniosek:}}
+
+\newcommand{\dbar}{d\hspace*{-0.08em}\bar{}\hspace*{0.1em}}
 
 \newenvironment{lecture}[1]{\par\medskip
    \noindent\chapter{#1} \rmfamily}{\medskip}
@@ -63,6 +71,7 @@
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \fancyhf{} % usuń bieżące ustawienia pagin
+\setlength{\headheight}{15pt}
 \fancyhead[LE,RO]{\bfseries\thepage}
 \fancyhead[LO]{\bfseries\rightmark}
 \fancyhead[RE]{\bfseries\leftmark}
@@ -122,7 +131,7 @@ Historia superkomputerów:
 Dla skali -> kubek z herbatą ma \textbf{$\sim10^{25}$ atomów}
 
 \ind{Demon Laplace'a}:
-Laplace mówił, że symulacja, która by znała położenia i pędy wszyskich cząstek by znała przeszłość i przyszłość $\to$ \textit{przeszłość i przyszłość by stała przed nią otworem}. Jest to wizja świata skrajnie deterministycznego. Obecnie raczej upadłej. {\color{green} Wniosek:} Kupując kefir nie obchodzi nas położenie wszystkich atomów, a właściwości makroskopowe.
+Laplace mówił, że symulacja, która by znała położenia i pędy wszyskich cząstek by znała przeszłość i przyszłość $\to$ \textit{przeszłość i przyszłość by stała przed nią otworem}. Jest to wizja świata skrajnie deterministycznego. Obecnie raczej upadłej. \wniosek Kupując kefir nie obchodzi nas położenie wszystkich atomów, a właściwości makroskopowe.
 
 \ind{Fizyka statystyczna}: Jest dziedziną zajmującą się przejściem z informacji mikroskopowej do informacji makroskopowej, która jest obiektem naszego zainteresowania.
 
@@ -474,7 +483,7 @@ Wnioski:
     \item Dla rozkładu maksymalnie nierównowagowego $p_1 = 1 , p_2 = \dots = 0$. Wtedy $I = 0$.
     \item Można pokazać, że rozkład równowagowy maksymalizuje Entropię. Jest to tzw twierdzenie Jensena dla fukncji wklęsłych. \com{Zdjęcie wklej}
 \end{enumerate}
-% -----------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------
 % 10.03.2022
 
 \begin{lecture}{Entropia Gibbsa i Boltzmanna}
@@ -651,7 +660,7 @@ Teraz:
     S &= k\qty[V \log V - \varrho V \log(\varrho V) - V (1 - \varrho) \log V - V (1 - \varrho) \log(1 - \varrho)]\\
     S &= V k \qty[-\varrho \log \varrho - (1 - \varrho)\log(1 - \varrho)]\\
 \end{align*}
-Wniosek - Entropia jest funkcja Ekstensywną (skaluje się z liczbą cząstek), $S(\alpha N) = \alpha S(N)$\\
+\wniosek - Entropia jest funkcja Ekstensywną (skaluje się z liczbą cząstek), $S(\alpha N) = \alpha S(N)$\\
 Teraz niech $S = f(x)$ i rozpiszmy ją jako: 
 $$f(x) = -x \log x - (1-x) \log(1-x)$$
 Wtedy jej pochodna to 
@@ -715,7 +724,7 @@ Teraz sprawdźmy ze wzoru na pochodną \eqref{eq:lec_5:ds_drho} co sie stanie j
 \]
 Czyli wtedy entropia maleje.
 
-{\color{orange} Wniosek:} Entropia (maksymalna liczba konfiguracji) jest maksymalizowana tylko i wyłącznie gdy $\varrho_L = \varrho_R$
+\wniosek Entropia (maksymalna liczba konfiguracji) jest maksymalizowana tylko i wyłącznie gdy $\varrho_L = \varrho_R$
 
 \end{lecture}
 
@@ -851,12 +860,918 @@ Wyciągamy teraz wniosek, że entropia będzie maksymalizowana, gdy $\varrho_L =
 
 \end{lecture}
 
-% ----------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------
 % 21.03.2022
 
-% \begin{lecture}{Kij wie jaki temat}
+\begin{lecture}{Kij wie jaki temat}
 
-% \end{lecture}
+\emph{Jachymski ma zastępstwo}
+
+\com{Od Szymona}
+
+\begin{align*}
+	S &= k N \left[ \log \frac{V}{N} \left( \frac{4 \pi m}{3 h^2} \frac{E}{N} \right)^{3 /2}  + \frac{5}{2}  \right]  \\
+\end{align*}
+dla gazu doskonałego. Pudełko z gazem opisują dla nas 4 wartości: energia $E$, objętość $V$, liczba cząsteczek $N$ i entropia $S$. Wypisaliśmy również wzór na temperaturę związany z entropią, ale nie był zaargumentowany. \\
+
+Przedzielmy pudełko ścianką, która pozwala na przepływ energii. Ale liczba cząstek się nie zmienia. Pierwsza część w czasie $t=0$ ma energię $E_1'$ a druga $E_2'$, w stanie równowagi $t \to \infty$ mamy $E_1, \, E_2$ oraz cała energia jest zachowana $E_1+ E_2 = E_1' + E_2' = E$. \\
+Entropia się jednak zwiększy. W stanie równowagi powinna być maksymalna. Co to znaczy, że entropia jest maksymalna?
+\begin{align*}
+	\delta S &=  \pdv[]{S_1}{{E_1}} \delta E_1 + \pdv[]{S_2}{{E_2}} \delta E_2, \\
+	\intertext{Natomiast $\delta S_1 = - \delta S_2$. Co za tym idzie, $\pdv*[]{}{{E_1}} = - \pdv*[]{}{{E_2}} $. Entropia ma się nie zmieniać, mamy więc wniosek}
+	\frac{1}{T} &\coloneq \pdv[]{S_1}{{E}} = \pdv[]{S_2}{{E}} 
+\end{align*}
+Weźmy wycinek z dochodzenia układu do położenia równowagi. W pewnym momencie będziemy mieli energie $E_1 + \Delta E $ i $E_2 - \Delta E$. Wówczas,
+\begin{align*}
+	\Delta S &= \pdv[]{S_1}{{E_1}} \Delta E - \pdv[]{S_2}{{E_2}}  \Delta E = \left( \frac{1}{ T_1} - \frac{1}{T_2} \right) \Delta E  
+\end{align*}
+$\Delta S >0$, mamy więc dwa przypadki.
+\begin{enumerate}
+	\item $\displaystyle{\Delta E >0, \quad \frac{1}{T_1} - \frac{1}{T_2} >0}$, wówczas $T_1 < T_2$
+	\item $\Delta E < 0$, wówczas $T_1 > T_2$. 
+\end{enumerate}
+Zatem widzimy, że przy tej definicji energia przepływa z układu o większej temperaturze do układu o mniejszej temperaturze. To jest to co byśmy chcieli. \\
+
+Możemy więc teraz policzyć temperaturę gazu doskonałego. Niech $s = S / N$ i podobnie pozostałe wartości przeskalujmy przez liczbę cząstek.
+\begin{align*}
+	s &= k \left[ \log v + \frac{3}{2} \log \varepsilon + \frac{5}{2} + \frac{3}{2} \log \frac{4 m \pi }{3 h^2} \right]  \\
+	\frac{1}{T} &= \pdv[]{s}{{\varepsilon}} = \frac{3}{2} \frac{k}{\varepsilon} 
+\end{align*}
+Stąd otrzymujemy znane wzory na związek energii gazu z jego temperaturą. 
+\begin{align*}
+	\varepsilon &= \frac{3}{2} k T \\
+	E &= \frac{3}{2} N kT 
+\end{align*}
+
+% -----
+% Zredaguj powyżej
+
+Na ostatnim wykładzie pojawiła się Entropia gazu doskonałego:
+\begin{equation*}
+        S(E, V, N) = N k \qty[\ln(\frac{V}{2}) + \frac32 \ln(\frac{E}{N}) + S_0]
+\end{equation*}
+Stan gazu jest opisywany czterema wartościami:
+\begin{itemize}
+    \item Energią $E$
+    \item Objętością $V$
+    \item Ilością cząstek $N$
+    \item Entropią $S$
+\end{itemize}
+
+Będziemy sobie teraz przedzielać pudełko ściankami o różnych właściwościach
+
+Wypisaliśmy wzór Sackur-Tetrodre:
+\[
+    S = k N \qty(\log\frac{V}{N}\qty(\frac{4 \pi m E}{3 h^2 N})^{\frac32} + \frac52)
+\]
+
+\com{Przepisz z tych 10 min}
+
+\section{Zależność od energii, entropii i temperatury}
+
+Teraz rozważmy sobie układ, pudełko zamknięte tłokiem o masie $m$, wysokości $h$, powierzchni $A$, w polu $g$. \com{Wstaw rysunek}.Zajdą zależności:
+\begin{align*}
+    E &= E_g + mhg\\
+    S &= k \log \sum(E_g, V) = k \log \sum (E - mgh, Ah)
+\end{align*}
+Stan równowagi osiągniemy, gdy $\pdv{S}{h} = 0$:
+\begin{align*}
+    \pdv{S}{h} &= 0\\
+    \pdv{S}{h} = k \pdv{\log \Sigma}{E_g} \pdv{E_g}{h} + \pdv{\log \Sigma}{V} \pdv{V}{h} &= - k mg \pdv{\log \Sigma}{E_g} + k A \pdv{\log \Sigma}{V}\\
+    0 = - mg\qty(\pdv{S}{E_g})_V + A \qty(\pdv{S}{V})_{E_g} &\implies \qty(\pdv{S}{V})_{E} = \frac{m g}{A T} = \frac{p}{T}
+\end{align*}
+
+Teraz rozważmy sobie układ, gdzie ścianka między pojemnikami z dwoma gazami jest ruchoma. Mamy więc więc pojemniki o objętościach $V_1$ i $V_2$. Teraz szukając stanu równowagi dostajemy:
+\begin{align*}
+    \pdv{S}{V_1} = 0 \qc \pdv{S}{E_1} = 0 \implies T_1 = T_2\\
+    \pdv{S}{V_1} = \pdv{S_1}{V_1} - \pdv{S_2}{V_1}\\
+    \implies \pdv{S_1}{V} = \pdv{S_2}{V}\qc p_1 = p_2 \qc \frac{p_1}{T_1} = \frac{p_2}{T_2}
+\end{align*}
+
+Spójrzmy teraz na małą zmianę Entropii:
+\[
+    \Delta S = \pdv{S_1}{V_1} \Delta V - \pdv{S_2}{V_2} \Delta V = \qty(\frac{p_1}{T_1} - \frac{p_2}{T_2}) \Delta V = \qty(\frac{p_1 - p_2}{T})\Delta V > 0
+\]
+Czyli $\Delta V > 0 \implies p_1 > p_2$. Patrzymy teraz na entropię:
+\(
+    s = k (\log v + \dots) \implies \pdv{s}{v} = \frac{k}{v}
+\) Daje to: \( p = \frac{kT}{p} \implies pV = NkT \)
+\begin{emph_box}{Wzór Clapeyrona}
+    \[
+        pV = NkT
+    \]
+\end{emph_box}
+
+Rozważamy teraz \emph{ściankę adiabatyczną} (termos):
+\com{Rysunek}
+W tym przypadku mamy;
+\[ 0 = 
+  \begin{cases}
+      \Delta V\\
+      \Delta E\\
+      \Delta N
+  \end{cases}
+\]
+Czyli inaczej mówiąc wymiana ciepła z otoczeniem nie zachodzi.
+
+\section{Pokazy}
+\emph{Zależność ciśnienia od głębokości w cieczy}
+
+\com{Wstaw zdjęcie z ururką i balonem}
+Patrząc na doświadczenie widzimy, że rurka z cieczą jest z jednej strony otwarta, a z drugiej zamknięta balonikiem, który jest wsuwany wgłąb cylindra z wodą. Wzrost ciśnienia działającego na balon obserwujemy poprzez to, że poziom cieczy w rurce się zmienia wraz ze wsuwaniem balonika na głębokość\\
+\com{Zdjęcie implozji puszki}\\
+
+\emph{Pokazy z różnicą ciśnień (Efekt wysokogórski etc.)} \com{Zdjęcia i film} \com{Zdjęcie z wodą wrzącą w temperaturze pokojowej w niskim ciśniniu}\\
+
+\emph{Pokaz z zamrażaniem lodu poprzez gwałtowne zmiejszenie ciśnienia w układzie z wodą}
+
+Ciecz która jest pomiędzy wodą a pompą to kwas siarkowy, który jest silnie higroskopijny, więc dzięki temu odfiltrowujemy powietrze od wody i zyskujemy efekt obniżenia temperatury wody i zamarzania. 
+
+\emph{Nurek Kartezjusza} \com{Zdjęcia}\\
+W nurku jest stała ilość gazu zamknięta w szklanej bańce powietrza. Od dołu jest otwarta ta bańka, wiec jest zatknięta wodą. Zwiększajac ciśnienie wody powietrze się spręża co raz bardziej, więc siła wyporu spada, a siła grawitacji pozostaje bez zmian bo jest niezależna od objętości gazu i nurek tonie. Jak zmniejszamy ciśnienie, to nurek się na nowo wynurza.
+
+\section{Powrót do teorii}
+Ostatni rodzaj ścianki, pozwala na przepływ energii i cząstek ale nieruchoma (ścianka wyimaginowana)
+Czyli mamy:
+\[
+    const = 
+    \begin{cases}
+    N_1 + N_2 = N\\
+    E_1 + E_2 = E
+    \end{cases}
+\]
+Oraz wiemy, że:
+\begin{align*}
+    0 = \pdv{S}{N_1} = \pdv{S_1}{N_1} - \pdv{S_2}{N_2} &\implies \qty(\pdv{S}{N})_E = - \frac{\mu}{T}\\
+    \text{Mała zmiana }&\text{entropii}:\\
+    \Delta S = \pdv{S_1}{N_1}\Delta N = \pdv{S_2}{N_2}\Delta N &= \frac{\mu_1 = \mu_2}{T} \Delta N > 0\\
+    \implies \Delta N>0\implies&\mu_1 < \mu_2
+\end{align*}
+Gdzie wielkość $\mu$ to \ind{Potencjał Chemiczny} - możemy go rozumieć jako 'chęć' cząstek do przechodzenia między dwoma objętościami.
+
+\end{lecture}
+
+% ------------------------------------------------------------------------
+% 24.03.2022
+
+\begin{lecture}{Potencjał chemiczny}
+
+\section{Potencjał Chemiczny Gazu Doskonałego}
+Piszemy równanie na Entropię:
+\[
+    S = k N (\ln V + \frac32 \ln \frac{4 \pi m}{3 h^2} + \frac52 + \frac32 \ln E - \frac52 \ln N)
+\]
+Wtedy \subind{potencjał chemiczny}{Potencjał Chemiczny} będzie wyglądać:
+\[
+    \mu = \frac{S}{N} - \frac52 k = - k T \qty(\ln\qty(\frac{V}{N}\qty(\frac{2 \pi n k T}{h^2})))
+\]
+
+
+\section{Warunki nieidealne}
+Do tej pory braliśmy tylko układy odizolowane o parametrach $E, N, V, S, T, \mu, p$, ale IRL nasz układ o stanie $\mathbb{S}$ jest w jakimś rezerwuarze $R$. Wtedy Energia całkowita to będzie:\\
+$E = E_S + E_R$ - suma energii układu o stanie $\mathcal{S}$ i rezerwuaru $R$.\\
+Oznaczamy to jako $\Gamma_N = \qty{\Gamma_S, \Gamma_R}$ - Stan układu $R+S$. Rozpiszemy to jako:
+\[
+    \rho(\Gamma_N) = \frac{1}{\omega(E, V, N)} \delta(E - H(\Gamma_N)) 
+\]
+Weźmy teraz $\varrho = \rho(\Gamma_S, \Gamma_R)$. Wtedy:
+\[
+    \rho_S(\Gamma_S) = \int\dd{\Gamma_R} \varrho(\Gamma_S, \Gamma_R) = \int \dd{\Gamma_R} \frac{1}{\omega} \delta(E - H_S(\Gamma_S) - H_R(\Gamma_R))
+\]
+\[
+    \rho_S(\Gamma_S) = \frac{1}{\omega(E, V, N)} \omega_R(E - H_S(\Gamma_S), V_R, N_R)
+\]
+Pamiętając, że:
+\[
+    \mqty{
+        \omega = \int \delta(E - H(\Gamma)) & \omega = e^{\frac{S}{k}}\\
+        k \log \omega = S
+    }
+\]
+Stosując te założenia do poprzednich wzorów:
+\[
+    \rho_S(\Gamma_S) \sim e^{\frac{1}{k} S_R(E - E_S, V_R, N_R)}
+\]
+Dalej zakładamy $\abs{S} \ll \abs{R}$, $\abs{E_S} \ll \abs{E}$. Rozwijamy wokół $E_S = 0$
+\[
+    S_R(E-E_S, V_R, N_R) \approx S_R(E) - \pdv{S_R}{E} E_S
+\]
+Z normalizacji $\rho_S$, biorąc $\beta = \frac{1}{k T}$:
+\[
+    \mqty{
+    \rho_S = \frac{1}{Z} e^{- \beta E_S(\Gamma_S)}\\
+    Z = \int\dd{\Gamma_S} e^{-\beta E(\Gamma_S)}
+    }
+\]
+Gdzie wielkosć 
+\begin{equation}
+    Z = \int\dd{\Gamma_S} e^{-\beta E(\Gamma_S)}
+    \label{eq:lec_8:suma_stat}
+\end{equation}
+nazwiemy \subind{sumą statystyczną}{Suma Statystyczna}, zaś wielkość $Z(T, V, N)$ nazwiemy \subind{zespołem kanonicznym}{Zespół Kanoniczny}
+
+Idąc dalej mamy:
+\begin{align}
+    \ev{E} &= U = \int_\Gamma E(\Gamma) \rho(\Gamma) \dd{\Gamma} = \\
+    &= \frac{1}{Z(T, V, N)} \int E e^{- \beta E(\Gamma)} \dd{\Gamma} = - \frac{1}{Z}\pdv{\beta}\int e^{- \beta E(\Gamma)} \dd{\Gamma} = \\
+    &= -\frac{1}{Z} \pdv{Z}{\beta} = - \pdv{\log Z}{\beta}
+\end{align}
+Licząc sobie teraz dyspersję tego rozkładu:
+\begin{align}
+    \ev{(\Delta E)^2} &= \ev{E^2} - \ev{E}^2\\
+    \ev{E} &= \footnotemark
+\end{align}
+\begin{figure}[ht!]
+         \centering
+         \begin{subfigure}[b]{0.4\textwidth}
+             \centering
+             \includegraphics[width=\textwidth]{Wyk_8_Rys_1.JPG}
+             \caption{Pierwsza część wyprowadznia}
+             \label{fig:lec_8:do_przepisania_1.1}
+         \end{subfigure}
+         \hfill
+         \begin{subfigure}[b]{0.4\textwidth}
+             \centering
+             \includegraphics[width=\textwidth]{Wyk_8_Rys_2.JPG}
+             \caption{Druga część}
+             \label{fig:lec_8:do_przepisania_1.2}
+         \end{subfigure}
+        \caption{\com{Przepisz to do równań}}
+        \label{fig:lec_8:do_przepisania_1}
+     \end{figure}
+\footnotetext{\com{Wklej Zdjęcie obliczeń aż do równoważności zespołów.}}
+
+\section{Powrót to $\mu$}
+\com{Wstaw rysunek z Goodnotes}
+
+$$P(N_g, N_d) = \frac{1}{Z} \sum_{j: \mqty{N_g\text{ w }V_g\\N_d\text{ w }V_d}} e^{- \beta E_j} = \frac{Z(N_g, N_d,)}{Z}$$
+Daje nam to: $Z(N_g, N_d) = Z_g(N_g)Z_d(N_d)$. Czy istnieje maksimum $P$?, tj.
+\[
+        \pdv{P}{N_g} \qc \pdv{\log P}{N_g}
+\]
+Tu jedna uwaga:
+\[
+    P_\text{mikro} = \frac{1}{\sum(E)} \qc P_\text{kanoniczne} = \frac{1}{Z} e^{-\beta \ev{E}}
+\]
+Daje nam to:
+\begin{align*}
+        S(E) &= k \log \sum(E)\qc P_M = e^{- S(E)/k} \implies P_K = P_M\\
+        \frac{e^{- \beta \ev{E}}}{Z} &= e^{- \beta S(E)/k}
+\end{align*}
+Daje nam to:
+\begin{equation}
+    e^{- \beta (U - TS)} = Z
+    \label{eq:lec_8:Z}
+\end{equation}
+
+Zdefiniujemy sobie tu taką wielkość:
+\begin{equation}
+    F = U - TS
+    \label{eq:lec_8:energia_swobodna}
+\end{equation}
+
+Nazwiemy ją \subind{energią swobodną}{Energia Swobodna}.
+\begin{align*}
+    - \beta F &= \log Z\\
+    F &= - k T \log Z\\
+    \dd{F} &= \dd{U} - T \dd{S} - S\dd{T}\\
+    \dd{S} &= \qty(\pdv{S}{U})_{VN} \dd{U} + \qty(\pdv{S}{V})_{UN}\dd{V} + \qty(\pdv{S}{N})_{VU}\\
+    \dd{F} &= \dd{U} - T \qty(\frac{1}{T} \dd{U} + \frac{p}{T} \dd{V} - \frac{\mu}{T} \dd{N}) - S \dd{T} =\\
+    &= - p \dd{V} - S \dd{T} + \mu \dd{N}\\
+    \mu &= \qty(\pdv{F}{N})_{T, V}
+\end{align*}
+Wstawmy sobie to teraz dla naszej sytuacji dwóch zbiorników:
+\begin{align*}
+    \pdv{\log Z_g(N_g)}{N_G} - \pdv{\log Z_d(N_d)}{N_d} &= 0\\
+    \color{BrickRed} \pdv{\log Z}{N} = -k T\mu\\
+    \implies \mu_g = \mu_d
+\end{align*}
+Idąc dalej z tym rozumowaniem liczymy sobie:
+\begin{align*}
+    Z_g(N_g) &= \int e^{- \beta E_g\footnotemark} \dd{\Gamma_g} = {\color{BrickRed} E_g \approx mgh + U_w} = \qty(\frac{V_g}{\lambda^3} e^{-\frac{mgh}{kT}})^{N_g}/N_g! \implies\\
+    \mu_g &\approx mgh + kT\log\frac{N_g \lambda^3}{V_g}\\
+    \mu_d &\approx 0 + kT \log \frac{N_d \lambda^3}{V_d}\\
+    % F = - kT \log Z &\qc \mu = (\pdv{F}{N) = -k T \pdv{\log Z}{N})
+\end{align*}
+\footnotetext{Energia grawitacyjna}
+Duży $\mu$ - skłonność do dyfuzji.
+
+Potencjał chemiczny to zmiana energii układu po dołożeniu nowej cząstki do niej.
+
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 28.03.2022
+
+\begin{lecture}{The return of Szymczak}
+    \section{Podsumowanie tego co do tej pory osiągnęliśmy}
+    \com{Zdjęcie}\\
+    Stosujemy do Termodynamiki opis Statystyczny, tj. $\ev{A} = \sum_i A_i P_i$. Wyznaczanie $P_i$ jest trudne, ale wykonalne dla \emph{Stanów równowagi}.\\
+    Dla \emph{układu izolowanego} w stanie równowagi:\\
+    \begin{itemize}
+        \item $P_i = \frac{1}{\sum_i}$
+        \item $S = k \log \sigma$, gdzie $S$ - entropia
+        \item Stan układu będziemy sobie definiować jako $S(E, V, N)$ i wiemy, że stanowi równowagi będzie odpowiadać stan makrostan realizujący największą liczbę mikrostanów.
+    \end{itemize}
+    Dostajemy takie równiania:
+    \[
+        -\frac{\mu}{T} = \qty(\pdv{S}{N})_{E,V}\qc\frac{1}{T} = \qty(\pdv{S}{E})_{V, N} \qc \frac{p}{T} = \qty(\pdv{S}{V})_{E, V}
+    \]
+    Czyli w szczególności różniczkę Entropii możemy zdefiniować jako:
+    \[
+        \dd{S} = \qty(\pdv{S}{U})_{V,N} \dd{U} + \qty(\pdv{S}{V})_{U,N}\dd{V} + \qty(\pdv{S}{N})_{V,U}
+    \]
+    Co dalej daje:
+    \[
+        T \dd{S} = \qty(\dd{E} + p \dd{V} - \mu \dd{N}) \implies
+    \]
+    \begin{equation}
+        \dd{E} = \underbrace{T\dd{S}}_{\footnotemark} - \underbrace{p \dd{V}}_{\footnotemark} + \underbrace{\mu \dd{N}}_{\footnotemark}
+        \label{eq:lec_9:1ZDN_rozniczkowa}
+    \end{equation}
+    \addtocounter{footnote}{-2}
+    \footnotetext{Przepływ ciepła}
+    \refstepcounter{footnote}
+    \footnotetext{Praca wykonana przez siły zewnętrzne}
+    \refstepcounter{footnote}
+    \footnotetext{Wkład do zmiany energii od przepływu materii}
+    Co jest \subind{pierwszą zasadą termodynamiki}{Zasada Termodynamiki!Pierwsza!Różniczkowa} w ujęciu różniczkowym.\\
+    W ujęciu ogólnym jest daje to postać:
+    \begin{equation}
+        \Delta E = \underbrace{Q}_{\footnotemark} + \underbrace{W}_{\footnotemark}
+        \label{eq:lec_9:1ZDN}
+    \end{equation}
+    \addtocounter{footnote}{-1}
+    \footnotetext{Ciepło}
+    \refstepcounter{footnote}
+    \footnotetext{Praca wykonana przez siły zewnętrzne}
+    Gdzie Równanie \eqref{eq:lec_9:1ZDN_rozniczkowa} możemy zapisać jedynie jeśli po drodze układ przechodzi przez kontinuum pośrednich stanów równowagi, tj. jest to \subind{proces odwracalny}{Proces!odwracalny}.
+    Liczymy pracę w takiej zmianie. \com{Rysunki 1 i 2 z Goodnotes}.\\
+    \wniosek Infintezymalna zmiana parametru wymuszającego zmienia kierunek procesu.\\
+    Teraz wracamy do Równania \eqref{eq:lec_9:1ZDN_rozniczkowa}:
+    \[
+        \dd{E} = \dbar Q + \dbar W,qc \dbar Q = T\dd{S}\qc\dbar W = - p \dd{W}
+    \]
+    Piszemy $\dbar$ zamiast $d$ bo jest to różniczka niezupełna. Teraz, gdyby:
+    \[
+        \dd{Q} = \dd{E} + p \dd{V} \implies \dd{Q} = \qty(\pdv{Q}{E})_V \dd{E} + \qty(\pdv{Q}{V})_E \dd{V}
+    \]
+    Co dla gazu doskonałego, gdzie znamy zależność $p V \frac23 E \implies p(E, V) = \frac{2E}{3V} \implies \pdv{p}{E} = \frac{2}{3V}$ dało by nam:
+    \[
+        0 = \pdv{Q}{V}{E} \neq \pdv{Q}{E}{V} = \qty(\pdv{p}{E})_V =  \frac{2}{3V}
+    \]
+    Dlatego piszemy $\dbar$ a nie $d$. Jest tak dlatego, że jest to tzw. \subind{forma Pfaffla}{Forma Pfaffla}:
+    \[
+        \delta P = \sum_i f_i \dd{x_i}
+    \]
+    bo nie każda forma Pfaffla jest różniczką zupełną.
+    \[
+        \dd{f} = \sum_i \pdv{f}{x_i} (x_1 \dots x_n) \dd{x_i}
+    \]
+    $\dbar$ może stać się różniczką zupełną dla procesu adiabatycznego $(\dbar Q = 0)$, $\dd{E} = \dbar W$ i ona staje się różniczką zupełną dopiero po podzieleniu przez temperaturę:
+    \begin{equation}
+        \dbar Q = T \dd{S} \implies \frac{\dbar Q}{T} = \dd{S} \implies S_A - S_B = \int_A^B \frac{\dbar Q}{T}
+        \label{eq:lec_9:zmiana_entropii}
+    \end{equation}
+    Kolejne co się pojawiło, to \emph{zespół kanoniczny}:
+    \[
+        P_i = \frac{e^{-\beta \overbrace{E_i}^{\footnotemark}}}{Z}
+    \]
+    \footnotetext{Energia mikrostanu}
+    Gdzie $\beta = \frac{1}{kT}, Z = \sum_{m_i} e^{- \beta E_{m_i}}$ - suma statystyczna. Będziemy mogli sobie zdefiniować:
+    \[
+        U - TS = \underbrace{F}_{\footnotemark} = - k T \log Z
+    \]
+    \footnotetext{\subind{Energia Swobodna Helmholza}{Energia Swobodna!Helmholza}}
+    \section{Gaz dokonały w zespole kanonicznym}
+    Teraz policzymy sobie Gaz doskonały w zespole kanonicznym:
+    \[
+        Z = \int e^{- \beta \sum_i \frac{|\va{p}|^2}{2m}} \frac{\dd{p^{3N} } \dd{r^{3N}}}{h^{3N} N!} = \frac{V^N}{N! h^{3N}} \qty(2 \pi m k T)^{\frac{3N}{2}}
+    \]
+    Czyli idąć z $N \to \infty$:
+    \[
+        F = - k T \log Z = - k T \qty(N \log V - N \log N + N - 3 N \log h + \frac{3N}{2} \log (2 \pi m k) + \frac{3 N}{2} \log T)
+    \]
+    Co w granicy Termodynamicznej by nam wybuchło (bo jest to 
+    \subind{wielkość ekstensywna}{Wielkość!Ekstensywna}), więc liczymy sobie energię swobodną na cząstkę (bo to już jest \subind{wielkością intensywną}{Wielkość!Intensywna}):
+    \[
+        f = \lim_{n\to\infty}\frac{F}{N} = - k T \qty(\log \underbrace{\frac{V}{N}}_{=v} + 1 - 3 \log h + \frac{3}{2} \log 2 \pi m k + \frac32 \log T)
+    \]
+    Teraz biorąc wzór $p \qty(\pdv{F}{V})_{T, N} = \qty(\pdv{f}{v})_{\Gamma} + \frac{kT}{v}$ dostajemy równanie stanu gazu doskonałego (\ind{Wzór Clapeyrona})
+    \begin{equation}
+        p v = k T \qc p V = N k T
+        \label{eq:lec_9:clapeyron}
+    \end{equation}
+    Idziemy dalej. Wychodzimy od równania $\dd{U} = T \dd{S} - p \dd{V}$ co jest interpretacją ciepła i pracy w języku poziomów energetycznych. Wiemy, że $U = \ev{E} = \sum_i p_i E_i \gets$  suma po mikrostanach.
+    \[
+        \dd{U} = \sum_i\qty(\underbrace{\dd{E_i}}_{\footnotemark}p_i + \underbrace{E_i \dd{p_i}}_{\footnotemark})
+    \]
+    \addtocounter{footnote}{-1}
+    \footnotetext{Zmiana energii poziomów}
+    \refstepcounter{footnote}
+    \footnotetext{Zmiana prawdopodobieństw obsadzenia poziomów $E_i$, $=T\dd{S}$}
+    I teraz:
+    \begin{align*}
+        S &= - k \sum_i P_i \log P_i\qc\sum_i P_i = 1\qc \sum_i \dd{P_i} = 0\\
+        \dd{S} &= - k \sum_i \dd{P_i} \overbrace{\log P_i}^{P_i = \frac{1}{Z} e^{-\beta E_i}} \underbrace{- k \sum_i P_i \frac{1}{P_i} \dd{P_i} }_{=0}\\
+        T \dd{S} &= - T k \sum_i \dd{P_i} \qty(-\beta E_i \log Z) = \sum_i \dd{P_i}{E_i}
+    \end{align*}
+    Teraz wyobraźmy sobie, że poziomy się nie zmieniają, ale prawdopodobieństwa obsadzeń już tak (np. na skutek kontaktu z innym ciałem, przekazem ciepła) $\implies \dd{E_i} = 0 \to \dbar Q = \dd{U} \sum_i E_i \dd{p_i}$ co skutkuje przekazem entropii $\dd{S_e} = \frac{1}{T} \dbar Q = \frac{1}{T} \sum_i E_i \dd{P_i} $
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 28.03.2022
+
+\begin{lecture}{Twierdzenie Adiabatyczne}
+Weźmy sobie:
+\[
+    E_{n_x n_y n_z} = \frac{\hbar^2\pi^2(n_x^2 + n_y^2 + n_z^2)}{2 m l^2}
+\]
+Spójrzmy sobie na poziomy energetyczne studni \com{Przerysuj ze zdjęcia}, to mamy: $L \to L'\qc\dd{P_i} = 0\qc\dd{E_i}\neq0$.
+\begin{emph_box}{\subind{Twierdzenie Adiabatyczne}{Twierdzenie!Adiabatyczne}}
+\emph{Twierdzenie Adiabatyczne}\textit{(mechanika kwantowa)}: Jeśli układ fizyczny był w stanie własnym Hamiltonianu $H(0)$ określonym liczbami kwantowymi $n$, to jeśli tylko $H$ zmienia się dostatecznie wolno, to układ pozostaje w stanie własnym Hamiltonianu $H(t)$ scharakteryzowanego tym zespołem liczb kwantowych.
+\end{emph_box}
+
+Widzimy, że w związku z tym:
+\begin{align*}
+    U &= \sum_i E_i P_i\qc S = ik\sum_i P_i \log P_i\\
+    \dd{U} &= \sum_i\qty(\underbrace{\dd{E_i}P_i}_{\footnotemark} + \underbrace{E_i\dd{P_i}}_{\footnotemark})\qc\dd{S} = \frac{1}{T} \sum_i \dd{P_i}E_i
+\end{align*}
+\addtocounter{footnote}{-1}
+\footnotetext{Praca}
+\refstepcounter{footnote}
+\footnotetext{$T\dd{S}$ - Ciepło}
+Czy to nie oszustwo?
+Bo widzimy, że na początku mamy:
+\[
+    p_n^i = e^{-\beta \frac{\hbar^2 \pi^2 n^2}{2 m L^2}}
+\]
+\[
+    p_n^f = e^{-\beta' \frac{\hbar^2 \pi^2 n^2}{2 m (L')^2}}
+\]
+
+\textit{Jeśli to Pana niepokoi, to może Pan wyłączyć mózg $\sim$ P. Szymczak 31.03.2022}
+Gdzie $\beta = \frac{1}{kT}, \frac{\beta}{L^2} = \frac{\beta'}{(L')^2} \implies T L^2 = T' (L')^2 \implies L = V^{\frac13} \implies T V^{\frac23} = const.$\\
+Czyli po wstawieniu tego wyniku do Równania Clapeyrona dostajemy $pV = NkT \implies T = \frac{pV}{Nk}$ Co też daje nam:
+\[
+    pV^{\frac53} = const.
+\]
+Jest to \emph{równanie adiabaty dla gazu doskonałego}.\\
+Z tego też widać, że w rozumieniu fizyki statystycznej, \emph{adiabatycznie}, to znaczy bez wymiany ciepła z otoczeniem, a niekoniecznie nieskończenie wolno, co jest rozumieniem kwantowym.
+Z tego wynika nam dalej:
+\begin{enumerate}
+    \item $\dbar W = \dd{U} = \sum_i P_i\dd{E_i} \gets$ kwazistatyczne, adiabatyczne (statystycznie) sprężanie układu
+    \item $\dd{E_i} = 0 \qc \dd{U} = \dbar{Q} = \sum_i E_i \dd{P_i} \qc S_e = \frac{1}{T} \sum_i E_i \dd{P_i}$, gdzie $S_e$ to zewnętrzna zmiana entropii.
+    \item Jeśli zmiana poziomów energetycznych nie następuje bardzo wolno, to cząstni mogą zmieniać stan ("spadanie kur z grzęd w tej studni nieskończonej"), przy czym prawdopodobieństwo przejśćia $i \to j$ wynosi:
+    \[
+        H' = H_o + V'\qc \tilde{P_{ij}} = \mel{\Psi_i}{V'}{\Psi_j} = \tilde{P_{ji}}
+    \]
+    Gdzie $v'$ jest zaburzeniem.
+\end{enumerate}
+Teraz patrzymy na prawdopodobieństwo obsadzenia stanu po zaburzeniu, $P_i'$.
+\begin{align*}
+    P_i' &= \sum_j \tilde{P_{ij}} P_j\\
+    \dd{P_i} = P_i' - P_i = \sum_j \tilde{P_{ij}}P_j - P_i = \sum_j \tilde{P_{ij}}P_j - \sum_j \tilde{P_{ij}}P_i = \sum_j \tilde{P_{ij}}(P_j - P_i)
+\end{align*}
+W związku z tym zmiana energii:
+\[
+    \sum_i E_i\dd{P_i} = \sum_{i,j} \tilde{P_{ij}} E_i (P_i - P_j) = \sum_{i,j} \tilde{P_{ji}} E_j (P_i - P_j) = \frac12\qty(\sum_{ij} \tilde{P}_{ij} E_i (P_j-P_i) - \tilde{P}_{ji} E_j (P_j - P_i))
+\]
+\[
+    \sum_i E_i \dd{P_i} = \frac12\sum_{ij}\tilde{P}_{ij}(E_i-E_j) (P_i-P_j) >0 
+\]
+I dlaczego to jest dodatnie? Ponieważ $p \sim e^{-\beta E_i}$. Czyli:
+\[
+    \dd{S_int} = \frac{1}{2T} \sum_{ij} \tilde{P}_{ij} (E_i-E_j) (P_i-P_j) 
+\]
+Zatem zmienia się energia, bez wymiany ciepła z otoczeniem. \\
+Daje nam to też \subind{Drugą Zasadę Termodynamiki}{Zasada Termodynamiki!Druga}.\\
+Zbierając te wyniki w całość dostajemy, że $\sum_i E_i \dd{p_i}$ można dostać w wyniku przekazu ciepła z otoczeniem, lub w wyniku przeprowadzenia nagłego nieodwracalnego procesu. Stąd wynika:
+\begin{equation}
+    \dd{S} = \dd{S_{int}} + \dd{S_{ext}} = \frac{\dbar Q}{T} + \underbrace{\dd{S_{int}}}_{\footnotemark}
+\end{equation}
+\footnotetext{Związane z nieodwracalnością, nieadiabatycznością (Mech.Kwant.) procesu lae nie przekazem ciepła}
+Daje nam to \emph{Drugą Zasadę Termodynamiki}
+\begin{emph_box}{\subind{Druga Zasada Termodynamiki}{Zasada Termodynamiki!Druga}}
+    Biorąc za $S$ Entropię Gibbsa:
+    \begin{equation}
+        \dd{S} \geq \frac{\dbar Q}{T}
+    \end{equation}
+    Co dla układu izolowanego ($\dbar Q = 0$) daje nam:
+    \begin{equation}
+        \dd{S} \geq 0
+    \end{equation}
+    Czyli inaczej mówiąc, Entropia układu izolowanego nigny nie maleje, nie zmienia się w procesach odwracalnych, a w nieodwracalnych rośnie.
+\end{emph_box}
+
+\section{Zespół wielki kanoniczny}
+Zespół wielki kanoniczny, to taki, gdzie układ może z otoczeniem wymieniać nie tylko ciepło ale i cząstki. \com{Wstaw rysunek}
+Czyli jego własności są takie. Biorąc $E_1, N_1, V_1$ jako stan układu, a $E_2, N_2, V_2$ stan otoczenia mamy $N_1 + N_2 = const.$ a $E_1 + E_2 = const.$
+Własności:
+\begin{enumerate}
+\item Dla całego układu $(1+2)$ obowiązuje rozkład mikrostanów
+\[
+    \rho(\Gamma^{(1)}, \Gamma^{(2)}) = \frac{1}{\omega(E, N, V)} \delta(E - E_1(\Gamma^{(1)}_1 N_1) - E_2(\Gamma^{(2)}_1 N_2))
+\]
+\item Nas ciekawią tylko prawdopodobieństwa poszczególnych mikrostanów układu $(1)$ bez względu na to co dzieje się w $(2)$.
+\[
+    \rho_1(\Gamma^{(1)}) = \int \dd{\Gamma_2} \rho(\Gamma^{(1)}, \Gamma^{(2)}) = \int \dd{\Gamma_2} \frac{1}{\omega(E, V, N)} \delta(E- E_1-E_2)
+\]
+\begin{equation}
+    \rho(\Gamma^{(1)}) = \frac{1}{\omega(E, V, N)} \omega_2(E - E_1(\Gamma^{(1)}_1 N_1), V_2, N-N_1)
+    \label{eq:lec_10:cos_1}
+\end{equation}
+Rozwińmy log $\omega_2$:
+\[
+    \log \omega_2(E- E_1, V_2, N-N_1) = \log \underbrace{\omega_2(E, V_2, N)}_{\frac{1}{k}S_2(E, V_2, N)} - \underbrace{\frac{1}{k}\pdv{k \log \omega_2}{E}E_1}_{\pdv{S}{E} = \frac{1}{T}} - \pdv{\log \omega_2}{N}N_1
+\]
+Pamiętając o tym, że $S = k \log \omega$:
+\[
+    \log \omega_2 (E-E_1, V_1, N-N_1) = \frac{1}{k} S_2 (E, V, N) - \beta E_1 + N \beta N_1
+\]
+Gdzie $\beta = \frac{1}{kT}$
+\[
+    \omega_2 (E-E_1, V_2, N-N_1) = A e^{-\beta (E_1 - \mu N_1)}
+\]
+Gdzie wielkość $z = e^{\beta \mu}$ nazwiemy \emph{aktywnością}. Wstawiamy teraz do równania \eqref{eq:lec_10:cos_1}, biorąc $\Xi(T, V, \mu) = \sum_N \int e^{-E - \mu N} \dd{\Gamma_N}$:
+\[
+    \rho_1(\Gamma^{(1)}) = \frac{1}{\Xi} e^{-\beta E_1 - \mu N} = \frac{1}{\Xi}z^N_1 e^{-\beta E_1}
+\]
+Stała normalizacyjna w zespole daje nam zwykle najwiecej informacji o układzie, więc spójrzmy sobie na stałą $\Xi$. Dostajemy ją jako:
+\[
+    \Xi(T, V, \mu) = \sum_{N=0}^{\infty} Z^N \int e^{-\beta E(\Gamma_N, V)} \dd{\Gamma_N}
+\]
+Teraz porównując sobie zespół kanoniczny z wielkim kanonicznym:
+\[
+    \frac{e^{-\beta \ev{E}}}{z} = \frac{-\beta \ev{E} - \mu \ev{N}}{\Xi}
+\]
+Daje nam to dalej:
+\[
+    z e^{\beta \mu \ev{N}} = \Xi \implies \log z + \beta \mu \ev{N} = \log \Xi
+\]
+Czyli jest to:
+\[
+    F - \mu \ev{N} = - k T \log \Xi \equiv \Omega(T, V, \mu)
+\]
+Wielkość $\Omega$ to \ind{Wielki podencjał termodynamiczny}
+\end{enumerate}
+
+
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 28.03.2022
+
+\begin{lecture}{Wielki zespół kanoniczny once again...}
+\section{W poprzednim odcinku...}
+
+Ostatnio wyprowadziliśmy sobie rozkład w którym układ może wymieniać z otoczeniem nie tylko energię ale i materię, jest to \emph{Wielki zespół kanoniczny}.
+\[
+    \rho = \frac{e^{-\beta(E - \mu N)}}{\Xi(T, V, \mu)}
+\]
+Gdzie $\Xi$:
+\[
+    \Xi = \sum_N\int e^{-\beta(E-\mu N)\dd{\Gamma_N})}
+\]
+W ten sposób zdefiniowaliśmy \subind{Energię swobodną Helmholza}{Energia Swobodna!Helmholza} jako:
+\[
+    F \mu N = - k T \log\Xi \equiv \Omega(T,V,N)
+\]
+Gdzie $\Omega$ to \emph{wielki potencjał termodynamiczny}.
+Różniczkę $\Omega$ definiujemy jako:
+\[
+    \dd{\Omega} = \dd{F} - \dd{\mu} N - \mu \dd{N} = -p\dd{V} - S\dd{T} - N\dd{\mu}
+\]
+W ten sposób definiujemy sobie $p, S$ jako:
+\[
+    p = \qty(\pdv{\Omega}{V})_{T, \mu}\qc S = - \qty(\pdv{\Omega}{T})_{V,\mu}
+\]
+W ten sposób dostaniemy $\ev{N}$:
+\[
+    \ev{N} = - \qty(\pdv{\Omega}{\mu})_{T, N} = \frac{1}{\beta} \qty(\pdv{\log \Xi}{\mu})_{T, V}
+\]
+Oraz, że:
+\[
+    \qty(\pdv{\beta} \log\Xi)_{V,p} = \frac{1}{\Xi} \sum_N \int \dd{\Omega_N} (E - \mu N) e ^{- \beta (E - \mu N)} = \ev{-E+\mu N} = -\ev{E} + \mu \ev{N}
+\]
+\linediv\\
+Czyli:
+\[
+    \ev{E} = - \pdv{\beta} \log\Xi + \mu k T \pdv{\log\Xi}{\mu}
+\]
+Inaczej pisząc, biorąc $z = e^{\beta \mu}$:
+\[
+    -\qty(\pdv{\beta} \log\Xi)_{V, z} = - \frac{1}{\Xi} \sum_N \int \dd{\Gamma_N} (-E)e^{-\beta E}z^N
+\]
+\linediv\\
+Chcemy pokazać, że $F = - p V$. W tym celu przyda nam się \emph{Twierdzenie Eulera o funkcjach jednorodnych}:\\
+\section{Twierdzenie Eulera o funkcjach jednorodnych}
+Niech $f$ będzie funkcją taką, że:
+\begin{equation}
+    f(\lambda x_1 + \lambda x_2 + \dots + \lambda x_N) = \lambda^n f(x_1, x_2, x_3, \dots, x_N)
+    \label{eq:lec_11:euler_teza}
+\end{equation}
+Wtedy $f$ nazwiemy funkcją jednorodną stopnia n-tego. Np. $3x^2$ - jednorodna stopnia 2, $xy^2+z^3$ - jednorodna stopnia 3, $e^{xy}$ - niejedorodna.\\
+Twierdzenie:\\
+Dla funkcji jednorodnej pierwszego stopnia n-tegp zachodzi:
+\[
+    nf(x_1, x_2, x_3 \dots x_N) = \sum_i x_i \pdv{f}{x_i}
+\]
+Dowód:\\
+Zróżniczkujmy równanie \eqref{eq:lec_11:euler_teza} po $\lambda$:
+\[
+    n \lambda^{n-1}f(x_1, x_2, x_3 \dots x_N) = \sum_i \pdv{\lambda x_i}{\lambda} \pdv{f}{\lambda x_i} = \sum_i x_i \pdv{f}{\lambda x_i}
+\]
+Co po podstawieniu $\lambda = 1$ daje:
+\[
+    nf(x_1, x_2, x_3 \dots x_N) = \sum_i x_i \pdv{f}{x_i}
+\]
+$\mathbb{QED}$
+Zastosujmy to teraz do Entropii. Entropia jest Ekstensywna, więc:
+\[
+    S(\lambda U, \lambda V, \lambda N) = \lambda S(U, V, N)
+\]
+Z Tw. Eulera:
+\[
+    S = \qty(\pdv{S}{U})_{V, N} U + \qty(\pdv{S}{V})_{U, N} V + \qty(\pdv{S}{N})_{V, U} N
+\]
+Czyli:
+\[
+    S = \frac{1}{T} (U + pV - \mu N)
+\]
+Co daje nam:
+\[
+    F = U - TS = - p V + \mu N \qc \Omega = F - \mu N = - pV
+\]
+\emph{Co chcieliśmy pokazać}
+
+
+\section{Transformata Legendre'a}
+Energię wewnętrzną definiujemy jako $U(S, V, N)$ co jest wielkością Ekstensywną.
+
+\com{Wstaw rysunek}
+Pochodna tej funkcji zdefiniujemy jako:
+\begin{align*}
+    \pdv{f}{x} &= p = \frac{f(x) - \Psi}{x}\\
+    f(x) - \Psi(p) &= px\\
+    \Psi(p) &= f(x) - \qty(\pdv{f}{x}) x\\
+    \Psi(p) &= f(x) - p x
+\end{align*}
+Teraz zdefiniujmy sobie \subind{entalpię}{Entalpia} ($H = U + pV$):
+\begin{align*}
+    \dd{U} &= T \dd{S} - p \dd{V}\\
+    T &= \qty(\pdv{U}{S})_{V,N} - p = \qty(\pdv{U}{V})_{S, N}\\
+    H(S, p, N) &= U(S, V, N) - V\qty(\pdv{U}{V})_{S,N}\\
+    H(S, p, N) &= U(S, V, N) + pV\\
+    F(S, p, N) &= U(S, V, N) - S\qty(\pdv{U}{S})_{V,\mu}\\
+    F(S, p, N) &= U(S, V, N) - ST
+\end{align*}
+Teraz definiując sobie \subind{energię swobodną Gibbsa}{Energia Swobodna!Gibbsa} zwana też \subind{entalpią swobodną Gibbsa}{Entalpia!Swobodna Gibbsa} $G(T, p, N)$:
+\begin{align*}
+    G(T, V, N) &= U(S, V, N) - V\qty(\pdv{U}{V}) - \qty(\pdv{U}{S})\\
+    &= U(S, V, N) + pV - ST
+\end{align*}
+Teraz możemy sobie do zdefiniować różniczkowo:
+\begin{align*}
+    \color{Blue} \dd{H} &= \color{Blue} T\dd{S} + V\dd{p} + \mu\dd{N}\\
+    \color{Cyan} \dd{T} &= \color{Cyan} T\dd{S} - p \dd{V} + \mu \dd{N} - T \dd{S} - S\dd{T} = - S \dd{T} - p \dd{V} + \mu \dd{N}\\
+    &\text{Za to dla Entalpii Gibbsa:}\\
+    \dd{G} &= T \dd{S} - p \dd{V} + \mu \dd{N} + p \dd{V} + U\dd{p}\\
+    \dd{G} &= - S \dd{T} + U \dd{p} + \mu\dd{N}
+\end{align*}
+Doprowadzi nas to do \emph{Relacji Maxwella}:
+\section{Relacje Maxwella}
+\begin{align*}
+\dd{H} = \qty(\pdv{H}{S})_{V,N} \dd{S} &+ \qty(\pdv{H}{p})_{S, N} \dd{p} + \qty(\pdv{H}{N})_{S,p} \dd{N} \implies\\
+\pdv{H}{S}{p} = \pdv{H}{p}{S} &\qc \pdv{H}{S}{N} = \pdv{H}{N}{S}\\
+\end{align*}
+\com{wstaw te wyprowadzenia}
+\com{Wstaw tu kwadracik termodynamiczny}\\
+\emph{TL;DR;} Z równości drugich pochodnych mamy dużo relacji Maxwella na pochodne po różnych wielościach. Jakich? Patrz kółeczko.\\
+Mnemotechniki:
+\begin{itemize}
+    \item \emph{V}alid \emph{F}acts and \emph{T}heoretical \emph{U}nderstanding \emph{G}enerates \emph{S}oliutions to \emph{P}roblems
+    \item \emph{V}icekonsul \emph{U}rugwaju, \emph{S}tary \emph{H}rabia \emph{P}anfnucy \emph{G}ryzł \emph{T}warde \emph{F}istaszki
+    \item \emph{P}odobno \emph{V}kurwiony \emph{F}izyk \emph{T}eoretyczny \emph{U}jebał \emph{G}órę \emph{S}tudentów
+\end{itemize}
+
+Teraz w układzie o stałej Temperaturze możemy sobie wyprowadzić:
+\begin{align*}
+    \Delta U_{ot} + \Delta _{uk} &= 0\\
+    \Delta U_{ot} &= - \Delta _{uk}\\
+    T \Delta S_{ot} &= \Delta U_{ot}\\
+    \Delta (S_{ot} + S_{uk}) \geq 0 \qc \Delta S_{ot} + \Delta S_{uk} &= \frac{U_{ot}}{T} + \Delta S_{uk} = \frac{-\Delta U_{uk}}{T} + \Delta S_{uk} \geq 0 \\
+    \Delta U_{uk} - T \Delta S_{uk} \leq 0\\
+    \Delta F_{uk} = \Delta(U_{uk} - T S_{uk}) \leq 0
+\end{align*}
+Czyli wniosek, przy wymianie ciepła w stałej temperaturze jak nie jesteśmy w stanie nic powiedzieć o entropii, to minimalizujemy sobie enegię/entalpię swobodną.
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 07.04.2022
+
+\begin{lecture}{Cośtam}
+\com{Przepisz wzorki z tablicy które wypisuje Przeniosło}
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 11.04.2022
+
+\begin{lecture}{Cośtam}
+\com{Poleciał skip po Kolokwium}
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 21.04.2022
+
+\begin{lecture}{Cykl Carnota}
+\com{Przepisz wzorki z tablicy które wypisuje Przeniosło}
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 25.04.2022
+
+\begin{lecture}{Związek z Mech.Klas.}
+\section{Twierdzenie Liouville'a}
+Twierdzenie Liouville'a mówi nam o tym, że w trakcie ewolucji dynamicznej objętość w przetrzeni fazowej pozostaje stała.\\
+Tj. weźmy sobie:
+\begin{align*}
+    \Gamma = (q_1, q_2, \dots , q_{3N}, p_1, p_2,\dots p_{3N})\qc \begin{cases}
+        \dot{q}_i = \pdv{H}{p_i}\\
+        \dot{p}_i = - \pdv{H}{q_i}
+    \end{cases}
+\end{align*}
+    Czyli definiujemy tak równania Hamiltona, którymi postulujemy, że będzie się dało przestrzeń fazową opisać. Definiujemy sobie też, że prędkość 'potoku fazowego' czyli ewolucji w przestrzeni fazowej zdefiniujemy sobie jako:
+    \[
+        \vb{v}(t) = \qty{\Gamma(t) | \Gamma(0) \in V_0}
+    \]
+    Teraz co się stanie za czas $\dd{t}$?
+    \[
+        \Delta V = V_{dt} - V_0 = \int{\sum_0} \overbrace{\dd{\va{S}}}^{\dd{S}\cdot\hat{n}} \cdot \vb{v} \dd{t} \underbrace{=}_{\footnotemark} \int_V \div \vb{v} \dd{\Gamma_N}
+    \]
+    \footnotetext{$6N$ wymiarowe tw Stokesa}
+    Gdzie definiujemy sobie:
+    \[
+    \vb{v} = \qty(\dot{q}_1, \dots, \dot{q}_{3N}, \dot{p}_1, \dots, \dot{p}_{3N})\qc \div \vb{v} = \sum \pdv{\dot{q}_i}{q_i} + \sum \pdv{\dot{p}_i}{p_i} = \sum_i \pdv{H}{q_i}{p_i} - \pdv{H}{p_i}{q_i}
+    \]
+    \section{Funkcja Rozkładu}
+    Musimy sobie jeszcze zdefiniować coś takiego jak \emph{Funkcja Rozkładu} $f(\underbrace{q^{3N}, p^{3N}}_{\Gamma^N}, t)$.\\
+    Teraz zdefiniujemy sobie $\dd{w} = f(\Gamma^N, t) \dd{\Gamma^N}$ gdzie $w$ będzie prawdopodobieństwem znalezienia układu w chwili $t$ w elemencie objętości fazowej $\dd{\Gamma^N}$.\\
+    Rozważymy sobie ruch ze stanu przestrzeni $\Gamma_0$ do $\Gamma_t$, opisywaną poprzez:
+    \[
+            f(\Gamma^N_0, t=0) \dd{\Gamma_0} = f(\Gamma^N_t, t=t) \dd{\Gamma_t}
+    \]
+    ale transformację $\Gamma_0 \to \Gamma_t$ można uważać za zmianę współrzędnych rozkładzie.
+    W związku z tym, korzystając z Tw. Liouville'a wiemy, że Jakobian zamiany zmiennych jest jednostkowy i jest zachowany podczas przejścia (objętość zachowana), czyli:
+    \begin{equation}
+        \dd{\Gamma_0} = \dd{\Gamma_t}
+        \label{eq:lec_15:liouville}
+    \end{equation}
+    Co prowadzi nas do wniosku, że:
+    \[
+        f(\Gamma_0^N, 0) = f(\Gamma_t^N, t)
+    \]
+    \wniosek  Funkcja rozkładu jest stała wzdłuż trajektorii ruchu
+    \section{Krótka dygresja o sposobach opisu świata}
+    W mechanice mamy dwa sposoby opisu:
+    \begin{itemize}
+        \item Opis Eulera
+        \item Opis Lagrange'a
+    \end{itemize}
+    Zwizualizujmy sobie to na przykładzie 3D.
+    \subsection{Opis Lagrange'a}
+    Odpowiada ponumerowaniu punktów poprzez ich położenia i pędy w czasie $t=0$ i śledenie ich ruchu. Zmiennymi niezależnymi są wtedy $\vb{r}_0, t$.
+    \subsection{Metoda Eulera}
+    Za zmienne niezależne przyjmuje położenie $\vb{r}, t$, czyli jakby zmienia się gęstość w konkretnym punkcie a nie położenia konkretnych punktów.
+    \com{Rysunek}
+    Zmierzone Eulerowsko i Lagrange'owsko temperatury będą sobie równe $\iff$
+    \[
+        T^E(\vb{r}(\vb{r}_0, t), t) = T^L(\vb{r}_0, t)
+    \]
+    Czyli inaczej mówiąc będą sobie równe tylko i wyłącznie gdy są obie mierzone w tym samym punkcie przestrzeni i czasie.
+    Gdzie po małej zmianie $\dd{t}$ temperatura $T^E$ jest mierzona w tym samym punkcie i mierzy temperaturę innych cząstek przepływających nad nią (mierzenie temperatury na wieży ze stale zamontowanym termomentrem), a temperatura $T^L$ mierzy temperaturę tej samej cząstki wzdłuż jej trajektorii, czyli w zmiennym położeniu. (Mierzenie temperatury na balonie w nurcie wiatru). Z zastrzeżeniem:
+    \[
+        \eval{\pdv{T^L}{t}}_{\vb{r}_0} \neq \eval{\pdv{T^E}{t}}_{\vb{r}}
+    \]
+    A prędkość i przyspieszenie fizycznie zazwyczaj opisujemy jako:
+    \begin{itemize}
+        \item Prędkość $\eval{\pdv{\vb{r}^L}{l}}_{\vb{r}_0}$
+        \item Przyspieszenie $\eval{\pdv{\vb{v}^L}{l}}_{\vb{r}_0}$
+    \end{itemize}
+    Czyli uściślając wnioski z poprzedniej sekcji:\\
+    \wniosek Funkcja rozkładu jest stała wzdłuż trajektorii ruchu, czyli:
+    \begin{equation}
+        f^E(\Gamma(\Gamma_0^N, t), t) = f^L(\Gamma_0^N, t) = f^L(\Gamma_0^N, 0)
+        \label{eq:lec_15:rozklady}
+    \end{equation}
+    \section{Zastosowanie do Fizyki Statystycznej}
+    Z funkcją rozkładu $f(\Gamma,t)$ można związać entropię:
+    \[
+        S_t = - k \int f^E(\Gamma_N, t) \log f^E(\Gamma^N, t) \dd{\Gamma^N}
+    \]
+    Teraz będziemy to porównywać z $S_{t=0}$:
+    \[
+        = -k \int f^E(\Gamma^N(\Gamma^N_0, t), t)\log f^E(\Gamma^N(\Gamma^N_0, t) \dd{\Gamma^N}
+    \]
+    Co po porównaniu z równaniem \eqref{eq:lec_15:liouville} i \eqref{eq:lec_15:rozklady}:
+    \[
+        = -k \int f^L(\Gamma_0^N, 0)\log f^L(\Gamma_0^N, 0) \dd{\Gamma_0^N} = S_{t=0}
+    \]
+    
+    {\color{Cerulean} Fakt: Entropia Gibbsa podczas ruchu w przestrzeni fazowej podlegającemu równaniom Hamiltona jest stała}
+    Zdefiniujemy sobie teraz \subind{Entropię gruboziarnistą}{Entropia!Gruboziarnista}:\\
+    Dzielimy sobie przestrzeń fazową na komórki. Jako, że człowiek nie jest demonem, który by mógł widzieć entorpię mikroskopowo w każdym punkcie P.F., więc wprowadzamy sobie zamiast dokładnej funkcji $f(\Gamma^N, t)$ funkcję uśrednioną (przecałkowaną) po komórce, tj. 
+    \[
+        \tilde{f}^E(\Gamma^N, t) = \frac{1}{\abs{w_i}} \int_{w_i} f^E(\Gamma^N, t)\dd{\Gamma^N}
+    \]
+    Gdzie $w_i$ jest objętością jednej komórki. Wtedy \emph{Entropia Gruboziarnista} to będzie:
+    \begin{equation}
+        \tilde{S}_t = - k \int \tilde{f}^E(\Gamma^N, t) \log \tilde{f}^E(\Gamma^N, t) \dd{\Gamma^N}
+    \end{equation}
+    I dopiero tak zdefiniowana Entropia rośnie, czyli nam się nie psuje Fizyka Statystyczna.
+\end{lecture}
+
+% ----------------------------------------------------------------------
+% Wykład 21.04.2022
+
+\begin{lecture}{Twierdzenie Poincarrego}
+\section{Szymczak Time}
+Mówimy sobie tu o twierdzeniu Pointcarrego o rekurencji \link{https://en.wikipedia.org/wiki/Poincaré_recurrence_theorem}{patrz wikipedia}. Z niego wynika, że jak mamy w przestrzeni fazowej jakąś objętość, to po odpowiednio długim czasie możemy oczekiwać, że $1\%$ fluktuacji powróci do początkowego miejsca w przestrzeni fazowej. Czas po którym to się dzieje nazywamy \emph{czasem powrotu}. Dla więcej niż kilku cząstek czas ten jest w dobrym przybliżeniu nieskończony. \\
+W oparciu o to twierdzenie Pointcarrego możemy wyciągnąć wnioski o dwóch właściwościach układów:
+\begin{itemize}
+    \item Własność mieszania w przestrzeni fazowej
+    \item Własność ergodyczności
+\end{itemize}
+\linediv\\
+Z własności mieszania i twiedzenia Pointcarrego wynika nam, że po odpowiednio długim czasie w układzie nastapi rozmycie w przestrzeni fazowej całego układu. Tj, że można sobie całkować po przestrzeni fazowej a nie po czasie, bo wszystkie stany będą równo prawopodobne. \\
+$\implies$ Uzasadnienie rozkładu mikrokanonicznego.\\
+Matematycznie:
+\[
+    \lim_{t\to\infty} \int F(\Gamma)f(\Gamma, t) \dd{\Gamma} \implies \frac{1}{\mu(C)} \int F(\Gamma) \dd{\Gamma}
+\]
+\linediv\\
+\emph{Ergodyczność}
+Weźmy sobie $\Gamma_0$ jako punkt początkowy. Niech:
+\[
+    \ev{f(\Gamma_0)}_t = \lim_{t\to\infty} \frac{1}{T} \int_0^T \dd{t} f(\Gamma_t) \implies \ev{f}_c = \frac{1}{\mu(c)}\int f(\Gamma) \dd{\Gamma}
+\]
+Wynika z tego, że ergodyczność $\iff \ev{f(\Gamma)}_t = \ev{f}_c$ dla wszystkich gładkich funkcji dla których $\ev{f}_c$ istnieje i jest stworzona.\\
+Niestety widać, że taka matematyczna ergodyczność w zasadzie w przyrodzie nie istnieje. Wynika z tego, że:\\
+\wniosek Nie liczy się ergodyczność dla dowolnych funkcji, a tylko dla funkcji 'fizycznie relewantnych', czyli np funkcji stanu gazu.\\
+\linediv\\
+Jeszcze inaczej patrzy na to Landau, że układy są samomieszające, tj. że ta ergodyczność nie jest w ogóle taka istotna, bo to się i tak uśredni
+
+\section{Przeniosław Radosło Time}
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+Lód & Ciepło topnienia & Woda & Ciepło wrzenia & Para wodna  \\
+\hline
+$\rho = 916 \frac{kg}{m^3}$    &  $6 \frac{kJ}{mol}$ &    $\rho = 916 \frac{kg}{m^3}$   &  $40.6 \frac{kJ}{mol}$ &  $\rho = 916 \frac{kg}{m^3}$ 
+\end{tabular}
+\caption{Tabelka z wartościami gęstości i ciepeł dla wody i jej faz}
+\end{table}
+Mamy sobie potencjał $U(S,V,N)$, które ma właściwość $U(\lambda S, \lambda V, \lambda N) = \lambda U(S, V, N)$. Pamiętamy też, że ten potencjał to:
+\[
+    U = TS - pV + \mu N \implies G = U - TS + pV = \mu N
+\]
+Wtedy:
+\[
+    LHS = T\dd{(\lambda S)} - p \dd{(\lambda V)} + \mu \dd{(\lambda N)} = \dd{\lambda} \qty[TS - pV + \mu N] + \lambda \qty[T\dd{S} - p\dd{V} + \mu \dd{N}] = \dd{\lambda} U + \lambda \dd{U}
+\]
+\[
+    RHS = N\dd{\mu} + S \dd{T} - V\dd{p} = 0 \implies N \dd{\mu} + N s \dd{T} - N v \dd{p} = 0 \implies N\qty[\dd{U} + s\dd{T} - v\dd{p}] = 0 
+\]
+Wtedy dla lodu w wodzie mamy takie zależności:
+\[
+    \begin{cases}
+        N_l\qty[\dd{\mu} + s_l \dd{T} - v_l \dd{p}] = 0\\
+        N_w\qty[\dd{\mu} + s_w \dd{T} - v_w \dd{p}] = 0
+    \end{cases}
+    \implies
+    \begin{cases}
+        \dd{\mu}_l = - s_l\dd{T} + v_l \dd{p}\\
+        \dd{\mu}_w = - s_w\dd{T} + v_w \dd{p}
+    \end{cases}
+\]
+Daje nam to dalej:
+\[
+    \dd{\mu}_l = \dd{\mu}_w \implies - s_l \dd{T} + v_l \dd{p} = - s_w \dd{T} + v_w \dd{p}
+\]
+Czyli
+\[
+    (s_w - s_l) \dd{T} = (v_w - v_l) \dd{p}
+\]
+Co daje:
+\[
+    \dv{T}{p} = \frac{v_w - v_l}{s_w - s_l} = \frac{\Delta v T_{topnienia}}{Q_{topnienia}} \implies \dv{p}{T} = \frac{Q_{top}}{\Delta V T_{top}} = -138\,\frac{bar}{K}
+\]
+Idac dalej z tym równaniem możemy dość do przekształcenia:
+\[
+    \dv{p}{T} = \frac{Q_{top}}{\Delta V T_{top}} = \frac{Q p}{n R T^2} \implies \frac{\dd{p}}{p} = \frac{Q}{n R} \frac{\dd{T}}{T^2}
+\]
+Idąc z tym ciut dalej dochodzimy do \subind{równania Clausiusa-Clapeyrona}{Równanie!Clausiusa-Clapeyrona}. \link{https://en.wikipedia.org/wiki/Clausius–Clapeyron_relation}{Patrz tu}
+\end{lecture}
 
 \tableofcontents
 

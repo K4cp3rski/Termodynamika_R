@@ -1,0 +1,81 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem}
+\usetikzlibrary{calc}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\DeclareDocumentCommand{\hcancel}{mO{0pt}O{0pt}O{0pt}O{0pt}}{%
+    \tikz[baseline=(tocancel.base)]{
+        \node[inner sep=0pt,outer sep=0pt] (tocancel) {#1};
+        \draw[red] ($(tocancel.south west)+(#2,#3)$) -- ($(tocancel.north east)+(#4,#5)$);
+    }%
+}%
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 2}
+
+Wyznaczyć stosunek temperatur Fermiego gazu doskonałego elektronów i protonów wewnątrz gwiazdy składającej się całkowicie ze zjonizowanego wodoru.
+
+\section{Rozwiązanie}
+
+Mamy powiedziane, że gwiazda z treści zadania jest w pełni zjonizowana, więc przyjmujemy populacje elektronów i protonów za równe. Jedne i drugie są fermionami, więc patrzymy na problem gazu(ów) fotonów w 3D. Dla uproszczenia przybliżmy gwiazdę jako sześcian o boku długości $L$. Jest to bez straty ogólności, bo aplikując periodyczne warunki brzegowe moglibyśmy rozszerzyć nasze rozumowanie na dowolną bryłę.
+Mówimy sobie, że w tym pudełku mamy zarówno $N$ elektronów jak i $N$ protonów.//
+Teraz już po ustaleniu założeń, które tu przyjmujemy możemy sobie przypomnieć, że energia jednego stanu kwantowego to będzie:
+\[
+    E_n = \frac{\pi^2 \hbar^2}{2 m L^2}\abs{\vb{n}}^2    
+\]
+Zaznaczmy, że $\vb{n}$ to skrótowy zapis na $\vb{n} = (n_x, n_y, n_z)$, bo takie rozbicie jest niezbędne z racji pracy w 3 wymiarach.\\
+Zdefiniujmy sobie zero energetyczne na energii stanu podstawowego. Takie działanie upraszcza nam rachunki, bo wtedy liczba stanów o energii mniejszej od Energii Fermiego $E_F$ to liczba stanów mających $\abs{\vb{n}}$ mniejsze niż $\abs{\vb{n_F}}$, które odpowiada $E_F$.\\
+Szukana liczba stanów będzie odpowiadać wycinkowi kuli dla którego wszystkie trzy współrzędne są dodatnie, z uwzględnieniem dwóch możliwości spinu cząstki. Stanowi on $\frac18$ całej kuli, czyli ta liczba stanów to będzie:
+\[
+    N = 2 \cdot \frac18 \frac43 \pi \abs{\vb{n_F}}^3 = \frac13 n_F^3 \implies n_F = \qty(\frac{3N}{\pi})^{\frac13}
+\] 
+Wyrażenie $n_F$ w języku całkowitej liczby cząstek przyda nam się do policzenia Energii Fermiego, gdyż jak już wcześniej wspomniane, $n_F$ odpowiada Energii Fermiego $E_F$, więc:
+\[
+    E_F = \frac{2 \pi^2 \hbar^2}{L^2} n_F^2 = \frac{\hbar^2}{2m} \qty(\frac{3 \pi^2 N}{V^2})^{\frac23}    
+\]
+
+A jako, że Temperatura Fermiego to $T_F = \frac{E_F}{k}$, więc:
+\[
+    T_F = \frac{1}{k} \frac{\hbar^2}{2m} \qty(\frac{2 \pi^2 N}{V^2})^{\frac23}    
+\]
+
+Doceolowo jednak chcemy porównać temperatury Fermiego dla obu gazów, więc po zapisaniu ich stosunku dostajemy:
+\[    
+    \frac{T_F^{(prot.)}}{T_F^{(elektr.)}} = \frac{\frac{1}{m_p} \hcancel{$\frac{\hbar^2}{2k}  \qty(\frac{2 \pi^2 N}{V^2})^{\frac23}$}}{\frac{1}{m_e} \hcancel{$\frac{\hbar^2}{2k} \qty(\frac{2 \pi^2 N}{V^2})^{\frac23}$}} = \frac{m_e}{m_p}
+\]
+
+Mogliśmy tu skrócić objętości obu gazów ze sobą, ponieważ mają równą liczbę cząstek $N$ i tą samą gęstosć (oby dwa są idealne i pochodzą ze zjonizowania wodoru), więc mają równe objętości.
+
+\end{document}

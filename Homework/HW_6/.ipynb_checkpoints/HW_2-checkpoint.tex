@@ -1,0 +1,78 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 2}
+
+W pudełku o objetości $V$ znajduje się ultrarelatywistyczny klasyczny gaz, dla którego $E=\sum_{i} c\left|\vec{p}_{i}\right|$. Oblicz $\Omega(\epsilon)=\frac{2 V}{h^{3}} \int_{\epsilon_{p}<\epsilon} d^{3} p$ opisujące liczbę stanów o energii mniejszej lub równej $\epsilon$. Znajdź wielką sumę statystyczną układu, jego energię swobodną i ciśnienie.
+Wskazówka: sume po pędach mozna zastapić catka $\sum_{p} \longrightarrow \int_{0}^{\infty} d \epsilon \rho(\epsilon)$, gdzie $\rho=\Omega^{\prime}$
+
+\section{Rozwiązanie}
+
+Energia ultrarelatywistycznego gazu jest dana wzorem:
+$$
+E=\sum_{i} c\left|\vec{p}_{i}\right|
+$$
+Policzmy najpierw liczbę stanów o energii mniejszej od $\epsilon$. Liczba stanów dana jest wzorem:
+$$
+\Omega(\epsilon)=\frac{2 V}{h^{3}} \int_{\epsilon_{p}<e} d^{3} p
+$$
+W celu policzenia tej całki najłatwiej jest przejść do współrzędnych sferycznych gdzie $|\vec{p}|=r=\frac{\varepsilon_{p}}{c}$. Wówczas liczba stanów energii jest równa:
+$$
+\Omega(\epsilon)=\frac{2 V}{h^{3}} \int_{0}^{\frac{3}{2}} r^{2} \cos \theta d r d \phi d \theta=\frac{8 \pi V \epsilon^{3}}{3 h^{3} c^{3}}
+$$
+Znajdźmy teraz wielką sumę statystyczną układu (kladziemy $\exp (\beta \mu)=z)$ :
+\begin{align*}
+\Xi &=\sum_{N} z^{N} \int d \Gamma_{N}=\sum_{N} z^{N} \frac{V^{N}}{h^{3 N} N !}\int _ { 0 } ^ { \infty } d ^ { 3 } p \operatorname{exp} (-\beta). \\
+\Xi &=\sum_{N} \frac{1}{N !}\left(\frac{8 \pi V z}{h^{3} c^{3} \beta^{3}}\right)^{N}=\exp \left(\frac{8 \pi V z}{h^{3} c^{3} \beta^{3}}\right)
+\end{align*}
+Stąd potencjał wielkokanoniczny jest równy:
+$$
+\eta=-k T \log \Xi=-\frac{8 \pi V z}{h^{3} c^{3} \beta^{4}}
+$$
+Z drugiej strony jednak:
+$$
+F-\mu N=\eta
+$$
+gdzie $F$ to szukana energia swobodna, a $N$ to średnia liczba cząstek. A zatem energia swobodna jest równa:
+$$
+F=-\frac{8 \pi V z}{h^{3} c^{3} \beta^{4}}+\mu N
+$$
+Natomiast ciśnienie jest równe:
+$$
+p=-\frac{\partial \eta}{\partial V}=\frac{8 \pi z}{h^{3} c^{3} \beta^{4}}
+$$
+
+
+\end{document}

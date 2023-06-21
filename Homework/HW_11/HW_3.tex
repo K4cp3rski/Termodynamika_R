@@ -1,0 +1,99 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 3}
+
+\emph{Debye again...} Oblicz energię wewnętrzną ciała stałego (opisywanego modelem Debye'a) w dla temperatury dążącej do zera i wyraź tę granicę przez temperaturę Debye'a. Pokaż że:
+$$
+\int_{0}^{\infty} C_{V}(T=\infty)-C_{V}(T)=U(T=0)
+$$
+
+\section{Rozwiązanie}
+
+Wiemy, że energia wewnętrzna w modelu Debeye'a jest dana wzorem:
+$$
+U=\int_{0}^{\infty} \hbar \omega\left(\frac{1}{2}+\frac{1}{\exp (\beta \hbar \omega)-1}\right) g(\omega) d \omega
+$$
+Chcemy pokazać, że zachodzi taka równość:
+$$
+\int_{0}^{\infty}\left(C_{V}(T \rightarrow \infty)-C_{V}(T)\right) d T=U_{0}
+$$
+Tutaj przypominamy wiedzę z Wykładu, że dla $T \rightarrow \infty$ ciepło właściwe ma postać 
+$
+C_{V}(T \rightarrow \infty)=3 N k
+$ i spełnia zależność różniczkową 
+$
+C_{V}=\left(\frac{\partial U}{\partial T}\right)_{V}
+$.
+W ogólności energia wewnętrzna jest dana wzorem:
+$$
+U=9 N k T\left(\frac{T}{T_{D}}\right)^{3} \int_{0}^{\frac{T_{D}}{T}} \frac{x^{3}}{\exp (x)-1} d x
+$$
+Widzimy, że jest ona funkcją tylko temperatury, więc pochodne cząstkowe przy wzorze na ciepło właściwe możemy zamienić na pełne pochodne. Upraszcza nam to naszą całkę do postaci:
+$$
+\int_{0}^{\infty} C_{V}(T) d T=\int_{0}^{\infty} \frac{\mathrm{d} U}{\mathrm{~d} T} d T=\int_{0}^{\infty} d U
+$$
+
+Czyli propagując to uproszczenie dalej mamy:
+$$
+\int_{0}^{\infty}\left(C_{V}(T \rightarrow \infty)-C_{V}(T)\right) d T=\left.3 N k T\right|_{0} ^{\infty}-\left.U(T)\right|_{0} ^{\infty}
+$$
+
+W tym miejscu warto by się było zastanowić co się dzieje z $U$ gdy $T \to 0$, zachowa się to trochę inaczej niż zwykle to obserwowaliśmy na ćwiczeniach, bo nie będzie można pominąć członu stałego.
+Dzieje się tak, ponieważ zauważyć można, że człon pod całką, który zależy od temperatury dla $T \rightarrow 0$ także dąży do zera, czyli pozostaje wyraz stały. Stąd też energia w zerowej temperaturze będzie miała postać:
+
+$$
+\begin{gathered}
+U_{0}=\int_{0}^{\omega_{D}} \hbar \omega \frac{1}{2} \frac{3 V}{2 \pi^{2} v_{0}^{3}} \omega^{2} d \omega \\
+U_{0}=\frac{3 V \hbar}{16 \pi^{2} v_{0}^{3}} \omega_{D}^{4}
+\end{gathered}
+$$
+Pamiętamy, że $\omega_{D}=v_{0}^{3} 6 \pi^{2} \frac{N}{V}$ a $T_{D}=\frac{\hbar \omega_{D}}{k}$. Po skorzystaniu z tej wiedzy wynik nam się upraszcza do postaci:
+$$
+U_{0}=\frac{9}{8} N k T_{D}
+$$
+
+Wróćmy teraz do pierwotnego zagadnienia.
+
+Dla dużych temperatur $\mathrm{U}(\mathrm{T})$ przyjmuje postać $U(T)=3 N k T$, a dla $T \rightarrow 0$ jest to po prostu $U_{0}$, więc możemy zapisać:
+$$
+\lim _{T \rightarrow \infty} 3 N k T-\left(\lim _{T \rightarrow \infty} 3 N k T-U_{0}\right)=U_{0}
+$$
+Pokazaliśmy więc, że
+$$
+\int_{0}^{\infty}\left(C_{V}(T \rightarrow \infty)-C_{V}(T)\right) d T=U_{0}
+$$
+
+\end{document}

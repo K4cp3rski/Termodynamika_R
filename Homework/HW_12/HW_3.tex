@@ -1,0 +1,94 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem}
+\usetikzlibrary{calc}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 3}
+
+Rozważ dwuwymiarowy gaz złożony z $N$ nieoddziałujących ze sobą nierelatywistycznych fermionów o spinie $\frac12$ w temperaturze $T = 0$. Gaz wypełnia powierzchnię o polu $A$.
+\begin{enumerate}[a)]
+    \item Znajdź energię Fermiego $E_F$ dla tego gazu \label{pkt_A}
+    \item Znajdź energię wewnętrzną na cząstkę $u = \frac{U}{N}$ dla tego gazu jako funkcję $E_F$ \label{pkt_B}
+\end{enumerate}
+
+\section{Rozwiązanie}
+
+Z definicji wszystkie rozpatrywane cząstki będą miały energię mniejszą niż Energia Fermiego. Skoro o powierzchni którą zajmuje gaz nie wiemy nic więcej, więc możemy bez straty ogólności utożsamić ją z kwadratem o boku $L$ i powierzchni $A$. Jak wiemy energia $n$-tego stanu to:
+\[
+    E_n = \frac{\pi^2 \hbar^2}{2 m L^2} n^2    
+\]
+
+Zdefiniujmy sobie zero energetyczne na energii stanu podstawowego. Takie działanie upraszcza nam rachunki, bo wtedy liczba stanów o energii mniejszej od Energii Fermiego $E_F$ to liczba stanów mających $\abs{\vb{n}}$ mniejsze niż $\abs{\vb{n_F}}$, które odpowiada $E_F$, a w tym przypadku i jednocześnie oznacza nam wszystkie możliwe stany.\\
+Szukana liczba stanów będzie odpowiadać wycinkowi koła dla którego oby dwie współrzędne są dodatnie, z uwzględnieniem dwóch możliwości spinu cząstki. Stanowi on $\frac14$ całego koła, czyli ta liczba stanów i jednocześnie liczba wszystkich cząstek to będzie:
+\[
+    N = 2 \cdot \frac14 \pi n_F^2 \implies n_F = \qty(\frac{2N}{\pi})^{\frac12}
+\] 
+Da nam to Energię Fermiego równą:
+\[
+    E_F = \frac{\pi^2 \hbar^2}{2 m L^2} \frac{2N}{\pi}    
+\]
+Dzięki temu, że patrząc na tę powierzchnię zobaczyliśmy kwadrat o boku $L$, więc $L^2 = A$, co pozwala nam zapisać Energię Fermiego jako:
+\[
+    E_F = \frac{\pi \hbar^2}{m} \frac{N}{A}    
+\]
+
+Daje nam to odpowiedź na punkt \ref{pkt_A}.
+
+Teraz policzmy sobie energię wewnętrzną na cząstkę tego gazu. Uznajemy, że stanów jest dużo, więc BSO sumocałka wchodzi tu w postaci całki. \\
+Pomocniczo sobie jeszcze zdefiniujmy $n_E$ czyli liczbę stanów o energii mniejszej od $E$ i jest ona dana wzorem:
+\begin{equation}\label{eq:ne}
+    n_E = \frac{mE A}{\pi \hbar^2}
+\end{equation}
+
+Czyli finalnie liczymy całkę:
+
+\[
+    U = \int_0^N E \dd{n_E} = E_F N - \int_0^{E_F} n_E \dd{E}
+\]
+
+Co po wstawieniu równania \eqref{eq:ne} daje nam równanie:
+\[
+    U = E_F N - \int_0^{E_F} \frac{m E A}{\pi \hbar^2} \dd{E} = E_F N - \frac{N}{2 E_F} E_F^2 = \frac12 N E_F    
+\]
+
+Ale jako, że szukamy energii wewnętrznej na cząstkę, to szukany wzór to:
+\[
+    u = \frac12 E_F    
+\]
+
+Co daje nam odpowiedź na pytanie \ref{pkt_B}
+
+\end{document}

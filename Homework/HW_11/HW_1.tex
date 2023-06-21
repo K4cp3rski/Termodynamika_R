@@ -1,0 +1,89 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 1}
+
+\emph{Fotony w d-wymiarach}. Oblicz energię wewnętrzną promieniowania we wnęce dla wnęki jedno- i dwu-wymiarowej
+
+\section{Rozwiązanie}
+
+Energia dla konkretnej częstości fotonu dana jest wzorem (fakt z ćwiczeń):
+$$
+E(\omega)=\frac{\hbar \omega}{\exp (\beta \hbar \omega)-1}
+$$
+Jak chcemy znaleźć energię wewnętrzną, to musimy do tego mieć gęstość stanów uzależnioną od częstości. W najprostszym, $1D$ przypadku, liczba stanów o $n \leq m$, gdzie $m$ i $n$ to numer modu, jest równa: $$N(m)=2 m$$
+Wiadomo, że energię można powiązać z numerem modu 
+$
+\epsilon=\frac{2 \pi \hbar n}{L}
+$\\
+gdzie L to wymiar wnęki. Dodatkowo wypada tu przejść na rozmowę w języku częstości poprzez zastosowanie związku 
+$
+\epsilon=\frac{\hbar \omega}{c}
+$
+Teraz dostaliśmy zależność:
+$$
+n=\frac{\omega L}{2 \pi c}
+$$
+A stąd można wyznaczyć liczbę stanów $N(\omega)$ o częstości mniejszej niż $\omega$ i gęstość stanów $g(\omega)$uzyskaną poprzez różniczkowanie liczby stanów:
+$$
+N(\omega)=\frac{\omega L}{\pi c} \qc g(\omega)=\frac{L}{\pi c}
+$$
+Stąd energia wewnętrzna fotonów jest równa:
+$$
+\begin{gathered}
+E=\int_{0}^{\infty} g(\omega) \frac{\hbar \omega}{\exp (\beta \hbar \omega)-1} d \omega \\
+E=\frac{L}{\pi c} \int_{0}^{\infty} \frac{\hbar \omega}{\exp (\beta \hbar \omega)-1} d \omega \\
+E=\frac{L k^{2} \pi}{6 \hbar c} T^{2}
+\end{gathered}
+$$
+Przejdźmy do układu dwuwymiarowego. Liczba stanów o $n$ mniejszym od jakiegoś $m$ jest równa:
+$$
+N(m)=2 \pi|\vec{n}|^{2}
+$$
+
+Odpowiednio liczba stanów o częstości mniejszej od $\omega$, oraz gęstość stanów:
+$$
+N(\omega)=\frac{L^{2} \omega^{2}}{2 \pi^{2} c^{2}} \qc g(\omega)=\frac{L^{2}}{\pi^{2} c^{2}} \omega
+$$
+Czyli energia wewnętrzna gazu fotonów:
+$$
+E=\frac{L^{2}}{\pi^{2} c^{2}} \int_{0}^{\infty} \frac{\hbar \omega^{2}}{\exp (\beta \hbar \omega)-1} d \omega
+$$
+Wycałkowanie tego wyrażenia da nam postać:
+$$
+E=\frac{2 L^{2} k^{3}}{\hbar^{2} c^{2} \pi^{2}} T^{3} \zeta(3)
+$$
+
+\end{document}

@@ -1,0 +1,110 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 3}
+
+Ekwipartycja energii. Klasyczny uklad fizyczny pozostaje $w$ kontakcie z termostatem o temperature $T$. Wiemy, że energia potencjalna tego układu dąży do $\infty$ na brzegach (ściankach) układu. Pokaż, że
+(a) Średnia energia kinetyczna na stopień swobody jest równa $\frac{1}{2} k T$
+(b) zachodzi relacja
+$$
+\left\langle q_{i} \frac{\partial V}{\partial q_{j}}\right\rangle=k T \delta_{i j}
+$$
+
+
+\section{Rozwiązanie}
+
+Rozwaźmy hamiltonian układu postaci:
+$$
+H=\sum_{i=0}^{3 N} \frac{p_{i}^{2}}{2 m}+V\left(q_{1}, q_{2}, \ldots, q_{N}\right)
+$$
+Suma statystyczna dana jest wzorem:
+$$
+Z=\int d \Gamma_{S} \exp (-\beta H)=\frac{1}{N ! h^{3 N}} \int d^{3 N} p d^{3 N} q \exp (-\beta H)
+$$
+gdzie $\beta=\frac{1}{k T}$ i $T$ jest temperaturą termostatu. Spróbujmy wyznaczyć teraz średnią wartość energii kinetycznej na stopień swobodny. Ma ona postać:
+$$
+\left\langle E_{k i n}\right\rangle=\frac{\int d p_{i} \frac{p_{1}^{2}}{2 m} \exp \left(-\beta \frac{p_{1}^{2}}{2 m}\right) A}{\int d p_{i} \exp \left(-\beta \frac{p_{1}^{2}}{2 m}\right) A}
+$$
+gdzie $A$ to całki po przestrzeni fazowej bez całki po $p_{i}$. Stąd:
+$$
+\left\langle E_{k i n}\right\rangle=\frac{\int d p_{i} \frac{p_{1}^{2}}{2 m} \exp \left(-\beta \frac{p_{i}^{2}}{2 m}\right)}{\int d p_{i} \exp \left(-\beta \frac{p_{1}^{2}}{2 m}\right)}
+$$
+Zauważmy, że całka w liczniku jest pochodną po $\beta$ całki z mianownika z dodanym minusem:
+$$
+\left\langle E_{k i n}\right\rangle=-\frac{1}{\int d p_{i} \exp \left(-\beta \frac{p_{i}^{2}}{2 m}\right)} \frac{\partial \int d p_{i} \exp \left(-\beta \frac{p_{i}^{2}}{2 m}\right)}{\partial \beta}
+$$
+Całka $\int d p_{i} \exp \left(-\beta \frac{p_{i}^{2}}{2 m}\right)$ jest całką gaussowską, więc wynik całki po wszystkich wartości $p_{i}$ od $-\infty$ do $\infty$ daje wynik:
+$$
+\int d p_{i} \exp \left(-\beta \frac{p_{i}^{2}}{2 m}\right)=\sqrt{\frac{2 m \pi}{\beta}}
+$$
+A więc średnia wartość energii kinetycznej na stopień swobody jest równa:
+$$
+\left\langle E_{\text {kin }}\right\rangle=-\frac{1}{\sqrt{\frac{2 m \pi}{\beta}}} \frac{\partial \sqrt{\frac{2 m \pi}{\beta}}}{\partial \beta}=\frac{1}{2 \beta}=\frac{1}{2} k T
+$$
+A zatem średnia wartość energii kinetycznej na stopień swobody jest równa $\frac{1}{2} k T$ co należało udowodnić.
+Zajmijmy się teraz drugą częścią zadania. Należy jeszcze udowodnić, że zachodzi:
+$$
+\left\langle q_{i} \frac{\partial V}{\partial q_{j}}\right\rangle=\delta_{i j} k T
+$$
+
+Rozpatrzmy osobno przypadek gdy $i=j$ i $i \neq j .$ Dla $i=j$ mamy:
+$$
+\frac{1}{Z} \int d \Gamma_{S} \exp (-\beta H)=1
+$$
+Całkując lewą stronę przez części dla dowolnego $i$ dostajemy:
+$$
+L H S=\left.\frac{1}{Z N ! h^{3 N}} q_{i} \int d^{3 N} p_{i} d^{3 N-1} q \exp (-\beta H)\right|_{x_{0}^{\prime}} ^{x_{0}}+\frac{1}{Z N ! h^{3 N}} \int d q_{i} q_{i} \beta \frac{\partial V}{\partial q_{i}} \int d^{3 N} p_{i} d^{3 N-1} q \exp (-\beta H)
+$$
+gdzie $x_{0}$ i $x_{0}^{\prime}$ to granice całkowania dla $q_{i}$ odpowiadajace brzegom układu. Wiadomo, że na brzegach potencjał dąży do $\infty$, więc człony brzegowe są równe 0 . Stąd w wyrażeniu zostaje tylko druga całka. Zauważmy, że jest ona równa $\beta\left\langle q_{i} \frac{\partial \mathcal{V} q_{j}}{}\right\rangle . \mathrm{Z}$ drugiej strony jest ona równa 1. Stąd mamy, że:
+$$
+\left\langle q_{i} \frac{\partial V}{\partial q_{i}}\right\rangle=\frac{1}{\beta}=k T
+$$
+Weźmy teraz przypadek $i \neq j$. Mamy:
+$$
+\left\langle q_{i} \frac{\partial V}{\partial q_{j}}\right\rangle=\frac{1}{Z} \int d \Gamma_{S} q_{i} \frac{\partial V}{\partial q_{j}} \exp (-\beta H)
+$$
+Przecałkujmy prawą stronę przez części, tym razem z względu na $q_{j}$ :
+$$
+R H S=-\left.\frac{1}{Z N ! h^{3 N} \beta} \int d^{3 N} p d^{3 N-1} q q_{i} \exp (-\beta H)\right|_{x_{0}^{x_{0}}}+\frac{1}{\beta Z N ! h^{3} N} \int d^{3 N} p d^{3 N} \frac{\partial q_{i}}{\partial q_{j}} \exp (-\beta H)
+$$
+Dla wyrazów brzegowych eksponens ponownie dąży do zera, więc pierwszy człon jest równy 0 . W drugim członie pod całką znajduje się wyrażenie $\frac{\partial q_{i}}{\partial q j}$, które ze względu na to, że współrzędne uogólnione są od siebie niezależne, jest równe 0 . Czyli dla $i \neq j$ :
+$$
+\left\langle q_{i} \frac{\partial V}{\partial q_{i}}\right\rangle=0
+$$
+Składając oba przypadki dostajemy wzór, który należało udowodnić:
+$$
+\left\langle q_{i} \frac{\partial V}{\partial q_{j}}\right\rangle=\delta_{i j} k T
+$$
+\end{document}

@@ -1,0 +1,123 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 3}
+
+Rozważ reakcję zachodzącą pomiędzy gazem protonów (p), elektronów (e) i atomów wodoru (H):
+$$
+p+e \longleftrightarrow H
+$$
+Reakcja ta zachodzi w objętości $V \mathrm{w}$ kontakcie z termostatem o temperaturze $T$. Załóżmy też, że gazy można traktować jako gazy doskonałe nieoddziałujących cząstek, biorąc tylko pod uwagę degenerację stanów energetycznych ze względu na spin. Korzystając z zespołu wielkiego kanonicznego znajdź stężenie elektronów $n_{e}$ jako funkcję stężenia atomów wodoru $n_{H}$ i temperatury $T$ zakładając obojętność elektryczną układu. Dla uproszczenia załóż, że atomy wodoru mogą być tylko w stanie podstawowym o energii $-E_{0}$. Dodatkowo, w przypadku atomów wodoru zaniedbaj masę elektronu w porównaniu do masy protonu.
+
+\section{Rozwiązanie}
+
+Mamy w jednym pojemniku gaz protonowy, elektronowy i wodorowy. Jako że nie oddziahują one ze sobą (poza reakcją), to możemy je potraktować jako 3 osobne uklady. Dodatkowo potraktujmy reakcję $p+e \leftrightarrow H$ jako wymianę cząstek między tymi gazami, to znaczy przejście dodatkowej cząstki do gazu wodorowego jest równoważne zniknięciu po jednej cząstce z gazu protonowego i elektronowego i vice versa. Skoro gazy nie oddziałuja ze sobą, to wielka suma statystyczna ukladu jest równa:
+$$
+\Xi_{t o t}=\Xi_{e} \Xi_{p} \Xi_{H}
+$$
+Skoro w gazach stany energetyczne sia zdegenerowane, to gazy możemy potraktować, jak gdyby byly klasyczne. Policzmy wielkie sumy kanoniczne:
+$$
+\Xi_{e}=\sum_{N} z_{e}^{N} \int d \Gamma_{N} \exp \left(-\beta \frac{p^{2}}{2 m_{e}}\right)=\sum_{N} \frac{z_{e}^{N} V^{N}}{h^{3 N} N !}\left(2 \pi m_{e} k T\right)^{\frac{3}{2}}=\exp \left(\frac{z_{e} V}{h^{3}}\left(2 \pi m_{e} k T\right)^{\frac{3}{2}}\right)
+$$
+gdzie $z_{e}=\exp \left(\mu_{e} \beta\right)$ Dla uproszczenia zauważmy, że wyrażenie $\frac{h}{\sqrt{2 \pi m_{e} k T}}$ jest równe termicznej dlugości fali de Broglie'a $\lambda_{e}$. Czyli wielka suma kanoniczna dla gazu elektronowego jest równa:
+$$
+\Xi_{c}=\exp \left(\frac{z_{e} V}{\lambda_{e}^{3}}\right)
+$$
+Analogicznie dla gazu protonowego mamy:
+$$
+\Xi_{p}=\exp \left(\frac{z_{p} V}{\lambda_{p}^{3}}\right)
+$$
+Natomiast dla atomu wodoru mamy:
+$$
+\Xi_{H}=\sum_{N} z_{H}^{N} \int d \Gamma_{N} \exp \left(\beta E_{0}-\beta \frac{p^{2}}{2 m_{p}}\right)
+$$
+Czyli postępująe analogicznie jak weześniej dostajemy:
+$$
+\Xi_{H}=\exp \left(\frac{z_{H} V \exp \left(\beta E_{0}\right)}{\lambda_{p}^{3}}\right)
+$$
+we wzorze pojawilo się $\lambda_{p}$ zamiast $\lambda_{H}$, ponieważ pomijamy masę elektronu w atomie wodoru, więc dhugość termicznej fali de Broglie'a jest taka sama jak dla protonu. Stąd wielka suma calego ukladu:
+$$
+\Xi_{t o t}=\exp \left(\frac{z_{H} V \exp \left(\beta E_{0}\right)}{\lambda_{p}^{3}}\right) \exp \left(\frac{z_{p} V}{\lambda_{p}^{3}}\right) \exp \left(\frac{z_{c} V}{\lambda_{\varepsilon}^{3}}\right)
+$$
+Skoro układ jest elektrycznie obojętny to stężenie protonów i elektronów musi być równe. Dodatkowo skoro uklad jest w równowadze termodynamicznej ( $\mathrm{dS}=0, \mathrm{dE}=0 \mathrm{i} \mathrm{dV}=0$ ), to z równania:
+$$
+T d S=d E+p d V-\mu_{e} d N_{e}-\mu_{p} d N_{p}-\mu_{H} d N_{H}
+$$
+
+dostajeny, że
+$$
+\mu_{H} d N_{H}=-\mu_{c} d N_{e}-\mu_{p} d N_{p}
+$$
+ale skoro reakcja ma postac $p+e \leftrightarrow H$, to na pojawienie sie jednego atomu wodoru przypada znikniecie jednego elektronu i jednego protonu. Czyli mamy $d N_{h}=-d N_{e}=$ $-d N_{p}$. Korzystając z tej obserwacji, dostajemy zależnośc na potencjaly chemiczne gazów:
+$$
+\mu_{h}=\mu_{e}+\mu_{p}
+$$
+Policzmy teraz wielki potencjal:
+$$
+\Omega=-k T \log \Xi_{t o t}=-k T\left(\frac{z_{e} V}{\lambda_{e}^{3}}+\frac{z_{p} V}{\lambda_{p}^{3}}+\frac{z_{H} \exp \left(\beta E_{0}\right) V}{\lambda_{p}^{3}}\right)
+$$
+Policzmy teraz średnią liczbę elektronów:
+$$
+\begin{array}{r}
+\left\langle N_{e}\right\rangle=-\frac{\partial \Omega}{\partial \mu_{e}} \\
+\left\langle N_{e}\right\rangle=\frac{z_{e} V}{\lambda_{e}^{3}}
+\end{array}
+$$
+Czyli stçżnie elektronów jest równe:
+$$
+n_{e}=\frac{z_{e}}{\lambda_{e}^{3}}
+$$
+Postepując analogicznie dostajemy, że stę́enje atomów wodoru jest równe:
+$$
+n_{H}=\frac{z_{H} \exp \left(\beta E_{0}\right)}{3}
+$$
+Chcemy teraz przeksztaleić wzór na stężenie elektronów, tak by stal się funkcją stężenia atomów wodoru i temperatury.
+$$
+\begin{gathered}
+n_{e}=\frac{\exp \left(\mu_{e} \beta\right)}{\lambda_{e}^{3}}=\frac{\exp \left(\beta\left(\mu_{H}-\mu_{p}\right)\right)}{\lambda_{e}^{3}}=\frac{\exp \left(\mu_{h} \beta\right) \exp \left(\beta E_{0}\right) \exp \left(-\beta E_{0}\right) \lambda_{p}^{3}}{\exp \left(\mu_{p} \beta\right) \lambda_{e}^{3} \lambda_{p}^{3}} \\
+n_{e}=\frac{n_{H} \exp \left(-\beta E_{0}\right)}{\lambda_{e}^{3} n_{p}}
+\end{gathered}
+$$
+Ale wiemy, że $n_{e}=n_{p}$. Więc rơwnanie przybiera postać:
+$$
+n_{e}=\frac{n_{H} \exp \left(-\beta E_{0}\right)}{n_{e} \lambda_{e}^{3}}
+$$
+A stąd:
+$$
+n_{e}=\frac{\sqrt{n_{H}} \exp \left(-\frac{\beta E_{0}}{2}\right)}{\lambda_{e}^{\frac{3}{2}}}
+$$
+
+
+\end{document}

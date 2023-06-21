@@ -1,0 +1,77 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hhline}
+\usepackage{placeins}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\title{Praca Domowa Termodynamika i Fizyka Statystyczna R 2021/2022}
+\author{Kacper Cybiński}
+% \newdate{date}{28}{01}{2022}
+% \date{\displaydate{date}}
+\date{\today}
+\setlength\parindent{0pt}
+
+\newcommand{\com}[1]{{\color{red} #1}}
+
+\newcommand{\link}[2]{{\color{cyan} \href{#1}{#2}}}
+
+\renewcommand{\emph}{\textbf}
+
+\begin{document}
+
+\maketitle
+
+\section{Zadanie 1}
+
+Pokaż, że entropia kwantowego gazu doskonałego wyraża się wzorem:
+\[
+    S = - k_B \sum_k \qty[\ev{n_k} \log \ev{n_k} \mp \qty(1 \pm \ev{n_k}) \log\qty(1 \pm \ev{n_k})]    
+\]
+
+Gdzie górny znak to Bozony a dolny to Fermiony.
+
+\section{Rozwiązanie}
+
+Pierwsze, co nam się przyda do pokazania tego, to wyznaczenie średniej liczby cząstek obsadzajacej stan o energii $\epsilon_k$. Do tego potrzebujemy wielkokanonicznego potencjału $\Omega_k$, czyli również sumy wielkokanonicznej $Z_k$. Są one równe odpowiednio:
+\[
+    Z_k = \qty(1 \pm \exp\qty(- \beta \qty(\epsilon_k - \mu)))^{\pm 1} \qc \Omega_k = \mp kT \log\qty(1 \pm \exp\qty(-\beta(\epsilon_k - \mu)))    
+\]
+
+Czyli teraz wiedząc, że $\ev{n_k} = - \pdv{\Omega_k}{\mu}$:
+\[
+   \ev{n_k} = \frac{\exp\qty(- \beta \qty(\epsilon_k - \mu))}{1 \pm \exp\qty(- \beta \qty(\epsilon_k - \mu))} = \frac{1}{\exp\qty(\beta \qty(\epsilon_k - \mu)) \pm 1}
+\]
+
+Mamy już potencjal wielkokanoniczny jednego stanu energetycznego, więc potencjał wielkokanoniczny całego układu $\Omega$ to będzie suma po potencjałach wszystkich dostępnych $k$ stanów, tj. $\Omega = \sum_k \Omega_k$.\\
+Chcemy z tego dostać entropię, więc stosujemy tutaj wiedzę, że dostaniemy ją po zróżniczkowaniu po $T$, tj. $S = - \pdv{\Omega}{T}$:
+\[
+    S = \sum_j \pm k \log\qty(1 \pm \exp\qty(- \beta \qty(\epsilon_k - \mu))) + \frac{k T}{k T^2} (\epsilon_j - \mu) \frac{1}{\exp\qty(\beta \qty(\epsilon_k - \mu)) \pm 1}  
+\]
+
+We wzorze który chcemy udowodnić Entropia jest wyrażona w jęzku $\ev{n_k}$, więc szukamy sposobów na przejście na ten język. Pierwsza taka tożsamość, jaką tu zastosujemy, to:
+\[
+    \log(1 \pm \exp(-\beta (\epsilon_j - \mu))) = - \log(1 \mp \ev{n_k})    
+\]
+Da nam to wtedy:
+\[
+    S = \sum_j \mp k \log(1 \mp \ev{n_k}) - \log\qty(\exp(- \beta (\epsilon_j - \mu))) \ev{n_k}    
+\]
+Czyli po małym przearanżowaniu dostajemy:
+\[
+    S = -k \sum_j \ev{n_k}\log(\ev{n_k}) \mp (1 \pm \ev{n_k}) \log(1 \pm \ev{n_k})    
+\]
+Co należało dowieść.
+
+\end{document}
